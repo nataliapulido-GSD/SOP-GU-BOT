@@ -1,0 +1,5 @@
+{
+  "name": "Copy of SOP GU BOT",
+  "description": "A modern, responsive React chatbot interface connected to an n8n webhook, featuring a customizable design and session management.",
+  "requestFramePermissions": []
+}
