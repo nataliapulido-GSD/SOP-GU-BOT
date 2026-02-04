@@ -1,5 +1,6 @@
 import React from 'react';
 import { Message } from '../types';
+import ReactMarkdown from 'react-markdown';
 
 interface MessageBubbleProps {
   message: Message;
@@ -45,7 +46,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
               : `bg-gray-100 text-gray-800 rounded-2xl rounded-bl-none ${message.isError ? 'border border-red-200 bg-red-50 text-red-600' : ''}`
           }`}
         >
-          {message.text}
+          <ReactMarkdown>{message.text}</ReactMarkdown>
         </div>
         <span className="text-[10px] text-gray-400 mt-1 px-1">
           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
