@@ -7,23 +7,28 @@ export const sendMessageToWebhook = async (url: string, payload: WebhookPayload)
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        chatInput: payload.chatInput,
+        sessionId: payload.sessionId
+      }),
     });
 
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
 
-    // Try to parse JSON first
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.indexOf("application/json") !== -1) {
-      const data = await response.json();
-      // Adjust this based on your specific n8n output structure. 
-      // Common patterns: { output: "text" }, { text: "text" }, or just the object itself if it's flat.
+    const responseText = await response.text();
+    console.log('Chat Response:', responseText);
+    
+    if (!responseText || responseText.trim() === '') {
+      throw new Error('Empty response');
+    }
+
+    try {
+      const data = JSON.parse(responseText);
       return data.output || data.text || data.message || JSON.stringify(data);
-    } else {
-      // Fallback to text if response is not JSON
-      return await response.text();
+    } catch {
+      return responseText;
     }
   } catch (error) {
     console.error('API Error:', error);
