@@ -7,9 +7,9 @@ export const DEFAULT_CONFIG: ChatConfig = {
   webhookUrl: 'https://nataliagarciapulido.app.n8n.cloud/webhook/b2cf5241-bd5d-43fd-955c-7637b363e43e/chat', 
   
   // Georgia Urology Logo (Imgur Direct Link)
-  logoUrl: 'https://i.imgur.com/Ds0rUEU.png',
+  logoUrl: 'https://i.imgur.com/nb3ZTao.png',
   
-  botName: 'GU SOP Assistant',
-  
-  welcomeMessage: 'Hello! I am the Georgia Urology SOP Assistant. I am here to help Virtual Assistants consult the Standard Operating Procedures. How can I assist you today?',
+  botName: 'GSD Max',
+
+  welcomeMessage: 'Hello! I\'m Max, your GSD SOP Assistant. I\'m here to help you quickly look up Standard Operating Procedures for Georgia Urology. What can I help you with today?',
 };
