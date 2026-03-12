@@ -150,11 +150,11 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             <div className="flex flex-col items-center px-4 pt-6 pb-6 space-y-5">
 
               {/* Max hero card */}
-              <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-md border border-purple-100">
+              <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-md border border-purple-100 h-64" style={{ backgroundColor: '#f0eff5' }}>
                 <img
                   src={MAX_IMAGE_URL}
                   alt="Max"
-                  className="w-full h-52 object-cover object-top"
+                  className="w-full h-64 object-contain"
                 />
               </div>
               <div className="w-full max-w-md px-1">
