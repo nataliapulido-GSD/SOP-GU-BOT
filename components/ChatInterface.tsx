@@ -193,9 +193,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           ) : (
             /* ── Active chat: full message list ── */
             <div className="p-4 md:p-6 space-y-2">
-              {messages.map(msg => (
-                <MessageBubble key={msg.id} message={msg} />
-              ))}
+              {messages.map((msg, idx) => {
+                if (msg.sender === 'bot') {
+                  const prevUserMsg = messages.slice(0, idx).reverse().find(m => m.sender === 'user');
+                  return <MessageBubble key={msg.id} message={msg} previousQuestion={prevUserMsg?.text ?? ''} />;
+                }
+                return <MessageBubble key={msg.id} message={msg} />;
+              })}
             </div>
           )}
 

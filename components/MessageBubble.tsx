@@ -1,13 +1,58 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Message } from '../types';
 import ReactMarkdown from 'react-markdown';
 
 interface MessageBubbleProps {
   message: Message;
+  previousQuestion?: string;
 }
 
-export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
+const FEEDBACK_OPTIONS = [
+  'Mixed roles or wrong SOP',
+  'Answer not found but should exist',
+  'Incomplete answer',
+];
+
+export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, previousQuestion = '' }) => {
   const isUser = message.sender === 'user';
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [confirmation, setConfirmation] = useState<string | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const showConfirmation = (msg: string) => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setShowDropdown(false);
+    setConfirmation(msg);
+    timerRef.current = setTimeout(() => setConfirmation(null), 3000);
+  };
+
+  const handleThumbsUp = () => {
+    showConfirmation('Thanks! ✓');
+  };
+
+  const handleThumbsDown = () => {
+    setShowDropdown(prev => !prev);
+  };
+
+  const handleOption = async (option: string) => {
+    setShowDropdown(false);
+    try {
+      await fetch('https://nataliagarciapulido.app.n8n.cloud/webhook/max-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          session_id: window.sessionStorage.getItem('sessionId') || 'unknown',
+          question: previousQuestion,
+          response: message.text,
+          error_type: option,
+        }),
+      });
+    } catch {
+      // silently ignore network errors
+    }
+    showConfirmation('Thanks for the feedback ✓');
+  };
 
   const UserIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -39,6 +84,47 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
         <span className="text-[10px] text-gray-400 mt-1 px-1">
           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </span>
+
+        {/* Feedback row — bot messages only */}
+        {!isUser && (
+          <div className="relative flex items-center gap-1 mt-0.5 px-1">
+            {confirmation ? (
+              <span className="text-[10px] text-green-500">{confirmation}</span>
+            ) : (
+              <>
+                <button
+                  onClick={handleThumbsUp}
+                  className="text-gray-400 hover:text-[#5B21B6] transition-colors text-xs leading-none p-0.5"
+                  aria-label="Thumbs up"
+                >
+                  👍
+                </button>
+                <button
+                  onClick={handleThumbsDown}
+                  className="text-gray-400 hover:text-[#5B21B6] transition-colors text-xs leading-none p-0.5"
+                  aria-label="Thumbs down"
+                >
+                  👎
+                </button>
+              </>
+            )}
+
+            {/* Thumbs-down dropdown */}
+            {showDropdown && (
+              <div className="absolute left-0 top-full mt-1 z-10 bg-white border border-gray-200 rounded-xl shadow-md py-1 min-w-[210px]">
+                {FEEDBACK_OPTIONS.map(option => (
+                  <button
+                    key={option}
+                    onClick={() => handleOption(option)}
+                    className="block w-full text-left text-xs px-3 py-2 text-gray-600 hover:bg-purple-50 hover:text-[#5B21B6] transition-colors"
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* User avatar */}
