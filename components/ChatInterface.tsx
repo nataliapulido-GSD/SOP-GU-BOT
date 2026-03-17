@@ -5,7 +5,7 @@ import { TypingIndicator } from './TypingIndicator';
 import { sendMessageToWebhook } from '../services/api';
 import { useConfig } from './ConfigContext';
 
-const MAX_IMAGE_URL = 'https://i.imgur.com/rMB8IOh.png';
+const MAX_IMAGE_URL = 'https://i.imgur.com/EiCbjBo.png';
 
 const SUGGESTED_PROMPTS = [
   'How do I process a referral?',

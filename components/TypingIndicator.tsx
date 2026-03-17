@@ -4,7 +4,7 @@ import React from 'react';
 export const TypingIndicator: React.FC = () => {
   return (
     <div className="flex mt-2 space-x-2.5 max-w-xs">
-      <img src="https://i.imgur.com/QXUMHai.png" className="w-8 h-8 rounded-full object-cover object-center flex-shrink-0 mt-auto mb-1" />
+      <img src="https://i.imgur.com/EiCbjBo.png" className="w-8 h-8 rounded-full object-cover object-center flex-shrink-0 mt-auto mb-1" />
       <div>
         <div className="bg-white border border-gray-100 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
           <div className="flex space-x-1.5 h-4 items-center">
