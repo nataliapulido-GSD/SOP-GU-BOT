@@ -21,7 +21,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
 
       {/* Bot avatar */}
       {!isUser && (
-        <img src="https://i.imgur.com/EiCbjBo.png" className="w-8 h-8 rounded-full object-cover object-center flex-shrink-0 mt-auto mb-1" />
+        <img src="https://i.imgur.com/vReG3a4.jpeg" className="w-8 h-8 rounded-full object-cover object-center flex-shrink-0 mt-auto mb-1" />
       )}
 
       <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
