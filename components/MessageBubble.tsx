@@ -39,10 +39,11 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, previousQ
     try {
       await fetch('https://nataliagarciapulido.app.n8n.cloud/webhook/max-feedback', {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
-          session_id: window.sessionStorage.getItem('sessionId') || 'unknown',
+          session_id: sessionStorage.getItem('sessionId') || 'unknown',
           question: previousQuestion,
           response: message.text,
           error_type: option,
