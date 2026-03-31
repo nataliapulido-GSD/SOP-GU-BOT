@@ -1,14 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Conversation } from '../src/hooks/useSidebarData';
+import { CATEGORIES } from './categories';
+import { CategorySection } from './CategorySection';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onNewChat: () => void;
-  onClinicSelect: (clinic: string) => void;
-  clinics: string[];
-  onAddClinic: (name: string) => void;
-  onDeleteClinic: (name: string) => void;
+  onCategoryItemSelect?: (item: string) => void;
   conversations: Conversation[];
   onDeleteConversation: (id: string) => void;
 }
@@ -72,41 +71,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   onClose,
   onNewChat,
-  onClinicSelect,
-  clinics,
-  onAddClinic,
-  onDeleteClinic,
+  onCategoryItemSelect,
   conversations,
   onDeleteConversation,
 }) => {
-  const [clinicsExpanded, setClinicsExpanded] = useState(true);
   const [resourcesExpanded, setResourcesExpanded] = useState(true);
   const [activeChat, setActiveChat] = useState<string | null>(null);
-  const [addingClinic, setAddingClinic] = useState(false);
-  const [newClinicName, setNewClinicName] = useState('');
-  const addClinicInputRef = useRef<HTMLInputElement>(null);
-
-  const handleAddClinic = () => {
-    setAddingClinic(true);
-    setTimeout(() => addClinicInputRef.current?.focus(), 0);
-  };
-
-  const commitNewClinic = () => {
-    const name = newClinicName.trim();
-    if (name) {
-      onAddClinic(name);
-    }
-    setNewClinicName('');
-    setAddingClinic(false);
-  };
-
-  const handleAddClinicKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') commitNewClinic();
-    if (e.key === 'Escape') {
-      setNewClinicName('');
-      setAddingClinic(false);
-    }
-  };
 
   return (
     <>
@@ -195,66 +165,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <div className="mx-4 my-2 border-t border-white/10" />
 
-          {/* Clinics */}
-          {/* TODO: replace localStorage with Supabase wherever data is persisted. */}
-          <div className="px-3">
-            <button
-              onClick={() => setClinicsExpanded(v => !v)}
-              className="w-full flex items-center justify-between px-2 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white/70 transition-colors rounded-lg hover:bg-white/5"
-            >
-              <span>Clinics</span>
-              <ChevronIcon expanded={clinicsExpanded} />
-            </button>
-            {clinicsExpanded && (
-              <div className="mt-1 space-y-0.5">
-                {clinics.map(clinic => (
-                  <div key={clinic} className="group relative">
-                    <button
-                      onClick={() => onClinicSelect(clinic)}
-                      className="w-full text-left flex items-center gap-2.5 px-3 py-1.5 pr-8 rounded-lg text-sm text-white/60 hover:bg-white/10 hover:text-white transition-colors"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#5B21B6] flex-shrink-0" />
-                      {clinic}
-                    </button>
-                    <button
-                      onClick={() => onDeleteClinic(clinic)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 p-1 rounded text-red-400 hover:text-red-300 transition-opacity"
-                      title="Delete clinic"
-                    >
-                      <TrashIcon />
-                    </button>
-                  </div>
-                ))}
-
-                {/* Add Clinic inline input */}
-                {addingClinic ? (
-                  <div className="flex items-center gap-1.5 px-3 py-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5B21B6] flex-shrink-0" />
-                    <input
-                      ref={addClinicInputRef}
-                      type="text"
-                      value={newClinicName}
-                      onChange={e => setNewClinicName(e.target.value)}
-                      onKeyDown={handleAddClinicKeyDown}
-                      onBlur={commitNewClinic}
-                      placeholder="Clinic name…"
-                      className="flex-1 min-w-0 bg-transparent border-b border-white/30 text-sm text-white placeholder-white/30 outline-none focus:border-white/60 pb-0.5"
-                    />
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleAddClinic}
-                    className="w-full text-left flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-sm text-white/30 hover:bg-white/10 hover:text-white/60 transition-colors"
-                  >
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="flex-shrink-0">
-                      <line x1="12" y1="5" x2="12" y2="19" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Add Clinic
-                  </button>
-                )}
-              </div>
-            )}
+          {/* Categories */}
+          <div className="px-3 space-y-1">
+            {CATEGORIES.map(category => (
+              <CategorySection
+                key={category.name}
+                category={category}
+                onItemSelect={onCategoryItemSelect}
+              />
+            ))}
           </div>
 
           <div className="mx-4 my-2 border-t border-white/10" />

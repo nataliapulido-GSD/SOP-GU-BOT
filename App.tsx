@@ -14,9 +14,6 @@ const AppContent: React.FC = () => {
   const [externalPrompt, setExternalPrompt] = useState<string | null>(null);
 
   const {
-    clinics,
-    addClinic,
-    deleteClinic,
     conversations,
     addConversation,
     deleteConversation,
@@ -55,10 +52,7 @@ const AppContent: React.FC = () => {
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
           onNewChat={handleNewChat}
-          onClinicSelect={(clinic) => setExternalPrompt(`What are the SOPs for ${clinic}?`)}
-          clinics={clinics}
-          onAddClinic={addClinic}
-          onDeleteClinic={deleteClinic}
+          onCategoryItemSelect={(item) => setExternalPrompt(`What are the SOPs for ${item}?`)}
           conversations={conversations}
           onDeleteConversation={deleteConversation}
         />
