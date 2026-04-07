@@ -8,12 +8,10 @@ import { useConfig } from './ConfigContext';
 const MAX_IMAGE_URL = 'https://i.imgur.com/vReG3a4.jpeg';
 
 const SUGGESTED_PROMPTS = [
-  'How do I process a referral?',
-  'What is the voicemail callback procedure?',
-  'How do I schedule a new patient?',
-  'What are the lab result notification steps?',
-  'Explain the prior authorization process',
-  'What is the after-hours protocol?',
+  { label: 'New Patient Setup', query: 'What is the process for scheduling a new patient?' },
+  { label: 'Deceased Patient Script', query: 'What is the approved script for a deceased patient call?' },
+  { label: 'Transfer Requirements', query: 'What are the requirements for Transfer of Care?' },
+  { label: 'IT Help Desk', query: 'What is the Help Desk phone number?' },
 ];
 
 interface ChatInterfaceProps {
@@ -180,10 +178,10 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                   {SUGGESTED_PROMPTS.map((prompt, i) => (
                     <button
                       key={i}
-                      onClick={() => handleSend(prompt)}
+                      onClick={() => setInputText(prompt.query)}
                       className="text-left text-xs sm:text-sm px-3 py-2.5 rounded-xl border border-purple-200 bg-white text-[#5B21B6] hover:bg-purple-50 hover:border-[#5B21B6] hover:shadow-sm transition-all font-medium leading-snug"
                     >
-                      {prompt}
+                      {prompt.label}
                     </button>
                   ))}
                 </div>
