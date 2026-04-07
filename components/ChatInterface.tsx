@@ -38,6 +38,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [streamingText, setStreamingText] = useState('');
+  const [isStreaming, setIsStreaming] = useState(false);
 
   // Scroll to bottom on new messages or loading state change
   const scrollToBottom = () => {
@@ -45,7 +47,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   };
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading]);
+  }, [messages, isLoading, streamingText]);
 
   // Auto-resize textarea
   useEffect(() => {
@@ -77,22 +79,51 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
 
     try {
-      const payload: WebhookPayload = {
-        action: 'sendMessage',
-        sessionId: sessionId,
-        chatInput: messageText,
-      };
+      // Fire the real API request immediately
+      const responsePromise = fetch(config.webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chatInput: messageText,
+          sessionId: sessionId,
+        }),
+      }).then(res => res.json());
 
-      const responseText = await sendMessageToWebhook(config.webhookUrl, payload);
+      // Show "Searching SOPs..." animation while waiting
+      setIsStreaming(true);
+      setStreamingText('');
+      const thinkingText = 'Searching SOPs';
+      let dots = '';
+      const thinkingInterval = setInterval(() => {
+        dots = dots.length >= 3 ? '' : dots + '.';
+        setStreamingText(thinkingText + dots);
+      }, 300);
+
+      const data = await responsePromise;
+      clearInterval(thinkingInterval);
+
+      // Stream the real response word by word
+      const fullResponse = data.output || data.response || data.message || '';
+      const words = fullResponse.split(' ');
+      let accumulated = '';
+
+      for (let i = 0; i < words.length; i++) {
+        accumulated += (i > 0 ? ' ' : '') + words[i];
+        setStreamingText(accumulated);
+        await new Promise(resolve => setTimeout(resolve, 30));
+      }
+
+      setIsStreaming(false);
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: responseText,
+        text: fullResponse,
         sender: 'bot',
         timestamp: new Date(),
       };
 
       setMessages(prev => [...prev, botMessage]);
+      setStreamingText('');
 
       // Derive title from the first user message in this conversation
       const allMessages = [...messages, newUserMessage, botMessage];
@@ -100,6 +131,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       const title = firstUserMsg ? firstUserMsg.text.slice(0, 60) : 'Conversation';
       onConversationSaved(title, allMessages);
     } catch {
+      setIsStreaming(false);
+      setStreamingText('');
       setMessages(prev => [
         ...prev,
         {
@@ -201,7 +234,17 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             </div>
           )}
 
-          {isLoading && (
+          {isStreaming && streamingText && (
+            <div className="px-4 md:px-6 pb-2 message assistant-message streaming">
+              <div className="flex justify-start">
+                <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-4 py-3 bg-white border border-gray-100 shadow-sm text-gray-800 text-sm leading-relaxed">
+                  {streamingText}
+                  <span className="typing-cursor">▊</span>
+                </div>
+              </div>
+            </div>
+          )}
+          {isLoading && !isStreaming && (
             <div className="px-4 md:px-6 pb-2">
               <TypingIndicator />
             </div>
