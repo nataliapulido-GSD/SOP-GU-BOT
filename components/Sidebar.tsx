@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Conversation } from '../src/hooks/useSidebarData';
 import { CATEGORIES } from './categories';
 import { CategorySection } from './CategorySection';
+import { PDF_URLS } from '../src/config/pdfUrls';
+import { PDFViewer } from '../src/components/PDFViewer';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -13,12 +15,8 @@ interface SidebarProps {
 }
 
 const RESOURCES = [
-  { label: 'SOP Master Index', icon: '📋' },
-  { label: 'Scheduling Guidelines', icon: '📅' },
-  { label: 'Referral Procedures', icon: '📤' },
-  { label: 'Insurance & Prior Auth', icon: '🏥' },
-  { label: 'Lab Results Protocol', icon: '🔬' },
-  { label: 'After-Hours Guide', icon: '🌙' },
+  { label: 'SOP Master Index', url: PDF_URLS['script-reference'] },
+  { label: 'Scheduling Guidelines', url: PDF_URLS['scheduling-foundations'] },
 ];
 
 function formatTimestamp(date: Date): string {
@@ -77,6 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [resourcesExpanded, setResourcesExpanded] = useState(true);
   const [activeChat, setActiveChat] = useState<string | null>(null);
+  const [selectedPDF, setSelectedPDF] = useState<string | null>(null);
 
   return (
     <>
@@ -192,9 +191,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {RESOURCES.map(res => (
                   <button
                     key={res.label}
+                    onClick={() => setSelectedPDF(res.url)}
                     className="w-full text-left flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-sm text-white/60 hover:bg-white/10 hover:text-white transition-colors"
                   >
-                    <span className="text-xs w-4 text-center flex-shrink-0">{res.icon}</span>
                     {res.label}
                   </button>
                 ))}
@@ -208,6 +207,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <p className="text-[10px] text-white/25 text-center">GSD Associates © 2025</p>
         </div>
       </aside>
+      {selectedPDF && <PDFViewer pdfUrl={selectedPDF} onClose={() => setSelectedPDF(null)} />}
     </>
   );
 };
