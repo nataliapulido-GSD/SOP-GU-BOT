@@ -133,7 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <p className="text-[10px] font-semibold uppercase tracking-widest text-white/30 px-2 mb-1.5">
               Recent
             </p>
-            {conversations.map((conv) => (
+            {conversations.slice(0, 5).map((conv) => (
               <div key={conv.id} className="group relative">
                 <button
                   onClick={() => setActiveChat(conv.id)}

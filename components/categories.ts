@@ -10,11 +10,11 @@ export const CATEGORIES: Category[] = [
   },
   {
     name: 'Clinical',
-    items: ['DASH Chief Complaints', 'Diagnosis/Symptom Search', 'Lab Protocol'],
+    items: ['DASH Chief Complaints', 'Diagnosis/Symptom Search'],
   },
   {
     name: 'Call Routing',
-    items: ['Transfer Guidelines', 'After-Hours Guide'],
+    items: ['Transfer Guidelines'],
   },
   {
     name: 'Scheduling',

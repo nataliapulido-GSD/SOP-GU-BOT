@@ -38,7 +38,7 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-100">
+    <div className="flex flex-col h-full bg-gray-100 dark:bg-gray-950">
 
       {/* Header — full width, sits above sidebar+content */}
       <div className="flex-none z-40 relative">
@@ -59,7 +59,7 @@ const AppContent: React.FC = () => {
 
         {/* Main chat column */}
         <main className="flex-1 overflow-hidden flex flex-col min-w-0 md:p-4">
-          <div className="flex-1 overflow-hidden flex flex-col bg-white md:rounded-2xl md:shadow-lg md:border md:border-gray-200">
+          <div className="flex-1 overflow-hidden flex flex-col bg-white dark:bg-gray-900 md:rounded-2xl md:shadow-lg md:border md:border-gray-200 dark:md:border-gray-700">
             <ChatInterface
               messages={messages}
               setMessages={setMessages}

@@ -32,7 +32,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   const { config } = useConfig();
 
   // Persistent session ID for the duration of the page load
-  const sessionId = useRef(`session_${Date.now()}`).current;
+  const sessionId = useRef(crypto.randomUUID()).current;
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -173,7 +173,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   return (
     <>
       {/* Chat Area */}
-      <div className="flex-1 relative overflow-hidden bg-[#f8f7ff]">
+      <div className="flex-1 relative overflow-hidden bg-[#f8f7ff] dark:bg-gray-900">
         <div className="absolute inset-0 overflow-y-auto scroll-smooth">
 
           {!hasUserMessages ? (
@@ -181,7 +181,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             <div className="flex flex-col items-center px-4 pt-6 pb-6 space-y-5">
 
               {/* Max hero card */}
-              <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-md border border-purple-100 h-64" style={{ backgroundColor: '#f0eff5' }}>
+              <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-md border border-purple-100 dark:border-purple-900 h-64" style={{ backgroundColor: '#f0eff5' }}>
                 <img
                   src={MAX_IMAGE_URL}
                   alt="Max"
@@ -189,8 +189,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 />
               </div>
               <div className="w-full max-w-md px-1">
-                <p className="text-gray-900 text-2xl font-bold leading-tight tracking-tight">Hi, I'm Max.</p>
-                <p className="text-purple-600 text-sm mt-0.5 font-medium">Your GSD SOP Assistant</p>
+                <p className="text-gray-900 dark:text-gray-100 text-2xl font-bold leading-tight tracking-tight">Hi, I'm Max.</p>
+                <p className="text-purple-600 dark:text-purple-400 text-sm mt-0.5 font-medium">Your GSD SOP Assistant</p>
               </div>
 
               {/* Welcome message bubble */}
@@ -204,7 +204,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
               {/* Suggested prompts */}
               <div className="w-full max-w-md">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center mb-3">
+                <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest text-center mb-3">
                   Suggested questions
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -212,7 +212,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                     <button
                       key={i}
                       onClick={() => setInputText(prompt.query)}
-                      className="text-left text-xs sm:text-sm px-3 py-2.5 rounded-xl border border-purple-200 bg-white text-[#5B21B6] hover:bg-purple-50 hover:border-[#5B21B6] hover:shadow-sm transition-all font-medium leading-snug"
+                      className="text-left text-xs sm:text-sm px-3 py-2.5 rounded-xl border border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800 text-[#5B21B6] dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:border-[#5B21B6] dark:hover:border-purple-700 hover:shadow-sm transition-all font-medium leading-snug"
                     >
                       {prompt.label}
                     </button>
@@ -237,7 +237,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           {isStreaming && streamingText && (
             <div className="px-4 md:px-6 pb-2 message assistant-message streaming">
               <div className="flex justify-start">
-                <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-4 py-3 bg-white border border-gray-100 shadow-sm text-gray-800 text-sm leading-relaxed">
+                <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-4 py-3 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm text-gray-800 dark:text-gray-100 text-sm leading-relaxed">
                   {streamingText}
                   <span className="typing-cursor">▊</span>
                 </div>
@@ -254,15 +254,15 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       </div>
 
       {/* Input Area */}
-      <div className="flex-none p-4 bg-white border-t border-gray-100">
-        <div className="relative flex items-end gap-2 bg-gray-50 border border-gray-200 rounded-3xl px-4 py-2 shadow-sm focus-within:ring-2 focus-within:ring-[#5B21B6]/25 focus-within:border-[#5B21B6] transition-all">
+      <div className="flex-none p-4 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700">
+        <div className="relative flex items-end gap-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl px-4 py-2 shadow-sm focus-within:ring-2 focus-within:ring-[#5B21B6]/25 focus-within:border-[#5B21B6] transition-all">
           <textarea
             ref={textareaRef}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about an SOP…"
-            className="w-full bg-transparent border-none outline-none resize-none py-3 max-h-32 text-gray-700 placeholder-gray-400 leading-relaxed text-sm"
+            className="w-full bg-transparent border-none outline-none resize-none py-3 max-h-32 text-gray-700 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 leading-relaxed text-sm"
             rows={1}
             disabled={isLoading}
           />

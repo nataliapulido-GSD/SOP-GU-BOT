@@ -1,0 +1,178 @@
+[
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "SCRIPT REFERENCE LIST \nContents \nCallbacks: ........ \nCallback Voicemails: \nOutbound: \nStandard Greeting (Inbound Calls): ............c.ccoooicoriiiiiiiiinn \nWrap Up: \nDead Air:. \nDeceased/Expired Patien \nDismissed Patient: .. \nDASH New System ReSPONSE:.........cc.ccovereirnvrneirinnia \nDASH Connect Closing: ....... \nAvailable Dates in DASH Self: ... \nDASH Guarantor (PEDS only): \nCircumcision Consult:....... \nVasectomy Consult: Do \nh \nBB \nB \nWL \nW \nNNNNN \nL\u00ab [ SOR\u2014\u2014\u2014\u2014 \nCallbacks: \n\u201cThis is (your name) from Georgia Urology returning your call. How can | help you?\u201d \nCallback Voicemails: \n\u201cThis is Georgia Urology returning your call if you still need assistance please call us back, we \nare experiencing longer than normal wait times but we ask that you hold for an agent. We \nappreciate your patience and thank you for choosing Georgia Urology. \nOutbound: \n\u201cGood morning/Good afternoon this is (your name) with Georgia Urology. Am | speaking with \nMr./Ms. ?\u201d \nStandard Greeting (Inbound Calls): \nThank you for calling Georgia Urology Patient Support Center. This is (your name). How can | \nassist? \nWrap Up: \n\u201cIs there anything else | can help you with? Thank you again for calling Georgia Urology.\u201d\nDropped Calls (due to know technology issues): \n\u201cThank you for calling Georgia Urology. This is (your name). | am sorry we just experienced a \nsystem issue that resulted in us losing calls. | apologize for any inconvenience this may have \ncause you. How can | help you?\u201d \nDead Air: > Use the standard phone greeting- Wait 10 seconds \n\u00bb Do asecond abbreviated greeting- \u201cGeorgia Urology this is (your name)\u201d- Wait \nanother 10 seconds \n> Simply say \u201cHello\u201d- Wait another 10 seconds",
+    "chunk_index": 0,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1685,
+      "token_count": 444
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "\u00bb Do asecond abbreviated greeting- \u201cGeorgia Urology this is (your name)\u201d- Wait \nanother 10 seconds \n> Simply say \u201cHello\u201d- Wait another 10 seconds \n\u00bb End the call with the following statement: \u201cDisconnecting call due to no \nresponse. \u201c \nDeceased/Expired Patients: \n\u201cI'am very sorry for your recent loss and am glad to assist during this difficult period. | can \ncancel the patient\u2019s/your (specific relation)\u2019s upcoming appointment at this time. May | ask the \ndate of passing for my records? (Wait for response) Thank you. (Cancel appointments) All \nupcoming appointments have been cancelled. Is there any other way | can assist you? (Wait for \nresponse) Thank you for calling Georgia Urology, we express our condolences to you during this \ntime.\u201d \nDismissed Patient: \n\u201cI'am unable to schedule your appointment at this time due to a lock on your account, but if | \ncould get your best contact information, I'll be happy to reach out to the proper parties to see \nwhat we can do about unlocking your account.\u201d \nDASH New System Response: \n\u201cl apologize this is taking a bit longer than usual, we implemented a new scheduling system \nrecently and | am still getting comfortable with the new process. You can expect the next time \nyou schedule an appointment; it will be much smoother and easier. \u201d \nDASH Connect Closing: \n\u201cIn the next 30 minutes you'll receive an email confirmation with your appointment details. Three to \ntwo days prior, you'll receive an email and text with your online check-in through our system called, \nPhreesia. Please complete this upon arrival. \nAvailable Dates in DASH Self: \n\"We understand that you were on our website and saw the available as soon as date, however, this is \nthe earliest availability throughout our practice and may not be available with the provider or \nappointment type you are requesting. | apologize for any confusion this may have caused; I'll be happy \nto continue scheduling your appointment.\" \nDASH Guarantor (PEDS only): \n\u201cMay | have the full name and dob of the person that will be legally responsible and will serve \nas the guarantor?\u201d",
+    "chunk_index": 1,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2088,
+      "token_count": 464
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "to continue scheduling your appointment.\" \nDASH Guarantor (PEDS only): \n\u201cMay | have the full name and dob of the person that will be legally responsible and will serve \nas the guarantor?\u201d \nCircumcision Consult: \nWhen scheduling a circumcision consultation, the following information needs to be reviewed \nwith the parent, caregiver, or physician\u2019s office after you have confirmed the patient\u2019s age. \n\u201cI would like to clarify that this appointment is a consultation with the physician, surgery will \nnot be performed on this day. Our physicians perform Circumcisions once the child is 6 months\nor older based on availability unless urgent or medically necessary. We perform circumcisions in \nan outpatient or hospital setting under general anesthesia. The physician will perform a \nphysical exam & discuss the scheduling process during your consultation.\u201d \n**Disclaimer: If the child is under 3 months and the parents request to be seen sooner read the \nscript below: \nWe are happy to schedule your appointment sooner, however a follow-up appointment may be \nnecessary prior to scheduling the procedure. **schedule the appointment 2 to 3 weeks out*** \nFoster Parents/Pending Adoptions: \n\u201cWe do not perform circumcision for religious reasons. We perform circumcisions in an \noutpatient or hospital setting under general anesthesia. This requires an initial consultation to \ndetermine if the patient is a good surgical cancidate. Scheduling the process can take anywhere \nfrom 6-8 weeks after the consultation and the patient must be 6 months of age or older.\u201d \nWe want to be informed but these scenarios should be few and far between. \nOrthodox Jewish practice: \nA mohel (moil/a person who performs the Jewish rite of circumcision) handles newborn \ncircumcisions- especially in the religious community \nIf there is a physical or medical problem, then the mohel will tell family to see a pediatric \nurologist. This does not mean that we will do circ on day 8 of life. We just weigh in as to \nwhether the mohel can do it or not. \nDr. Scherz provided names of two mohel\u2019s- We can give the names, but the caller will have to",
+    "chunk_index": 2,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2118,
+      "token_count": 459
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "whether the mohel can do it or not. \nDr. Scherz provided names of two mohel\u2019s- We can give the names, but the caller will have to \nresearch and reach out to them on their own. We aren\u2019t making referrals just helpful \ninformation to further assist the caller. \n\u00bb Dr. Arthur Gumer \n\u00bb Dr. Jonathan Metzl \nIf there is a medical problem that prevents the mohel from doing the circumcision our physician \nwill perform the procedure using our current guidelines. It will not be expedited but the Rabbi \n**may** be present during the procedure to say the required prayers. The parents would have \nto discuss this with the physician during the consultation. The Patient Support Center cannot \nguarantee this will occur they can just advise the parents to discuss with the provider.\n\u00a2 If the parent declines, use the listed rebuttals: \n(1) \u201cI understand your concerns, but our physicians would like your child to be seen in the \nHAWK clinic first, and only if there is a surgical reason would your child need to be seen \nby one of our Pediatric Urology Surgeons.\u201d \n(2) \u201cLet me walk you through what our HAWK clinic has to offer via our website \ngaurology.com. Our Nurse Practitioners have a wealth of knowledge dealing with all \ntypes of voiding dysfunctions and they publish blogs on the subject on a regular basis.\u201d \nVasectomy Consult: \n\u201cI would like to clarify that this appointment is a consultation with the physician. This visit is for you to \ndiscuss the details of the vasectomy procedure and receive clarification of any questions you may have. \nIf you decide to move forward with the procedure after your consultation, the physician will then \ndiscuss the scheduling process. The procedure can usually be scheduled for 6-8 weeks later.\u201d \nWaitlist: \n\u201cYou'll receive an email confirming that you have been added to the waitlist. If an earlier appointment \nbecomes available our system will send you a text message to move up your appointment, but you only \nhave 15 minutes to respond. If you fail to respond within that timeframe the system will add you to the \nend of the list.\u201d\nGEONGIA LNOLOGY",
+    "chunk_index": 3,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2093,
+      "token_count": 467
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "have 15 minutes to respond. If you fail to respond within that timeframe the system will add you to the \nend of the list.\u201d\nGEONGIA LNOLOGY \nPatient Support Center \nNew Patient Call Audit \nAgent: \nAuditor D. Frazier Date: \nCall handling that would result in an immediate failure: \n(See list below, this is not an all-inclusive list) \nv \nv \nv Irate patients require escalation to the practice Administrators via email \nMultiple calls\u2014Your ability to resolve the patients\u2019 issues in the firstinteraction, reducing the \nneed for the caller to call again with the same request (includes transferring caller to appropriate \nperson when necessary \nPlacing an incoming call on hold before greeting patient and collecting foundational call \ninformation \nTransfer call \u2014 Before transferring always educate the caller about who they are being sent to, \nwhat to expect, and ask for their permission to complete the transfer \nDisconnecting a call with no documented return call \nGiving patient/caller medical advice without advance approval. \nGiving PHI to an unauthorized person \nNot executing CCl script \nTransferring care: Transferring care without physicians\u2019 prior approval (Each provider has their \nown preferences on whether a phone note is required for transferring patients.) \nNot validating patients\u2019 information \nMerging charts without verifying patients' information (Name, D.0.8B, address, and phone \nnumbers) \nConfirms an appointment that is not scheduled \nExpectation 90% or above \nReview of Appointment Scheduling: \nA. Appointment Scheduling -Placement Accuracy \na. Properly introduce yourself and the company to the caller on incoming calls, callbacks, \noutgoing calls, or when leaving voicemails \nO ves 0O No15pts \nb. Looks up patient per protocol \nQOves O NoQ N/A10pts\nc. Correctly enters chief complaint to drive the appropriate event type \nQves QONo Q N/A 10pts \nd. Asks applicable triage questions and correctly selects caller\u2019s response \nQves O NoQ N/A 10pts \ne. Answers the post Triage question pop ups appropriately \nO vYes 0O NoQ N/ASpts",
+    "chunk_index": 4,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2050,
+      "token_count": 457
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "Qves O NoQ N/A 10pts \ne. Answers the post Triage question pop ups appropriately \nO vYes 0O NoQ N/ASpts \nf.  Fully notates chart (Chart Details) \nO ves O NoQN/A10pts \ng. Schedules appointment according to the insurance grid. \nOvYes O NoQN/ASPEs \nh. Follows departments protocols and guidelines \nQOvYes O NoQ N/ASpts \ni. Utilized appropriate resources prior to transferring the call. (Ex: floor support, \npreferences, insurance grid) \nQOvYes O No0Q N/A 10pts \nj. Wraps up Call by completing All of the following O Yes 0 No O N/A 20pts \nConfirms appointment details \nQOvYes O No ON/A \nInforms patient of Phreesia paperwork procedures \nQvYes ONo AN/A \nInforms patient of DASH confirmation \nQves ONo ON/A \nAsks if patient needs additional assistance \nQvyes ONo ON/A \nThanks the patient for calling Georgia Urology \nOyves O NoON/A \nB. Data Entry Review (Demographics) \nk. Collects and correctly enters patients name, D.0.B & address into the system \nO ves O No QN/A15pts \nI Correctly enters insurance plan \nQOves ONo ON/A15pts \nm. Captures Guarantor Information \nQOves O NoON/A 10pts \nn. Appropriately sets authorization fields \nQOves 0O NoQ N/A 10pts \n0. Collects Email address or uses NA when applicable \nQOves QO No ON/A10pts \np. Collects primary and secondary phone numbers \nQvyes O NoQ N/A 10pts\nq. Inputs Referring physician and PCP\u2019s information/ Sends request to add the provider \nQves O NoQON/A 10pts \nUpdates chart as necessary **Demographics, PCP & insurance** (Former patients that \nare now considered new patient* 3 plus years since their last visit)",
+    "chunk_index": 5,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1557,
+      "token_count": 451
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "Qves O NoQON/A 10pts \nUpdates chart as necessary **Demographics, PCP & insurance** (Former patients that \nare now considered new patient* 3 plus years since their last visit) \nQOves QO No O N/A10pts \nVerifies correctpolicy holder (when entering newinsurance plans or reschedulinga New \nPatient Self Scheduled appt) \nQvYes O No O N/A 10pts \nC. Call etiquette \nt \naa. \nbb. Has a friendly and welcoming tone throughout the call \nOves O No O N/A10pts \nMaintains a professional manner, keeps content of the call Georgia Urology related \nQves QNoQ N/A20pts \nAvoids interrupting the caller \nQ Yes O No O N/A 5pts \n. Avoids the need for repeat information \n0 Yes O No O N/A 15pts \nAsks the necessary probing questions \nQ Yes O No Q N/A 10pts \nMinimizes dead air during the call \nQO Yes O No O N/A 10pts \nResponds promptly to the caller's questions \nQO Yes O No O N/A 10pts \nEmpathizes with the caller \nQvyes O NoQ N/A10pts \nAsks for permission prior to placing call on hold or transferring the call to the \nappropriate person or department \nO Yes O No O N/A 10pts \nReview of Appointment Scheduling \nTotal Score: \nData Entry Review (Demographics) \nTotal Score: \nCall Etiquetts \nTotal Score:\nG aronain unoLoay \nPatient Support Center \nFollow-up call Evaluation \nAgent: \nAuditor: L. Dominguez Date: \nCall handling that would result in an immediate failure: \nDepartment protocol and guidelines list (not an inclusive list) \n\u00ab lrate patients require escalation to the practice Administrators via email \n\u00a2 Multiple calls\u2014Your ability to resolve the patients\u2019 issues in the first interaction, reducing the need for the caller to call again with the same request (includes transferring caller to appropriate person when necessary \n\u00a2 Placing an incoming call on hold before greeting patient and collecting foundational",
+    "chunk_index": 6,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1801,
+      "token_count": 453
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "\u00a2 Placing an incoming call on hold before greeting patient and collecting foundational \ncall information \n\u00ab Transfer call - Before transferring always educate the caller about who they are being \nsent to, what to expect, and ask for their permission to complete the transfer. \n\u00a2 Disconnecting a call with no documented return call. \n\u00ab  Giving patient/caller medical advice without advance approval. \n\u00a2 Giving PHI to an unauthorized person. \n\u00ab Notexecuting CCl script. \n\u00ab Transferring care: Transferring care without physicians\u2019 prior approval (Each provider \nhas their own preferences on whethera phone note is required for transferring patients.) \n\u00ab Notvalidating patients' information \n\u00a2 Merging charts without verifying patients' information (Name, D.0.B, address, and \nphone numbers) \n\u00ab Confirms an appointment that is not scheduled. \nReview of Call Flow: expectation 90% or above \nReview of Follow-up call flow: \nA. Properly introduce yourself and the company to the caller (Adhered to incoming call & \ncallback scripts) \nQOves 0O NoQ N/A10pts \nB. Looks up patient per protocol (Name and date of birth) \nQvyes QNoQ N/A10pts\nC. Verifies and updates all demographics (Address, phone numbers- primary and secondary), \ninsurance, PCP, and email address. (One year or more since their last visit) \nQvyes QO NoQN/A 10pts \nD. Captures Guarantor Information & Verifies correct policy holder when entering in new \ninsurance plans. \nQvyes QO NoQN/A 10pts \nE. Correctly enters chief complaint to drive the appropriate event type. \nQves ONoON/A10pts \nF. Asks applicable triage questions and correctly selects caller\u2019s response. \nQves O NoQN/A 10pts \nG. Fully notates chart (Chart Details) \nQOvYes O NoQN/A 5pts \nH. Follows departments protocols and guidelines. \nQOves O NoQN/ASpts \nI. Utilized appropriate resources prior to transferring the call. (Ex: floor support, preferences, \ninsurance grid)",
+    "chunk_index": 7,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1890,
+      "token_count": 461
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "H. Follows departments protocols and guidelines. \nQOves O NoQN/ASpts \nI. Utilized appropriate resources prior to transferring the call. (Ex: floor support, preferences, \ninsurance grid) \nQves ONoQN/AS5pis \nUsed correct method while transferring the call - Warm VS Cold transfer. \nOves ONoQON/AS \nJ.  Directs the patient to the appropriate person for further assistance. \nQvYes QO NoQ N/A10pts \nFront Desk \nSurgery scheduler or procedure scheduler \nTriage Staff \nPBO - Billing \nPractice admin Y YV VY \nK. Wraps up Call by completing All of the following: \nO vYes O NoQ N/A10pts \n\u00a2 Confirms appointment details. \nQOves ONo ON/A \n* Asks if patient needs additional assistance prior to ending the call \nQvyes ONo OQN/A \n\u00a2 Thanks the patient for calling in (pleasant closing) \nQOves O NoQN/A \nL. Call etiquette \na. Hasafriendly and welcoming tone throughout the call \nQves O No ON/A15pts \nb. Maintains a professional manner, keeps content of the call Georgia Urology related \nQOves O NoQ N/A1Spts\nAvoids interrupting the caller. \nQ ves Q No Q N/A 5pts \nAvoids the need for repeat information. \nO Yes O No O N/A 15pts \nAsks the necessary probing questions. \nQ ves Q No O N/A 10pts \nMinimizes dead air during the call. \nQYes QNo O N/A10pts \nResponds promptly to the caller's questions. \nQ Yes O No QN/A 10pts \nEmpathizes with the caller \nQvYes O NoQ N/A10pts \nAsks for permission prior to placing call on hold or transferring the call to the \nappropriate person or department. \nQ Yes O No O N/A 10pts \nReview of Appointment Scheduling \nTotal Score: \nCall Etiguette: \nTotal Score:\n\u00ae L \u00a2",
+    "chunk_index": 8,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1578,
+      "token_count": 447
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "appropriate person or department. \nQ Yes O No O N/A 10pts \nReview of Appointment Scheduling \nTotal Score: \nCall Etiguette: \nTotal Score:\n\u00ae L \u00a2 \nCircumcision Consult Script \nWhen scheduling a circumcision consultation, determine the patient's age prior to getting \ndemographics or reviewing the script. \n\u201cI would like to clarify that this appointment is a consultation with the physician, surgery will not be \nperformed on this day. Our physicians perform Circumcisions once the child is 6 months or older \nbased on availability unless urgent or medically necessary. We perform circumcisions in an \noutpatient or hospital setting under general anesthesia. The physician will perform a physical exam \n& discuss the scheduling process during your consultation.\u201d \n**Disclaimer: If the child is under 3 months and the parents request to be seen sooner read the \nscript below: \nWe are happy to schedule your appointment sooner, but a follow-up appointment may be \nnecessary before scheduling the procedure. **schedule the appointment 2 to 3 weeks out*** \nFoster Parents/Pending Adoptions: We will see the patient for the circumcision consult, however, \nunless urgent or medically necessary, we cannot proceed with the circumcision until the adoption \nhas been finalized and/or they've returned to their parent\u2019s custody.\nThe Newborn Circumcision Center \ne Who \u2014 Healthy, newborn baby boys up to 6 weeks of age & less than 13lbs (there is \na screening process in place to determine eligibility) \ne What - Thisis a newborn circumcision center offering self-pay services only. TNCC \ndoes not accept insurance. The cost is $950 & it is due in full 72hrs before the \nprocedure. \ne When \u2014 \u2018Soft\u2019 launch is Tuesday 10/18/22 \ne Where \u2014 11835 Alpharetta Hwy, Roswell GA 30076 \ne Why \u2014 We have identified a need in our community to provide this as birth \nhospitals increasingly deny newborn circumcisions for questionable indications & \nfewer insurance companies cover \u2018elective\u2019 circumcisions. \ne Scheduling \u2014 The PSC does not schedule this clinic, we provide parents with the \ndirect number",
+    "chunk_index": 9,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2076,
+      "token_count": 458
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "fewer insurance companies cover \u2018elective\u2019 circumcisions. \ne Scheduling \u2014 The PSC does not schedule this clinic, we provide parents with the \ndirect number \ne Phone number: 678.208.6288 or extension 7090 \nCircumcisions for Religious Reasons \nThis is information that we want to share BUT we should only discuss with callers if they bring up the subject. \n\u201cWe do not perform circumcisions for religious reasons. We perform circumcisions in an outpatient or hospital setting under general \nanesthesia. This requires an initial consultation to determine if the patient is a good surgical candidate. Scheduling the procedure \ncan take anywhere from 6-8 weeks after the consultation and the patient must be 6 months of age or older.\u201d \nWe want to be informed but these scenarios should be few and far between. \nOrthodox Jewish practice: \nA mobhel (/moil/a person who performs the Jewish rite of circumcision) handles newborn circumcisions - especially in the religious \ncommunity \nIf there is a physical or medical problem, then the mohel will tell family to see a pediatric urologist \nThis does not mean that we will do circ on day 8 of life. We just weigh in as to whether the mohel can do it or not \nDr. Scherz provided names of two mohel\u2019s - We can give the names but the caller will have to research and reach out to them on \ntheir own. We aren\u2019t making referrals just helpful information to further assist the caller. \ne Dr. Arthur Gumer \n* Dr.Jonathan Metz| \nIf there is a medical problem that prevents the mohel from doing the circumcision our physicians will perform the procedure using \nour current guidelines. It will not be expedited but the Rabbi **may** be present during the procedure to say the required prayers. \nThe parents would have to discuss this with the physician during the consultation. The Patient Support Center cannot guarantee this \nwill occur they can just advise the parents to discuss it with the provider. ~ **This will ultimately be at the discretion of the physician \nand the surgical facility. IE: Covid is beyond our control... | doubt ORs are allowing Rabbi\u2019s to be present given the current pandemic \n& risks. **",
+    "chunk_index": 10,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2146,
+      "token_count": 472
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "and the surgical facility. IE: Covid is beyond our control... | doubt ORs are allowing Rabbi\u2019s to be present given the current pandemic \n& risks. **\n\"This is Georgia Urology returning \nyour call if you still need \nassistance please call us back, we \nare experiencing longer than \nnormal wait times but we ask that \nyou hold for an agent. We \nappreciate your patience and \nthank you for choosing Georgia \nUrology.\u201d\n1. Confirm Legal Guardian: \nFor the first visit, we require that the legal guardian schedule and accompany the child to \nthe appointment; Are you the legal guardian or do you have legal rights to make medical \ndecisions for the patient? \nIf YES: \nGreat! Let\u2019s go ahead and get the appointment scheduled. \nIf they confirm they are the legal guardian but cannot attend the initial visit: \nWe prefer that the legal guardian accompanies the child to their first \nappointment. However, if you\u2019re unable to attend we can accept a signed and dated letter \nof consent giving another individual permission to bring your child in for the visit. \nThe letter must include: \n* Your full legal name (as the guardian) \n\u00ab The full legal name of the person you\u2019re authorizing \n* Aclear statement granting permission for them to bring the child for the initial \nappointment \n* Your signature and the date along with a copy of your driver\u2019s license \nThe person you authorize to accompany your child must be 18 years or older and have \navalid government-issued photo ID (such as a driver\u2019s license, state ID, or passport) \nthat exactly matches the name in your letter.) \nIf NOT, the legal guardian: \nI\u2019d be happy to schedule the appointment directly with them. Would you like to provide \ntheir contact information so we can reach out, or would you prefer to have them call us at \n404.252.25067\" \nPushback from caller: \nDetermine the following - Will the legal guardian/parent bring the child to the \nappointment? \n\u00ab If YES: Proceed with scheduling, confirming that all demographic \ninformation is for the legal guardian/parent.",
+    "chunk_index": 11,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2021,
+      "token_count": 442
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "Determine the following - Will the legal guardian/parent bring the child to the \nappointment? \n\u00ab If YES: Proceed with scheduling, confirming that all demographic \ninformation is for the legal guardian/parent. \n\u00ab If NO: Contact the guardian/parent to provide letter details (see above). If \nthey cannot be contacted, do not proceed. Offer to call back or provide a \nnumber for them to call. \nNote: Incarcerated Parents - They must sign documents allowing temporary medical \ndecision rights. If your caller indicates they don\u2019t have this information you cannot more \nforward to schedule an appointment.\n*+**+Special Circumstances - urgent/ emergent***** \nIn cases of urgent medical needs (such as testicular torsion or obstructing kidney stones \netc.) someone other than the legal guardian may call to schedule the appointment. \nIn these cases: \n* Create the patient's chart. \n* Notify Floor Support and explain the full situation \n\u00ab Escalate to Ped\u2019s Triage- stay on the line with the caller and clearly explain to Triage the \nsituation/ urgency. \nThis ensures that urgent issues are never delayed while still following chain-of-command \nand protecting the child\u2019s care. \n** If you\u2019re unsure whether it\u2019s a true urgent case, always check with Floor Support \nbefore proceeding.\n\u201cMay I have the full name and \ndob of the legal guardian that \nwill serve as the guarantor? \nThis person would be \nresponsible for any amount \ninsurance does not cover.\"\nNGPG Updates: \nThe physicians and team at NGPG Urology are joining Georgia Urology Jan 1st, 2025: \nIf a NGPG patient is calling about a 2024 appointment. Please direct them back to NGPG - \nThat number is 770.219.8765 (for all NGPG locations). They will need to hit option # 1 and \nthen option #1 once they get into the appointment scheduling prompt. \nWe want to convey to patients that while the practice name changes, they will continue to \nreceive the same excellent care from the physicians and our Care team! \nWho are the providers joining? \n\u00ab Ajay Gopalakrishna, MD",
+    "chunk_index": 12,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 2016,
+      "token_count": 458
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "receive the same excellent care from the physicians and our Care team! \nWho are the providers joining? \n\u00ab Ajay Gopalakrishna, MD \n\u00ab Devendar Katkoori, MD \n\u00ab Kalpit Patel, MD \n\u00ab David Stanley, MD \n\u00ab Annie Nguyen, AGCACNP \n\u00ab Loading providers in NextGen: \nPlease make sure to load the new providers in the NextGen environment. \nLabel new Tab as**Gwinnett Northeast** to help familiarize yourself with the new \nproviders. This will make it easier in the upcoming months. \ne We will begin importing existing patient appointments from the NGPG system into \nNextGen this weekend. The goal is to ensure that all patient appointments remain intact \nand consistent as we transition them into our system and make the process seamless. \n\u00ab Although we will begin receiving calls next week, we can only schedule 2025 \nappointments \nKey Points to Remember: Dr. Pareek and David Johnson will not, but we will be taking over \ntheir patient lists. \nY \u201900(\\,0(\\ \nXA \nEven though these patients are new to Georgia Urology, they are not new to their providers. \nWe need to make sure the transition feels smooth and welcoming.\nWhen answering calls from NGPG patients, here\u2019s an example of a warm greeting you can use: \n\u201cThank you for calling Georgia Urology, this is [Agent\u2019s Name] with the Patient Support \nCenter. How can | help you today?\u201d \n* Once the patient is identified as a former NGPG patient, continue with something like: \n\u201cMr./Mrs. [Patient\u2019s Last Name], we\u2019d like to welcome you to Georgia Urology and thank you \nfor trusting us with your care. Let\u2019s go ahead and confirm your upcoming appointment or get \nyour appointment scheduled. (more verbiage examples to come)\nS} \nuoq \n_ucm \ns,0dw\u00b0 \n1e)) \nJo \nJ3jsuel| \nDiscussion Points: \n* Appropriate and Inappropriate \nreasons to transfer care and why. \n* When a Phone Note is required. \n* How to relay the Phone Note \nprocess to the patient/caller.",
+    "chunk_index": 13,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1885,
+      "token_count": 457
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "* Appropriate and Inappropriate \nreasons to transfer care and why. \n* When a Phone Note is required. \n* How to relay the Phone Note \nprocess to the patient/caller. \nWe should not be initiating \nthe conversation. The \npatient/caller should be the \nconversation starter. \nWhen is it Appropriate to Transfer a Patients Care? \nAppropriate Reasons To Transfer \n\u00ab Patient Satisfaction \n* Relocation \ne e - ] \nExamples \n* Bedside manors or staff customer service \n\u00ab Relocation of patient's home or work \nWhenis it Appropriate to Transfer a Patients Care? \nAppropriate Reasons To Transfer \n* Patient Satisfaction \n\u00a2 Relocation \not =) \nExamples \n\u00ab Bedside manors or staff customer service \n\u00bb Relocation of patient's home or work \nWhenis it Inappropriate to Transfer a Patients Care? \nReasons not to Transfer \n* Sooner Availability \nAlternatives we can offer \n* Advanced Practitioners \n* Waitlist \nWe are a Specialist, not a PCP \nSetting. Our physicians prefer to \nkeep their patients in their care \nto ensure rapport is built and to \ncreate a personable experience.\nWhenis a Phone Note Required? \n[ \u2014\u2014\u2014 el \nDr. Walter Falconer \n|interpreter |End of session AM \n1Accepts transfer patients * |Yes, phonenote must be sent prior to scheduling regardless if its been over 3 years \n(R e e SRt S \nDr. Carl Capelouto \nInterpreter First slot of PM session \nAccepts transfer patients Yes, no phonenote required \nNP. John Buchanan \nSame day adds? trans! \nAccepts transfer patients No \nHow to Relay the Phone Note \nProcess \n[Eaeansaas T e e sl o e s e ] \nAppropriate Explanation Inappropriate Explanation \n\"Before we can transfer your care, the \"Before we can transfer your care, the \ndoctor would like to view your chart and doctor will need to approve the transfer. | \npast medical history. Once this is will send a phone note to the doctor, and",
+    "chunk_index": 14,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 1826,
+      "token_count": 435
+    }
+  },
+  {
+    "sop_id": "doc_001",
+    "chunk_text": "doctor would like to view your chart and doctor will need to approve the transfer. | \npast medical history. Once this is will send a phone note to the doctor, and \ncomplete one of our team members will once he decides if he approves the \ngive you a call for scheduling\". transfer, we will call you back\u201d. \nuole [easkiD \nnoAdjuey |",
+    "chunk_index": 15,
+    "metadata": {
+      "title": "Script Reference List",
+      "total_chunks": 16,
+      "char_count": 330,
+      "token_count": 80
+    }
+  }
+]

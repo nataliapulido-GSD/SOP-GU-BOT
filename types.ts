@@ -19,4 +19,5 @@ export interface ChatConfig {
   logoUrl: string;
   botName: string;
   welcomeMessage: string;
+  darkMode: boolean;
 }
