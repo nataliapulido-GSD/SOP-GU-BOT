@@ -7,11 +7,6 @@ interface MessageBubbleProps {
   previousQuestion?: string;
 }
 
-const FEEDBACK_OPTIONS = [
-  'Mixed roles or wrong SOP',
-  'Answer not found but should exist',
-  'Incomplete answer',
-];
 
 /** Split response text into main body and an optional source section.
  *  Detects a separator line of 3+ dashes followed by a line starting with **Source:** */
@@ -34,14 +29,17 @@ function parseResponse(text: string): { mainText: string; sourceText: string | n
 
 export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, previousQuestion = '' }) => {
   const isUser = message.sender === 'user';
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showOtherInput, setShowOtherInput] = useState(false);
+  const [otherText, setOtherText] = useState('');
+  const [selectedPredefined, setSelectedPredefined] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<string | null>(null);
   const [feedbackGiven, setFeedbackGiven] = useState<'up' | 'down' | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const PREDEFINED_OPTIONS = ['Incorrect information', 'Incomplete answer', 'Not relevant', 'Unclear response'];
+
   const showConfirmation = (msg: string) => {
     if (timerRef.current) clearTimeout(timerRef.current);
-    setShowDropdown(false);
     setConfirmation(msg);
     timerRef.current = setTimeout(() => setConfirmation(null), 3000);
   };
@@ -53,11 +51,13 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, previousQ
 
   const handleThumbsDown = () => {
     setFeedbackGiven('down');
-    setShowDropdown(prev => !prev);
+    setShowOtherInput(prev => !prev);
   };
 
-  const handleOption = async (option: string) => {
-    setShowDropdown(false);
+  const submitFeedback = async (errorType: string, comment: string) => {
+    setShowOtherInput(false);
+    setOtherText('');
+    setSelectedPredefined(null);
     try {
       await fetch('https://nataliagarciapulido.app.n8n.cloud/webhook/max-feedback', {
         method: 'POST',
@@ -68,13 +68,26 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, previousQ
           session_id: sessionStorage.getItem('sessionId') || 'unknown',
           question: previousQuestion,
           response: message.text,
-          error_type: option,
+          error_type: errorType,
+          comment,
         }),
       });
     } catch {
       // silently ignore network errors
     }
     showConfirmation('Thanks for the feedback ✓');
+  };
+
+  const handlePredefinedSelect = (option: string) => {
+    setSelectedPredefined(prev => prev === option ? null : option);
+  };
+
+  const handleOtherSubmit = async () => {
+    const text = otherText.trim();
+    const predefined = selectedPredefined;
+    if (!text && !predefined) return;
+    const errorType = predefined ?? 'Other';
+    await submitFeedback(errorType, text);
   };
 
   const UserIcon = () => (
@@ -152,20 +165,48 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({ message, previousQ
               </>
             )}
 
-            {/* Thumbs-down dropdown */}
-            {showDropdown && (
-              <div className="absolute left-0 top-full mt-1 z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md py-1 min-w-[210px]">
-                {FEEDBACK_OPTIONS.map(option => (
-                  <button
-                    key={option}
-                    onClick={() => handleOption(option)}
-                    className="block w-full text-left text-xs px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-[#5B21B6] dark:hover:text-purple-400 transition-colors"
-                  >
-                    {option}
-                  </button>
-                ))}
+            {/* Thumbs-down panel — predefined options + free-form input */}
+            {showOtherInput && (
+              <div className="absolute left-0 top-full mt-1 z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md p-3 min-w-[260px]">
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500 mb-2">What went wrong?</p>
+                <div className="flex flex-col gap-1 mb-3">
+                  {PREDEFINED_OPTIONS.map(option => (
+                    <button
+                      key={option}
+                      onClick={() => handlePredefinedSelect(option)}
+                      className={`text-left text-xs px-2.5 py-1.5 rounded-lg border transition-all ${
+                        selectedPredefined === option
+                          ? 'border-purple-400 bg-purple-50 dark:bg-purple-900/30 text-[#5B21B6] dark:text-purple-300 font-medium'
+                          : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-purple-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-600" />
+                  <span className="text-[10px] text-gray-400 dark:text-gray-500">Other</span>
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-600" />
+                </div>
+                <textarea
+                  value={otherText}
+                  onChange={e => setOtherText(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleOtherSubmit(); } }}
+                  placeholder="Describe the issue…"
+                  rows={3}
+                  className="w-full text-xs text-gray-700 dark:text-gray-200 bg-transparent border border-gray-200 dark:border-gray-600 rounded-lg px-2.5 py-2 resize-none focus:outline-none focus:border-purple-400 dark:focus:border-purple-500 placeholder-gray-400"
+                />
+                <button
+                  onClick={handleOtherSubmit}
+                  disabled={!otherText.trim() && !selectedPredefined}
+                  className="mt-1.5 w-full text-xs font-medium py-1.5 rounded-lg bg-[#5B21B6] text-white hover:bg-purple-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                >
+                  Submit
+                </button>
               </div>
             )}
+
           </div>
         )}
       </div>
