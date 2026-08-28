@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSD · Stones Made Simple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:   #240f3a;
+    --deep-2: #1a0b2b;
+    --mid:    #5a3988;
+    --violet: #8c52ff;
+    --lav:    #b89dff;
+    --lime:   #45ff03;
+    --grey:   #5e5e5e;
+    --white:  #ffffff;
+    --line:   #E6DEF4;
+    --red:    #E24B4B;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(140,82,255,0.30), transparent 42%),
+      radial-gradient(circle at 92% 92%, rgba(193,106,255,0.22), transparent 48%),
+      var(--deep-2);
+    color:#2a2130;
+    font-family:'Roboto', sans-serif;
+    min-height:100vh;
+  }
+
+  .toprail{ background:linear-gradient(135deg, var(--deep) 0%, #33184f 100%); padding:24px 20px 26px 20px; }
+  .toprail-inner{ max-width:720px; margin:0 auto; }
+  .brandmark{ display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .gmark{ width:28px; height:28px; border-radius:50%; border:3px solid var(--lime); position:relative; flex-shrink:0; }
+  .gmark::after{ content:''; position:absolute; top:-1px; left:10px; width:3px; height:8px; background:var(--deep); }
+  .gmark::before{ content:''; position:absolute; top:2px; left:2px; width:5px; height:5px; border-radius:50%; background:var(--lime); box-shadow:0 0 6px rgba(69,255,3,0.9); }
+  .wordmark{ display:flex; align-items:center; gap:7px; font-family:'Anton', sans-serif; color:var(--white); font-size:17px; letter-spacing:.03em; }
+  .wordmark .bar{ width:2px; height:14px; background:var(--lav); opacity:.6; }
+  .wordmark .sub{ font-family:'Roboto', sans-serif; font-weight:400; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--lav); opacity:.85; }
+
+  .eyebrow{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--lav); font-weight:700; display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .eyebrow::before{ content:''; width:16px; height:2px; background:var(--lime); display:inline-block; }
+  h1{ font-family:'Anton', sans-serif; font-weight:400; color:var(--white); font-size:clamp(28px,5vw,40px); margin:0 0 8px 0; }
+  .lede{ font-size:14.5px; color:rgba(255,255,255,0.65); max-width:560px; line-height:1.55; }
+
+  main{ max-width:720px; margin:0 auto; padding:22px 20px 70px 20px; }
+
+  /* ---------------- SCENARIO PICKER ---------------- */
+  #picker.hidden{ display:none; }
+  .picker-title{
+    font-family:'Anton',sans-serif; font-weight:400; color:var(--white); font-size:16px;
+    margin:0 0 14px 0; text-align:center;
+  }
+  .tile-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media(max-width:480px){ .tile-grid{ grid-template-columns:1fr; } }
+  .tile{
+    background:var(--white); border:none; border-radius:16px; padding:20px 16px; cursor:pointer;
+    text-align:left; box-shadow:0 12px 28px rgba(10,4,20,0.3); transition:transform .15s ease, box-shadow .15s ease;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .tile:hover{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(10,4,20,0.4); }
+  .tile .emoji{ font-size:30px; }
+  .tile .ttitle{ font-family:'Anton',sans-serif; font-weight:400; font-size:15.5px; color:var(--deep); line-height:1.25; }
+  .tile .tsub{ font-size:12px; color:var(--grey); line-height:1.4; }
+
+  /* ---------------- DETAIL VIEW ---------------- */
+  #detail.hidden{ display:none; }
+  .back-btn{
+    display:flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer;
+    color:var(--lav); font-size:13px; font-weight:700; padding:8px 0; margin-bottom:12px;
+  }
+  .back-btn:hover{ color:var(--white); }
+  .back-btn svg{ width:16px; height:16px; }
+
+  .detail-card{ background:var(--white); border-radius:18px; padding:22px; box-shadow:0 20px 45px rgba(10,4,20,0.35); }
+  .detail-head{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .detail-head .emoji{ font-size:32px; }
+  .detail-head h2{ font-family:'Anton',sans-serif; font-weight:400; color:var(--deep); font-size:21px; margin:0; }
+  .detail-sub{ font-size:13.5px; color:var(--grey); line-height:1.5; margin:0 0 18px 0; }
+
+  .big-step{
+    display:flex; gap:14px; align-items:flex-start; padding:13px 0; border-top:1px solid var(--line);
+  }
+  .big-step:first-of-type{ border-top:none; }
+  .big-step .snum{
+    width:30px; height:30px; border-radius:50%; background:var(--mid); color:var(--white);
+    font-family:'Anton',sans-serif; font-size:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .big-step p{ margin:0; font-size:15px; line-height:1.55; color:#2a2130; }
+  .big-step p b{ color:var(--mid); }
+
+  /* interactive toggle question */
+  .ask-box{ background:#F5F0FC; border-radius:12px; padding:16px; margin:14px 0; }
+  .ask-box .q{ font-size:14.5px; font-weight:700; color:var(--deep); margin-bottom:10px; }
+  .yn-row{ display:flex; gap:10px; }
+  .yn-btn{
+    flex:1; border:1.5px solid var(--line); background:var(--white); color:var(--mid);
+    font-size:14px; font-weight:700; padding:11px; border-radius:10px; cursor:pointer; transition:all .15s ease;
+  }
+  .yn-btn:hover{ border-color:var(--violet); }
+  .yn-btn.selected-yes{ background:var(--red); border-color:var(--red); color:var(--white); }
+  .yn-btn.selected-no{ background:#3E8F1F; border-color:#3E8F1F; color:var(--white); }
+
+  .result-box{
+    display:none; border-radius:12px; padding:15px 16px; margin-top:12px; font-size:14.5px; line-height:1.6;
+  }
+  .result-box.show{ display:block; animation:pop .3s ease; }
+  @keyframes pop{ from{opacity:0; transform:scale(.96);} to{opacity:1; transform:scale(1);} }
+  .result-box.urgent{ background:#FBE3D6; color:#7A3115; border:2px solid #E2632F; }
+  .result-box.ok{ background:#E4EFD9; color:#2f5115; border:2px solid #3E8F1F; }
+
+  .check-list{ margin-top:8px; }
+  .check-row{ display:flex; align-items:flex-start; gap:10px; padding:8px 0; cursor:pointer; }
+  .check-row input{ width:19px; height:19px; margin-top:1px; accent-color:var(--violet); flex-shrink:0; }
+  .check-row span{ font-size:14px; line-height:1.5; transition:color .15s ease; }
+  .check-row.checked span{ color:#B7ADC9; text-decoration:line-through; }
+
+  .copy-chip{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--deep); border-radius:10px; padding:12px 14px; margin-top:12px;
+  }
+  .copy-chip .ctext{ color:var(--white); font-size:13.5px; line-height:1.5; }
+  .copy-chip button{
+    background:var(--lime); color:var(--deep); border:none; cursor:pointer; flex-shrink:0;
+    font-size:11.5px; font-weight:700; padding:8px 12px; border-radius:14px; white-space:nowrap;
+  }
+  .copy-chip button:hover{ background:#5cff26; }
+
+  .phone-big{
+    background:var(--lime); color:var(--deep); font-family:'Anton',sans-serif; font-weight:400;
+    font-size:22px; text-align:center; padding:16px; border-radius:12px; margin:10px 0;
+  }
+
+  .reset-link{
+    display:block; text-align:center; margin-top:16px; background:none; border:none; cursor:pointer;
+    color:var(--mid); font-size:12.5px; font-weight:700; padding:8px;
+  }
+
+  .toast{
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(10px);
+    background:var(--deep); color:var(--white); padding:10px 18px; border-radius:22px; font-size:12.5px;
+    opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
+    border:1px solid rgba(69,255,3,0.4); z-index:100;
+    display:flex; align-items:center; gap:7px; box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  }
+  .toast .dot{ width:6px; height:6px; border-radius:50%; background:var(--lime); box-shadow:0 0 6px rgba(69,255,3,0.9); }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  footer{ text-align:center; padding:20px 20px 0 20px; color:rgba(255,255,255,0.35); font-size:11px; letter-spacing:.05em; }
+</style>
+</head>
+<body>
+
+<div class="toprail">
+  <div class="toprail-inner">
+    <div class="brandmark">
+      <span class="gmark"></span>
+      <span class="wordmark">GSD<span class="bar"></span><span class="sub">Stones Made Simple</span></span>
+    </div>
+    <div class="eyebrow">New Hire Guide</div>
+    <h1>What's the call about?</h1>
+    <p class="lede">Tap the situation that matches your call. We'll walk you through exactly what to do — no need to remember anything.</p>
+  </div>
+</div>
+
+<main>
+
+  <!-- ===================== SCENARIO PICKER ===================== -->
+  <div id="picker">
+    <div class="tile-grid">
+      <button class="tile" data-scenario="intake">
+        <span class="emoji">🪨</span>
+        <span class="ttitle">Patient has a kidney stone</span>
+        <span class="tsub">First call — questions to ask + red flags</span>
+      </button>
+      <button class="tile" data-scenario="app">
+        <span class="emoji">🩺</span>
+        <span class="ttitle">Scheduling with a PA / NP</span>
+        <span class="tsub">Not the physician themselves</span>
+      </button>
+      <button class="tile" data-scenario="hotline">
+        <span class="emoji">☎️</span>
+        <span class="ttitle">Patient asks about the Hotline</span>
+        <span class="tsub">Same-day / next-day / after hours</span>
+      </button>
+      <button class="tile" data-scenario="stone11">
+        <span class="emoji">⏱️</span>
+        <span class="ttitle">Booking the appointment</span>
+        <span class="tsub">Is it still a Stone11?</span>
+      </button>
+      <button class="tile" data-scenario="locked">
+        <span class="emoji">🔒</span>
+        <span class="ttitle">Account won't save / locked</span>
+        <span class="tsub">NextGen is blocking the appointment</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== DETAIL VIEWS ===================== -->
+  <div id="detail" class="hidden">
+    <button class="back-btn" id="backBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      All scenarios
+    </button>
+    <div class="detail-card" id="detailContent"></div>
+  </div>
+
+</main>
+
+<footer>GSD MEDICAL OUTSOURCE · SECTION 11 — STONES</footer>
+
+<div class="toast" id="toast"><span class="dot"></span>Copied</div>
+
+<script>
+const picker = document.getElementById('picker');
+const detail = document.getElementById('detail');
+const detailContent = document.getElementById('detailContent');
+
+document.querySelectorAll('.tile').forEach(tile=>{
+  tile.addEventListener('click', ()=> openScenario(tile.dataset.scenario));
+});
+document.getElementById('backBtn').addEventListener('click', ()=>{
+  detail.classList.add('hidden');
+  picker.classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+function openScenario(key){
+  picker.classList.add('hidden');
+  detail.classList.remove('hidden');
+  renderScenario(key);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.innerHTML = `<span class="dot"></span>${msg}`;
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 1700);
+}
+
+async function copyText(text){
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  showToast('Copied ✓');
+}
+
+function renderScenario(key){
+  if(key === 'intake') renderIntake();
+  if(key === 'app') renderApp();
+  if(key === 'hotline') renderHotline();
+  if(key === 'stone11') renderStone11();
+  if(key === 'locked') renderLocked();
+}
+
+/* ===================== SCENARIO 1: INTAKE ===================== */
+function renderIntake(){
+  detailContent.innerHTML = `
+    <div class="detail-head"><span class="emoji">🪨</span><h2>Patient Has a Kidney Stone</h2></div>
+    <p class="detail-sub">Ask these questions. Check them off as you go.</p>
+
+    <div class="check-list" id="questionList">
+      ${['Have you had a kidney stone before?','What is your current comfort level?','Have you had any recent imaging? Where? Can you send the CT report / disc, or have it faxed?','How large is the stone?','Are you experiencing any other symptoms?']
+        .map((q,i)=>`<label class="check-row"><input type="checkbox" data-q="${i}"><span>${q}</span></label>`).join('')}
+    </div>
+
+    <div class="ask-box">
+      <div class="q">🤢 Does the patient have nausea or visible blood in urine?</div>
+      <div class="yn-row">
+        <button class="yn-btn" id="nauseaYes">Yes</button>
+        <button class="yn-btn" id="nauseaNo">No</button>
+      </div>
+      <div class="result-box urgent" id="nauseaResult">
+        <b>Stop — this needs Triage.</b><br>
+        1. Create the patient's chart first.<br>
+        2. Then transfer the call to Triage.
+      </div>
+      <div class="result-box ok" id="nauseaResultOk">
+        Good — continue with a normal stones appointment.
+      </div>
+    </div>
+
+    <div class="ask-box">
+      <div class="q">📅 Can you find an appointment for them?</div>
+      <div class="yn-row">
+        <button class="yn-btn" id="apptYes">Yes</button>
+        <button class="yn-btn" id="apptNo">No</button>
+      </div>
+      <div class="result-box ok" id="apptResultOk">
+        Great — book it and you're done.
+      </div>
+      <div class="result-box urgent" id="apptResultNo">
+        <b>Especially if symptoms are severe:</b><br>
+        Reach out to Floor Support or Triage for help.<br>
+        Just make sure the patient already has a chart before you contact them.
+      </div>
+    </div>
+  `;
+
+  document.querySelectorAll('#questionList input').forEach(cb=>{
+    cb.addEventListener('change', ()=> cb.closest('.check-row').classList.toggle('checked', cb.checked));
+  });
+
+  const nauseaYes = document.getElementById('nauseaYes');
+  const nauseaNo = document.getElementById('nauseaNo');
+  nauseaYes.addEventListener('click', ()=>{
+    nauseaYes.classList.add('selected-yes'); nauseaNo.classList.remove('selected-no');
+    document.getElementById('nauseaResult').classList.add('show');
+    document.getElementById('nauseaResultOk').classList.remove('show');
+  });
+  nauseaNo.addEventListener('click', ()=>{
+    nauseaNo.classList.add('selected-no'); nauseaYes.classList.remove('selected-yes');
+    document.getElementById('nauseaResultOk').classList.add('show');
+    document.getElementById('nauseaResult').classList.remove('show');
+  });
+
+  const apptYes = document.getElementById('apptYes');
+  const apptNo = document.getElementById('apptNo');
+  apptYes.addEventListener('click', ()=>{
+    apptYes.classList.add('selected-no'); apptNo.classList.remove('selected-yes');
+    document.getElementById('apptResultOk').classList.add('show');
+    document.getElementById('apptResultNo').classList.remove('show');
+  });
+  apptNo.addEventListener('click', ()=>{
+    apptNo.classList.add('selected-yes'); apptYes.classList.remove('selected-no');
+    document.getElementById('apptResultNo').classList.add('show');
+    document.getElementById('apptResultOk').classList.remove('show');
+  });
+}
+
+/* ===================== SCENARIO 2: ADVANCED PRACTITIONER ===================== */
+function renderApp(){
+  detailContent.innerHTML = `
+    <div class="detail-head"><span class="emoji">🩺</span><h2>Scheduling with a PA / NP</h2></div>
+    <p class="detail-sub">PAs and NPs often have sooner openings than the physician — a doctor is still in the office to guide their care.</p>
+
+    <div class="ask-box">
+      <div class="q">Does this physician require their own presence before a stones patient sees their PA/NP?</div>
+      <div class="yn-row">
+        <button class="yn-btn" id="reqYes">Yes, required</button>
+        <button class="yn-btn" id="reqNo">No, it's fine</button>
+      </div>
+      <div class="result-box urgent" id="reqResultYes">
+        <b>Don't book with the PA/NP alone.</b><br>
+        Schedule with the physician instead, or check their actual availability rules first.
+      </div>
+      <div class="result-box ok" id="reqResultNo">
+        Go ahead and schedule with the PA/NP. Reassure the patient — a doctor will still review their care and make final decisions.
+      </div>
+    </div>
+
+    <div class="copy-chip">
+      <span class="ctext">Always add this to the appointment details:</span>
+      <button onclick="copyText('patient is aware of provider')">Copy</button>
+    </div>
+  `;
+  document.getElementById('reqYes').addEventListener('click', function(){
+    this.classList.add('selected-yes'); document.getElementById('reqNo').classList.remove('selected-no');
+    document.getElementById('reqResultYes').classList.add('show');
+    document.getElementById('reqResultNo').classList.remove('show');
+  });
+  document.getElementById('reqNo').addEventListener('click', function(){
+    this.classList.add('selected-no'); document.getElementById('reqYes').classList.remove('selected-yes');
+    document.getElementById('reqResultNo').classList.add('show');
+    document.getElementById('reqResultYes').classList.remove('show');
+  });
+}
+
+/* ===================== SCENARIO 3: HOTLINE ===================== */
+function renderHotline(){
+  detailContent.innerHTML = `
+    <div class="detail-head"><span class="emoji">☎️</span><h2>The Kidney Stone Hotline</h2></div>
+    <p class="detail-sub">It's open 24/7 for a same-day or next-day appointment.</p>
+    <div class="phone-big">1-855-STONE11</div>
+    <div class="phone-big" style="font-size:16px;">(1-855-786-6311)</div>
+    <div class="big-step"><span class="snum">☀️</span><p>Calls during <b>regular business hours</b> route to the <b>Patient Support Center</b>.</p></div>
+    <div class="copy-chip">
+      <span class="ctext">Copy the number to share with a patient</span>
+      <button onclick="copyText('1-855-786-6311')">Copy</button>
+    </div>
+  `;
+}
+
+/* ===================== SCENARIO 4: STONE11 TIMING ===================== */
+function renderStone11(){
+  detailContent.innerHTML = `
+    <div class="detail-head"><span class="emoji">⏱️</span><h2>Is It Still a Stone11?</h2></div>
+    <p class="detail-sub">A real Stone11 appointment must happen within <b>24–48 hours</b> of the call.</p>
+
+    <div class="ask-box">
+      <div class="q">Did the patient accept a time within 24–48 hours?</div>
+      <div class="yn-row">
+        <button class="yn-btn" id="s11Yes">Yes</button>
+        <button class="yn-btn" id="s11No">No, wants later</button>
+      </div>
+      <div class="result-box ok" id="s11ResultYes">
+        Perfect — label this appointment as <b>Stone11</b>.
+      </div>
+      <div class="result-box urgent" id="s11ResultNo">
+        This is <b>no longer a Stone11</b>. Relabel the appointment event as a regular office visit (<b>NP / OV / FU</b>).
+      </div>
+    </div>
+
+    <div class="copy-chip" id="declineChip" style="display:none;">
+      <span class="ctext">Add this to the appointment details:</span>
+      <button onclick="copyText('patient declined Stone11 appointment within 24-48 hr window, preferred a later date')">Copy</button>
+    </div>
+  `;
+  document.getElementById('s11Yes').addEventListener('click', function(){
+    this.classList.add('selected-no'); document.getElementById('s11No').classList.remove('selected-yes');
+    document.getElementById('s11ResultYes').classList.add('show');
+    document.getElementById('s11ResultNo').classList.remove('show');
+    document.getElementById('declineChip').style.display = 'none';
+  });
+  document.getElementById('s11No').addEventListener('click', function(){
+    this.classList.add('selected-yes'); document.getElementById('s11Yes').classList.remove('selected-no');
+    document.getElementById('s11ResultNo').classList.add('show');
+    document.getElementById('s11ResultYes').classList.remove('show');
+    document.getElementById('declineChip').style.display = 'flex';
+  });
+}
+
+/* ===================== SCENARIO 5: LOCKED ACCOUNT ===================== */
+function renderLocked(){
+  detailContent.innerHTML = `
+    <div class="detail-head"><span class="emoji">🔒</span><h2>Account Won't Save?</h2></div>
+    <p class="detail-sub">If the account is in collections, NextGen blocks the appointment. For Stone11 (and cancer diagnosis) patients, here's exactly what to do:</p>
+
+    <div class="big-step">
+      <span class="snum">1</span>
+      <p>Tell the patient first: <i>"This appointment time may become unavailable while we unlock your account."</i> So they're not caught off guard.</p>
+    </div>
+    <div class="big-step">
+      <span class="snum">2</span>
+      <p><b>Warm transfer the patient to Billing</b> (Central Business Office) to get the account unlocked. Stay on the line and connect them directly — don't just send a message.</p>
+    </div>
+    <div class="big-step">
+      <span class="snum">3</span>
+      <p>Once it's unlocked, go back and save the appointment. If that time is gone, help them find another one.</p>
+    </div>
+
+    <div class="copy-chip">
+      <span class="ctext">Say this before transferring:</span>
+      <button onclick="copyText('This appointment time may become unavailable while we unlock your account.')">Copy</button>
+    </div>
+
+    <div class="result-box ok show" style="margin-top:14px;">
+      💡 This same rule applies to patients with a <b>cancer diagnosis</b> too.
+    </div>
+  `;
+}
+</script>
+</body>
+</html>

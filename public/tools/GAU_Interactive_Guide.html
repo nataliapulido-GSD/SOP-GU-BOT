@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAU · Call Routing Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;
+    --paper-dim:#EFE8D8;
+    --ink:#20262A;
+    --ink-soft:#5B6360;
+    --teal:#12676A;
+    --teal-dark:#0B4C4E;
+    --teal-light:#DCEDE9;
+    --coral:#E2632F;
+    --coral-light:#FBE3D6;
+    --gold:#B98A2E;
+    --gold-light:#F3E6C8;
+    --line:#E1D8C2;
+    --white:#FFFFFF;
+    --shadow: 0 2px 10px rgba(32,38,42,0.06), 0 1px 2px rgba(32,38,42,0.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  a{color:inherit;}
+
+  /* ---------- top rail / tabs ---------- */
+  .toprail{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:2px solid var(--ink);
+  }
+  .toprail-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px 0 20px;
+    flex-wrap:wrap; gap:10px;
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:8px;
+    padding-bottom:10px;
+  }
+  .brand .mark{
+    width:30px;height:30px;border-radius:6px;background:var(--teal);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:var(--paper); font-family:'Fraunces',serif; font-weight:700; font-size:16px;
+    flex-shrink:0;
+  }
+  .brand .name{font-size:15px; font-weight:700; letter-spacing:0.02em;}
+  .brand .sub{font-size:11px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+
+  .tabs{
+    display:flex; gap:2px; flex-wrap:wrap;
+    margin-left:auto;
+  }
+  .tab-btn{
+    appearance:none; border:2px solid var(--ink); border-bottom:none;
+    background:var(--paper-dim); color:var(--ink);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
+    padding:9px 14px; border-radius:8px 8px 0 0;
+    cursor:pointer; transform:translateY(2px);
+    transition:transform .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .tab-btn:hover{transform:translateY(0px); background:var(--gold-light);}
+  .tab-btn.active{
+    background:var(--white); transform:translateY(0px);
+    box-shadow:0 -2px 0 var(--teal) inset;
+  }
+
+  main{max-width:1100px; margin:0 auto; padding:0 20px 90px 20px;}
+  section.panel{display:none; padding-top:34px; animation:fadein .35s ease;}
+  section.panel.active{display:block;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--teal-dark); font-weight:600;
+    display:flex; align-items:center; gap:8px; margin-bottom:10px;
+  }
+  .eyebrow::before{content:''; width:18px; height:2px; background:var(--coral); display:inline-block;}
+  h2.pagetitle{font-size:clamp(28px,4vw,40px); margin:0 0 8px 0;}
+  .lede{font-size:15.5px; color:var(--ink-soft); max-width:640px; line-height:1.55; margin-bottom:28px;}
+
+  /* ---------- HERO / router ---------- */
+  .hero{
+    padding:46px 0 10px 0;
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,52px); line-height:1.04; margin:0 0 14px 0;
+  }
+  .hero h1 em{ color:var(--teal); font-style:normal; }
+  .hero p.lede{font-size:17px; margin-bottom:30px;}
+
+  .router{
+    background:var(--ink); border-radius:16px; padding:28px;
+    box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .router::before{
+    content:'CALL CENTER'; position:absolute; top:14px; right:20px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.15em;
+    color:rgba(246,241,230,0.35);
+  }
+  .router label{
+    color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:12px;
+    letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:10px;
+  }
+  .router input{
+    width:100%; font-size:19px; font-family:'Inter',sans-serif; font-weight:500;
+    padding:16px 18px; border-radius:10px; border:none; outline:none;
+    background:var(--paper); color:var(--ink);
+  }
+  .router input::placeholder{color:#9a9284;}
+  .router-results{margin-top:16px; display:grid; gap:10px;}
+  .router-hint{color:rgba(246,241,230,0.55); font-size:13px; margin-top:12px; font-family:'IBM Plex Mono',monospace;}
+
+  .ticket{
+    background:var(--paper); border-radius:10px; padding:14px 16px;
+    display:flex; align-items:center; gap:14px; box-shadow:0 4px 14px rgba(0,0,0,0.18);
+    animation:pop .25s ease;
+  }
+  @keyframes pop{from{opacity:0; transform:scale(.97);} to{opacity:1; transform:scale(1);}}
+  .ticket .stamp{
+    font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:11.5px;
+    padding:6px 10px; border-radius:20px; white-space:nowrap; flex-shrink:0;
+    letter-spacing:.02em;
+  }
+  .ticket .body{flex:1;}
+  .ticket .ev{font-weight:600; font-size:14.5px;}
+  .ticket .note{font-size:12.5px; color:var(--ink-soft); margin-top:2px; line-height:1.4;}
+
+  .badge-PSC{background:var(--teal-light); color:var(--teal-dark);}
+  .badge-FrontDesk{background:#DCE6F5; color:#28437A;}
+  .badge-Triage{background:var(--coral-light); color:#9C3D18;}
+  .badge-Surgery{background:#E4EFD9; color:#3E5B22;}
+
+  .quicknav{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:34px;}
+  .qn-card{
+    background:var(--white); border:1px solid var(--line); border-radius:12px; padding:18px;
+    cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; box-shadow:var(--shadow);
+  }
+  .qn-card:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(32,38,42,0.1);}
+  .qn-card .num{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--coral); font-weight:700;}
+  .qn-card h3{font-size:16.5px; margin:6px 0 4px 0;}
+  .qn-card p{font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5;}
+
+  /* ---------- search / event lookup ---------- */
+  .searchbar{
+    display:flex; align-items:center; gap:10px; background:var(--white);
+    border:2px solid var(--ink); border-radius:12px; padding:6px 6px 6px 16px; margin-bottom:22px;
+  }
+  .searchbar svg{flex-shrink:0;}
+  .searchbar input{
+    flex:1; border:none; outline:none; font-size:16px; font-family:'Inter',sans-serif;
+    padding:12px 0; background:transparent; color:var(--ink);
+  }
+  .filterchips{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; padding:7px 13px;
+    border-radius:20px; border:1.5px solid var(--ink); cursor:pointer; background:transparent;
+    transition:all .15s ease;
+  }
+  .chip.active{background:var(--ink); color:var(--paper);}
+  #eventList{display:grid; gap:10px;}
+  .no-results{color:var(--ink-soft); font-style:italic; padding:30px 0; text-align:center;}
+
+  /* ---------- department cards ---------- */
+  .dept-grid{display:grid; gap:14px;}
+  .dept-card{
+    background:var(--white); border:1px solid var(--line); border-radius:12px; overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .dept-head{
+    display:flex; align-items:center; gap:14px; padding:16px 18px; cursor:pointer;
+    user-select:none;
+  }
+  .dept-head .dot{width:12px; height:12px; border-radius:50%; flex-shrink:0;}
+  .dept-head h3{margin:0; font-size:17px; flex:1;}
+  .dept-head .count{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);}
+  .dept-head .chevron{transition:transform .2s ease; color:var(--ink-soft);}
+  .dept-card.open .chevron{transform:rotate(180deg);}
+  .dept-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .dept-card.open .dept-body{max-height:900px;}
+  .dept-list{list-style:none; margin:0; padding:0 18px 18px 18px;}
+  .dept-list li{
+    padding:9px 0 9px 22px; border-top:1px solid var(--paper-dim); font-size:14px;
+    position:relative; line-height:1.45;
+  }
+  .dept-list li:before{content:'—'; position:absolute; left:0; color:var(--ink-soft);}
+  .dept-list li.shared{color:#9C3D18;}
+  .dept-list li.shared .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; background:var(--coral-light);
+    color:#9C3D18; padding:2px 7px; border-radius:10px; margin-left:8px; font-weight:600;
+  }
+  .vm-callout{
+    background:var(--gold-light); border:1px solid var(--gold); border-radius:12px;
+    padding:14px 18px; margin-bottom:22px; font-size:14px; display:flex; gap:10px; align-items:center;
+  }
+
+  /* ---------- stent wizard ---------- */
+  .wizard{
+    background:var(--white); border:1px solid var(--line); border-radius:16px; padding:30px;
+    box-shadow:var(--shadow); min-height:280px;
+  }
+  .wiz-step{display:none; animation:fadein .3s ease;}
+  .wiz-step.active{display:block;}
+  .wiz-q{font-size:19px; font-weight:700; font-family:'Fraunces',serif; margin-bottom:20px;}
+  .wiz-options{display:grid; gap:10px;}
+  .wiz-opt{
+    text-align:left; background:var(--paper-dim); border:1.5px solid var(--line); border-radius:10px;
+    padding:14px 18px; font-size:14.5px; cursor:pointer; font-family:'Inter',sans-serif;
+    transition:all .15s ease; color:var(--ink);
+  }
+  .wiz-opt:hover{border-color:var(--teal); background:var(--teal-light);}
+  .wiz-progress{display:flex; gap:6px; margin-bottom:24px;}
+  .wiz-progress .seg{height:4px; flex:1; background:var(--line); border-radius:2px;}
+  .wiz-progress .seg.done{background:var(--teal);}
+  .wiz-result{
+    background:var(--teal-dark); color:var(--paper); border-radius:12px; padding:24px;
+  }
+  .wiz-result .eyebrow2{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gold-light); margin-bottom:10px; opacity:.85;
+  }
+  .wiz-result h3{font-size:22px; margin:0 0 10px 0; color:var(--paper);}
+  .wiz-result p{font-size:14.5px; line-height:1.6; margin:0;}
+  .wiz-restart{
+    margin-top:18px; background:var(--coral); color:var(--white); border:none; padding:10px 18px;
+    border-radius:8px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600;
+    cursor:pointer;
+  }
+  .wiz-back{
+    margin-top:14px; margin-right: 10px; background:transparent; color:var(--ink-soft); border:1px solid var(--line);
+    padding:9px 16px; border-radius:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; cursor:pointer;
+  }
+
+  /* ---------- POD contacts ---------- */
+  .pod-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
+  .pod-card{
+    background:var(--white); border:1px solid var(--line); border-radius:12px; padding:18px;
+    box-shadow:var(--shadow);
+  }
+  .pod-card h3{margin:0 0 8px 0; font-size:16px; color:var(--teal-dark); display:flex; align-items:center; gap:8px;}
+  .pod-card h3:before{content:'📍';}
+  .pod-card p{margin:0; font-size:13.5px; line-height:1.55; color:var(--ink-soft);}
+  .pod-note{
+    background:var(--coral-light); border:1px solid #E7B8A0; border-radius:12px; padding:16px 18px;
+    margin-top:18px; font-size:13.5px; color:#7A3115;
+  }
+
+  /* ---------- glossary flip cards ---------- */
+  .gloss-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px;}
+  .flip-card{perspective:1000px; height:150px; cursor:pointer;}
+  .flip-inner{
+    position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-front,.flip-back{
+    position:absolute; width:100%; height:100%; backface-visibility:hidden;
+    border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:center;
+    box-shadow:var(--shadow);
+  }
+  .flip-front{background:var(--teal); color:var(--paper);}
+  .flip-front .term{font-family:'Fraunces',serif; font-size:20px; font-weight:700;}
+  .flip-front .tap{font-family:'IBM Plex Mono',monospace; font-size:10px; opacity:.7; margin-top:8px;}
+  .flip-back{background:var(--white); border:1.5px solid var(--teal); transform:rotateY(180deg); color:var(--ink);}
+  .flip-back .term{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--teal-dark); font-weight:700; margin-bottom:6px;}
+  .flip-back p{font-size:12.5px; line-height:1.45; margin:0; color:var(--ink-soft);}
+
+  footer{
+    text-align:center; padding:30px 20px; color:var(--ink-soft); font-size:12px;
+    font-family:'IBM Plex Mono',monospace; border-top:1px solid var(--line); margin-top:40px;
+  }
+
+  @media (max-width:640px){
+    .toprail-inner{padding:12px 14px 0 14px;}
+    .tabs{gap:0;}
+    .tab-btn{padding:8px 10px; font-size:11px;}
+    .router{padding:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toprail">
+  <div class="toprail-inner">
+    <div class="brand">
+      <span class="mark">G</span>
+      <span>
+        <div class="name">GAU Call Routing</div>
+        <div class="sub">new hire guide</div>
+      </span>
+    </div>
+    <div class="tabs" id="tabs">
+      <button class="tab-btn active" data-panel="home">Home</button>
+      <button class="tab-btn" data-panel="lookup">Look Up a Call</button>
+      <button class="tab-btn" data-panel="depts">Departments</button>
+      <button class="tab-btn" data-panel="stent">Stent</button>
+      <button class="tab-btn" data-panel="pod">Locations</button>
+      <button class="tab-btn" data-panel="gloss">Glossary</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ===================== HOME ===================== -->
+  <section class="panel active" id="home">
+    <div class="hero">
+      <div class="eyebrow">Welcome</div>
+      <h1>Every call has <em>a place</em><br>it belongs.</h1>
+      <p class="lede">This guide helps you quickly figure out which department owns each patient request — without having to memorize everything on day one. Type what the patient is asking for below, just like you'd jot down the reason for the call.</p>
+
+      <div class="router">
+        <label for="routerInput">What does the patient need?</label>
+        <input type="text" id="routerInput" placeholder="e.g. lab results, schedule surgery, stent...">
+        <div class="router-results" id="routerResults"></div>
+        <div class="router-hint" id="routerHint">Start typing to see where the call should go →</div>
+      </div>
+
+      <div class="quicknav">
+        <div class="qn-card" data-goto="lookup">
+          <div class="num">01</div>
+          <h3>Look up a call</h3>
+          <p>The full list of call reasons (Event Types), who handles each one, and important notes.</p>
+        </div>
+        <div class="qn-card" data-goto="depts">
+          <div class="num">02</div>
+          <h3>Departments</h3>
+          <p>See what each team does, explained in plain language.</p>
+        </div>
+        <div class="qn-card" data-goto="stent">
+          <div class="num">03</div>
+          <h3>Stent scenario</h3>
+          <p>The scenario that confuses new agents most — solved step by step.</p>
+        </div>
+        <div class="qn-card" data-goto="pod">
+          <div class="num">04</div>
+          <h3>Location contacts</h3>
+          <p>Who to contact based on the clinic's location (POD).</p>
+        </div>
+        <div class="qn-card" data-goto="gloss">
+          <div class="num">05</div>
+          <h3>Glossary</h3>
+          <p>PSC, ASC, POD, NV... every acronym explained simply.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LOOKUP ===================== -->
+  <section class="panel" id="lookup">
+    <div class="eyebrow">Directory</div>
+    <h2 class="pagetitle">Look up a call</h2>
+    <p class="lede">Type a keyword or filter by department. This is the full list of call reasons (Event Types) and who owns them.</p>
+
+    <div class="searchbar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#20262A" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="eventSearch" placeholder="Search by call reason...">
+    </div>
+    <div class="filterchips" id="filterChips">
+      <button class="chip active" data-dept="all">All</button>
+      <button class="chip" data-dept="PSC">PSC</button>
+      <button class="chip" data-dept="FrontDesk">Front Desk</button>
+      <button class="chip" data-dept="Triage">Triage</button>
+      <button class="chip" data-dept="Surgery">Surgery Scheduler</button>
+    </div>
+    <div id="eventList"></div>
+  </section>
+
+  <!-- ===================== DEPARTMENTS ===================== -->
+  <section class="panel" id="depts">
+    <div class="eyebrow">Teams</div>
+    <h2 class="pagetitle">Who handles what?</h2>
+    <p class="lede">Click each department to see everything it covers. Anything shown in color is a responsibility shared with another team.</p>
+    <div class="vm-callout">☎️&nbsp; <span><strong>Voicemail capability</strong> available only for: Triage · Surgery Scheduler · Practice Administrator</span></div>
+    <div class="dept-grid" id="deptGrid"></div>
+  </section>
+
+  <!-- ===================== STENT WIZARD ===================== -->
+  <section class="panel" id="stent">
+    <div class="eyebrow">Guided scenario</div>
+    <h2 class="pagetitle">Stent — who schedules it?</h2>
+    <p class="lede">This is one of the trickiest scenarios for new agents. Answer the questions below and we'll tell you exactly who to route the patient to.</p>
+
+    <div class="wizard">
+      <div class="wiz-progress" id="wizProgress"></div>
+      <div id="wizSteps"></div>
+    </div>
+  </section>
+
+  <!-- ===================== POD ===================== -->
+  <section class="panel" id="pod">
+    <div class="eyebrow">Locations</div>
+    <h2 class="pagetitle">Contacts by location (POD)</h2>
+    <p class="lede">For ASC (outpatient) procedures, use this table to know which front desk to contact based on the patient's location.</p>
+    <div class="pod-grid" id="podGrid"></div>
+    <div class="pod-note">⚠️ Reminder: for <strong>Cystoscopy, Vasectomy, Urodynamics, and Urocuff</strong>, always check this location section for Gwinnett and Braselton.</div>
+  </section>
+
+  <!-- ===================== GLOSSARY ===================== -->
+  <section class="panel" id="gloss">
+    <div class="eyebrow">Terms</div>
+    <h2 class="pagetitle">Glossary</h2>
+    <p class="lede">Tap each card to reveal its meaning.</p>
+    <div class="gloss-grid" id="glossGrid"></div>
+  </section>
+
+</main>
+
+<footer>GAU · Internal new-hire training guide · Internal use only</footer>
+
+<script>
+/* ================= DATA ================= */
+const DEPT_COLORS = {
+  "PSC": {dot:"#12676A", badge:"badge-PSC"},
+  "FrontDesk": {dot:"#28437A", badge:"badge-FrontDesk"},
+  "Triage": {dot:"#9C3D18", badge:"badge-Triage"},
+  "Surgery": {dot:"#3E5B22", badge:"badge-Surgery"}
+};
+const DEPT_LABEL = {PSC:"PSC", FrontDesk:"Front Desk", Triage:"Triage", Surgery:"Surgery Scheduler"};
+
+const events = [
+  ["Biopsy Test Results","FrontDesk",""],
+  ["Cath / removals for Northern POD","Triage",""],
+  ["Clinical questions","Triage",""],
+  ["Communicate test results over the phone","Triage",""],
+  ["Consult-Cancer","PSC",""],
+  ["Consult-Circumcision","PSC","Only used for PEDS patients."],
+  ["Cystoscopy / in-office procedures","FrontDesk","Also check the ASC location section for Gwinnett and Braselton."],
+  ["Follow-Up","PSC","For an established patient seeing their care team; also used for Second Opinion appointments."],
+  ["Interstitial Cystitis Patient","PSC",""],
+  ["Medication Refills (not requiring an office visit)","Triage",""],
+  ["New Patient","PSC","If the patient was last seen 3+ years ago, they're considered \"new.\""],
+  ["NV-BCG","FrontDesk",""],
+  ["NV-Cath Placement or Change","FrontDesk","Triage handles this for the Northern POD."],
+  ["NV-Gemcitabine","FrontDesk",""],
+  ["NV-IC Treatment","FrontDesk",""],
+  ["NV-KUB","FrontDesk",""],
+  ["NV-Labs Only","FrontDesk",""],
+  ["NV-Provenge","FrontDesk",""],
+  ["NV-PSA","FrontDesk",""],
+  ["NV-PTNS","FrontDesk",""],
+  ["NV-Semen Analysis","Triage",""],
+  ["NV-Sildenafil","FrontDesk",""],
+  ["NV-Testosterone Injection","FrontDesk",""],
+  ["NV-Urine Culture / Urine drop-off","Triage",""],
+  ["NV-Uroflow","FrontDesk",""],
+  ["Office Visit - Aveed","FrontDesk",""],
+  ["Office Visit - BCG","FrontDesk",""],
+  ["Office Visit - Eligard","FrontDesk",""],
+  ["Office Visit - Firmagon","FrontDesk",""],
+  ["Office Visit - Sildenafil","FrontDesk",""],
+  ["Office Visit - Tadalafil","FrontDesk",""],
+  ["Patient Portal Labwork / Test Result Uploads","Triage",""],
+  ["PE — Pre-Surgery Appointment","Surgery","Appointment before surgery to discuss surgical details."],
+  ["Perc Lead Placement","FrontDesk",""],
+  ["Post-Op (PO)","Surgery","If 3+ months have passed since surgery, the PSC CAN schedule this as a Follow-Up instead. Gwinnett and Braselton PCs schedule directly."],
+  ["Post surgery complications","Triage",""],
+  ["Prenatal Consult","PSC",""],
+  ["Prior Authorizations (Meds)","Triage",""],
+  ["Radiology order assistance","Triage",""],
+  ["Send messages to providers","Triage",""],
+  ["Stone11","PSC","Stone appointments scheduled within 24–48 hours of the initial call."],
+  ["Surgery (SGY)","Surgery",""],
+  ["Testosterone Pellet Implant","FrontDesk",""],
+  ["Transfer Patient","PSC","For an established patient switching to another provider's care."],
+  ["Trimix Trial","FrontDesk",""],
+  ["Urocuff","FrontDesk","Also check the ASC location section for Gwinnett and Braselton."],
+  ["Urodynamics","FrontDesk","Also check the ASC location section for Gwinnett and Braselton."],
+  ["Vasectomy Consultation","PSC",""],
+  ["Vasectomy Procedure","FrontDesk","Also check the ASC location section for Gwinnett and Braselton."],
+  ["Virtual Visit (New / Follow-up / Transfer)","PSC",""]
+];
+events.sort((a,b)=>a[0].localeCompare(b[0]));
+
+const departments = [
+  {name:"All Departments", items:[
+    ["Inbound calls",false],["Outbound calls",false]
+  ]},
+  {name:"Philmon Business Office", items:[
+    ["Account balances",false],
+    ["(Un)locking patient accounts with collection statuses",false],
+    ["Payment plans",false],
+    ["Costs for labs, surgery, and procedures",false],
+    ["CPT codes",false],
+    ["Correcting patient balances",false],
+    ["Answering finance-related questions",false],
+    ["Troubleshooting copay issues in Phreesia",false],
+  ]},
+  {name:"IVU (Insurance Verification Unit)", items:[
+    ["Insurance verification",false]
+  ]},
+  {name:"ChartPro", items:[
+    ["Law firm patient chart requests",false],
+    ["Patient chart requests",false],
+  ]},
+  {name:"Front Desk", items:[
+    ["Onsite patient paperwork assistance",false],
+    ["Directions to the clinic",false],
+    ["Patient check-in",false],
+    ["Patient check-out",false],
+    ["Resending Virtual Visit invitations",false],
+    ["Providing office directions",false],
+    ["In-office copay collection",false],
+    ["School / work excuses",false],
+    ["Guidance on who can accompany PEDS patients",false],
+    ["Scheduling outpatient procedures (ASC)","Front Desk + ASC"],
+    ["Fax folder management","Front Desk + Triage"],
+    ["NV scheduling for adults","Front Desk + Triage"],
+    ["Same-day approval (provider-dependent)","Front Desk + Triage"],
+    ["Rescheduling efforts","PSC + Front Desk"],
+    ["Checking received medical records","PSC + Front Desk"],
+    ["Scheduling routine visits","PSC + Front Desk + Triage"],
+    ["Medication refills","PSC + Front Desk + Triage"],
+  ]},
+  {name:"Triage", items:[
+    ["Directing patients to the ER",false],
+    ["Faxing office notes",false],
+    ["Answering patient portal questions",false],
+    ["Uploading labs / results to the portal",false],
+    ["NV scheduling for PEDS",false],
+    ["Communicating test results by phone",false],
+    ["Post-surgery complications",false],
+    ["Allergic reactions to medication",false],
+    ["Clinical questions",false],
+    ["Sending messages to providers",false],
+    ["Prior authorizations (medication)",false],
+    ["Medication refills (no visit required)",false],
+    ["Radiology order assistance",false],
+    ["Coordinating hospital consultations",false],
+    ["Fax folder management","Front Desk + Triage"],
+    ["NV scheduling for adults","Front Desk + Triage"],
+    ["Same-day approval (provider-dependent)","Front Desk + Triage"],
+    ["Scheduling routine visits","PSC + Front Desk + Triage"],
+    ["Medication refills","PSC + Front Desk + Triage"],
+  ]},
+  {name:"Practice Administrators", items:[
+    ["Directing daily clinic operations and staff",false],
+    ["Approving unique scheduling requests",false],
+    ["Dismissing patients from the practice",false],
+    ["Medical vendor management",false],
+    ["Handling extreme patient complaints",false],
+    ["Managing Workers' Compensation cases",false],
+  ]},
+  {name:"PSC (Patient Service Center)", items:[
+    ["Expediting Phreesia management",false],
+    ["Patient portal enrollment",false],
+    ["Urolift consultations",false],
+    ["DASH task list",false],
+    ["Kidney stone hotline",false],
+    ["Georgia Urology online inquiries (GU emails)",false],
+    ["Rescheduling efforts","PSC + Front Desk"],
+    ["Checking received medical records","PSC + Front Desk"],
+    ["Scheduling routine visits","PSC + Front Desk + Triage"],
+    ["Medication refills","PSC + Front Desk + Triage"],
+  ]},
+  {name:"Surgery Scheduler", items:[
+    ["Pre-ops",false],
+    ["Surgery at hospital",false],
+    ["Post-ops",false],
+    ["PEDS circumcision",false],
+  ]},
+  {name:"IT / iVision", items:[
+    ["Phone / software / computer issues",false]
+  ]},
+];
+
+const podContacts = [
+  ["Decatur POD","Conyers MDs (Chen, Futral, Neil) → Conyers front desk. Decatur MDs (Msezane, Stites, Falconer, Kemper & APPs) → the patient's primary office front desk. If no answer after 2 minutes, send an email."],
+  ["Gwinnett","Barbara Rainy, ext. 4724"],
+  ["Northern","The patient's primary office front desk. If no answer after 2 minutes, send an email."],
+  ["Northwest","The patient's primary office front desk. If no answer after 2 minutes, send an email."],
+  ["Southern","The patient's primary office front desk. If no answer after 2 minutes, send an email."],
+  ["DiMeglio","Midtown front desk"],
+];
+
+const glossary = [
+  ["ASC","Ambulatory Surgery Center — an outpatient (same-day) procedure center."],
+  ["PSC","Patient Service Center — handles scheduling, consults, and general patient service tasks."],
+  ["POD","A clinic location/region grouping (e.g. Gwinnett, Northern, Decatur)."],
+  ["NV","New Visit — an appointment type for a first-time visit for a specific treatment."],
+  ["GU","Georgia Urology (the practice) or Genitourinary, depending on context."],
+  ["PC","Practice Coordinator."],
+  ["PA","Practice Administrator (in this context) — not to be confused with Physician Assistant."],
+  ["IVU","Insurance Verification Unit."],
+  ["PEDS","Pediatric patients."],
+  ["SGY","Surgery."],
+  ["PE","Pre-op / pre-surgical evaluation appointment."],
+  ["PO","Post-Op appointment."],
+  ["IC","Interstitial Cystitis."],
+  ["KUB","Kidneys, Ureters, and Bladder — a type of X-ray."],
+  ["BCG","Bacillus Calmette-Guérin — a bladder treatment/instillation."],
+  ["PTNS","Percutaneous Tibial Nerve Stimulation — a bladder condition treatment."],
+  ["PSA","Prostate-Specific Antigen — a lab test."],
+  ["CPT","Code used for billing medical procedures."],
+  ["Phreesia","The patient check-in / intake software platform."],
+  ["iVision","The IT / technical support team."],
+];
+
+/* ================= TABS ================= */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>gotoPanel(btn.dataset.panel));
+});
+document.querySelectorAll('.qn-card').forEach(c=>{
+  c.addEventListener('click', ()=>gotoPanel(c.dataset.goto));
+});
+function gotoPanel(id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.panel===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', p.id===id));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ================= ROUTER (hero search) ================= */
+const routerInput = document.getElementById('routerInput');
+const routerResults = document.getElementById('routerResults');
+const routerHint = document.getElementById('routerHint');
+routerInput.addEventListener('input', ()=>{
+  const q = routerInput.value.trim().toLowerCase();
+  routerResults.innerHTML = '';
+  if(!q){ routerHint.style.display='block'; return; }
+  routerHint.style.display='none';
+  const matches = events.filter(e=> e[0].toLowerCase().includes(q) || DEPT_LABEL[e[1]].toLowerCase().includes(q)).slice(0,5);
+  if(matches.length===0){
+    routerResults.innerHTML = '<div class="router-hint" style="display:block;">No exact match found — try another word, or check the "Look Up a Call" tab.</div>';
+    return;
+  }
+  matches.forEach(([ev,dept,note])=>{
+    const el = document.createElement('div');
+    el.className='ticket';
+    el.innerHTML = `<span class="stamp ${DEPT_COLORS[dept].badge}">${DEPT_LABEL[dept]}</span>
+      <span class="body"><div class="ev">${ev}</div>${note?`<div class="note">${note}</div>`:''}</span>`;
+    routerResults.appendChild(el);
+  });
+});
+
+/* ================= EVENT SEARCH TAB ================= */
+let activeDeptFilter = 'all';
+const eventSearch = document.getElementById('eventSearch');
+const eventList = document.getElementById('eventList');
+document.querySelectorAll('#filterChips .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#filterChips .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    activeDeptFilter = chip.dataset.dept;
+    renderEvents();
+  });
+});
+eventSearch.addEventListener('input', renderEvents);
+function renderEvents(){
+  const q = eventSearch.value.trim().toLowerCase();
+  eventList.innerHTML = '';
+  const filtered = events.filter(([ev,dept])=>{
+    const matchesQ = !q || ev.toLowerCase().includes(q);
+    const matchesDept = activeDeptFilter==='all' || dept===activeDeptFilter;
+    return matchesQ && matchesDept;
+  });
+  if(filtered.length===0){
+    eventList.innerHTML = '<div class="no-results">No results. Try a different keyword.</div>';
+    return;
+  }
+  filtered.forEach(([ev,dept,note])=>{
+    const el = document.createElement('div');
+    el.className='ticket';
+    el.style.boxShadow='var(--shadow)';
+    el.innerHTML = `<span class="stamp ${DEPT_COLORS[dept].badge}">${DEPT_LABEL[dept]}</span>
+      <span class="body"><div class="ev">${ev}</div>${note?`<div class="note">${note}</div>`:''}</span>`;
+    eventList.appendChild(el);
+  });
+}
+renderEvents();
+
+/* ================= DEPARTMENTS ================= */
+const deptGrid = document.getElementById('deptGrid');
+departments.forEach((d,i)=>{
+  const colorCycle = ["#12676A","#28437A","#9C3D18","#3E5B22","#B98A2E"];
+  const dot = colorCycle[i % colorCycle.length];
+  const card = document.createElement('div');
+  card.className='dept-card';
+  const listHtml = d.items.map(([text,shared])=>{
+    if(shared){
+      return `<li class="shared">${text}<span class="tag">${shared}</span></li>`;
+    }
+    return `<li>${text}</li>`;
+  }).join('');
+  card.innerHTML = `
+    <div class="dept-head">
+      <span class="dot" style="background:${dot}"></span>
+      <h3>${d.name}</h3>
+      <span class="count">${d.items.length} tasks</span>
+      <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6360" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="dept-body"><ul class="dept-list">${listHtml}</ul></div>
+  `;
+  card.querySelector('.dept-head').addEventListener('click', ()=>card.classList.toggle('open'));
+  deptGrid.appendChild(card);
+});
+
+/* ================= STENT WIZARD ================= */
+const wizSteps = document.getElementById('wizSteps');
+const wizProgress = document.getElementById('wizProgress');
+
+const wizardTree = {
+  start: {
+    q: "Which best describes the patient?",
+    options: [
+      {label:"NEW patient with a stent already placed", next:"new"},
+      {label:"ESTABLISHED patient (already has history with GU)", next:"established"},
+      {label:"The stent was placed in the Emergency Room (ER)", next:"er"},
+    ]
+  },
+  new: {
+    q: "Who placed the stent?",
+    options: [
+      {label:"A Georgia Urology (GU) provider", next:"result", result:{
+        title:"Surgery Scheduler",
+        detail:"Route the call to the Surgery Scheduler (PC for the Gwinnett POD)."
+      }},
+      {label:"An out-of-state or non-local provider", next:"result", result:{
+        title:"PSC",
+        detail:"Route the call to the PSC. Ask for imaging or op notes if available — if they don't have them, it's still okay to schedule."
+      }},
+      {label:"A local urologist who is NOT with GU", next:"result", result:{
+        title:"The patient must follow up with their provider",
+        detail:"Do not schedule with GU. The patient needs to follow up with their own provider."
+      }},
+    ]
+  },
+  established: {
+    q: null,
+    autoResult:{
+      title:"Surgery Scheduler",
+      detail:"This applies regardless of who placed the stent — even a local urologist. This also includes patients not seen in the past 3 years, as long as they have history with GU."
+    }
+  },
+  er: {
+    q: null,
+    autoResult:{
+      title:"Email the Practice Administrator (PA)",
+      detail:"When the stent was placed by a GU provider in the ER, and that ER provider does NOT accept the patient's insurance: email the PA of the POD that does accept that insurance, to facilitate scheduling."
+    }
+  }
+};
+
+let wizHistory = ['start'];
+
+function renderWizard(){
+  const key = wizHistory[wizHistory.length-1];
+  const node = wizardTree[key];
+  wizSteps.innerHTML = '';
+
+  // progress bar: 2 segments (question 1, question/result)
+  wizProgress.innerHTML = '';
+  const totalSegs = 2;
+  for(let i=0;i<totalSegs;i++){
+    const seg = document.createElement('div');
+    seg.className = 'seg' + (i < wizHistory.length ? ' done' : '');
+    wizProgress.appendChild(seg);
+  }
+
+  if(node.autoResult){
+    renderResult(node.autoResult);
+    return;
+  }
+  if(node.q){
+    const wrap = document.createElement('div');
+    wrap.className='wiz-step active';
+    const opts = node.options.map(o=>`<button class="wiz-opt" data-next="${o.next}" data-idx="${node.options.indexOf(o)}">${o.label}</button>`).join('');
+    wrap.innerHTML = `<div class="wiz-q">${node.q}</div><div class="wiz-options">${opts}</div>`;
+    wizSteps.appendChild(wrap);
+    wrap.querySelectorAll('.wiz-opt').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const idx = btn.dataset.idx;
+        const opt = node.options[idx];
+        if(opt.next === 'result'){
+          wizHistory.push('result');
+          renderResult(opt.result);
+        } else {
+          wizHistory.push(opt.next);
+          renderWizard();
+        }
+      });
+    });
+    if(wizHistory.length > 1){
+      const back = document.createElement('button');
+      back.className='wiz-back';
+      back.textContent='← Back';
+      back.addEventListener('click', ()=>{ wizHistory.pop(); renderWizard(); });
+      wizSteps.appendChild(back);
+    }
+  }
+}
+
+function renderResult(result){
+  const wrap = document.createElement('div');
+  wrap.className='wiz-step active';
+  wrap.innerHTML = `
+    <div class="wiz-result">
+      <div class="eyebrow2">Correct routing</div>
+      <h3>${result.title}</h3>
+      <p>${result.detail}</p>
+    </div>
+  `;
+  const restart = document.createElement('button');
+  restart.className='wiz-restart';
+  restart.textContent='Start over';
+  restart.addEventListener('click', ()=>{ wizHistory=['start']; renderWizard(); });
+  const back = document.createElement('button');
+  back.className='wiz-back';
+  back.textContent='← Back';
+  back.addEventListener('click', ()=>{ wizHistory.pop(); renderWizard(); });
+  wizSteps.appendChild(wrap);
+  wizSteps.appendChild(back);
+  wizSteps.appendChild(restart);
+}
+renderWizard();
+
+/* ================= POD GRID ================= */
+const podGrid = document.getElementById('podGrid');
+podContacts.forEach(([pod,contact])=>{
+  const card = document.createElement('div');
+  card.className='pod-card';
+  card.innerHTML = `<h3>${pod}</h3><p>${contact}</p>`;
+  podGrid.appendChild(card);
+});
+
+/* ================= GLOSSARY FLIP CARDS ================= */
+const glossGrid = document.getElementById('glossGrid');
+glossary.forEach(([term,def])=>{
+  const card = document.createElement('div');
+  card.className='flip-card';
+  card.innerHTML = `
+    <div class="flip-inner">
+      <div class="flip-front"><div class="term">${term}</div><div class="tap">TAP TO REVEAL →</div></div>
+      <div class="flip-back"><div class="term">${term}</div><p>${def}</p></div>
+    </div>
+  `;
+  card.addEventListener('click', ()=>card.classList.toggle('flipped'));
+  glossGrid.appendChild(card);
+});
+</script>
+</body>
+</html>
