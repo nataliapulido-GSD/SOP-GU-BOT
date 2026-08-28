@@ -26,7 +26,8 @@ const INTERACTIVE_TOOLS = [
     { id: 'phone-note', label: 'Phone Note Guide', url: '/tools/GSD_Phone_Note_Guide.html', icon: '📝' },
     { id: 'notepad', label: 'Call Notepad', url: '/tools/GSD_Call_Notepad_and_Appointment_Details.html', icon: '📞' },
     { id: 'nextgen', label: 'NextGen PM Guide', url: '/tools/NextGen_PM_Interactive_Guide.html', icon: '🖥️' },
-    { id: 'scheduling', label: 'Scheduling Foundations', url: '/tools/Scheduling_Foundations_Interactive_Guide.html', icon: '📆' }
+    { id: 'scheduling', label: 'Scheduling Foundations', url: '/tools/Scheduling_Foundations_Interactive_Guide.html', icon: '📆' },
+    { id: 'insurance', label: 'Insurance Guide', url: '/tools/Insurance_Guide_Georgia_Urology.html', icon: '🪪' }
 ];
 
 function formatTimestamp(date: Date): string {
