@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSD · Call Notepad &amp; Appointment Details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:   #240f3a;
+    --deep-2: #1a0b2b;
+    --mid:    #5a3988;
+    --violet: #8c52ff;
+    --lav:    #b89dff;
+    --lime:   #45ff03;
+    --grey:   #5e5e5e;
+    --white:  #ffffff;
+    --field:  #FCFBFE;
+    --line:   #E6DEF4;
+    --red:    #E24B4B;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(140,82,255,0.30), transparent 42%),
+      radial-gradient(circle at 92% 92%, rgba(193,106,255,0.22), transparent 48%),
+      var(--deep-2);
+    color:#2a2130;
+    font-family:'Roboto', sans-serif;
+    min-height:100vh;
+    padding-bottom:40px;
+  }
+  a{color:inherit;}
+
+  .wrap{ max-width:480px; margin:0 auto; padding:20px 16px 0 16px; }
+
+  /* ---------------- header ---------------- */
+  .titlebar{
+    background: linear-gradient(135deg, var(--deep) 0%, #33184f 100%);
+    border-radius:16px 16px 0 0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px;
+  }
+  .brandmark{ display:flex; align-items:center; gap:9px; }
+  .gmark{ width:28px; height:28px; border-radius:50%; border:3px solid var(--lime); position:relative; flex-shrink:0; }
+  .gmark::after{ content:''; position:absolute; top:-1px; left:10px; width:3px; height:8px; background:var(--deep); }
+  .gmark::before{ content:''; position:absolute; top:2px; left:2px; width:5px; height:5px; border-radius:50%; background:var(--lime); box-shadow:0 0 6px rgba(69,255,3,0.9); }
+  .wordmark{ display:flex; align-items:center; gap:7px; font-family:'Anton', sans-serif; color:var(--white); font-size:17px; letter-spacing:.03em; }
+  .wordmark .bar{ width:2px; height:14px; background:var(--lav); opacity:.6; }
+  .wordmark .sub{ font-family:'Roboto', sans-serif; font-weight:400; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--lav); opacity:.85; margin-left:1px; }
+  .head-actions{ display:flex; align-items:center; gap:4px; }
+  .icon-btn{
+    background:none; border:none; cursor:pointer; padding:5px;
+    color:var(--lav); display:flex; align-items:center; justify-content:center;
+    border-radius:7px; transition:background .15s ease, color .15s ease;
+  }
+  .icon-btn:hover{ background:rgba(184,157,255,0.16); color:var(--white); }
+  .icon-btn svg{ width:17px; height:17px; }
+
+  /* ---------------- mode tabs ---------------- */
+  .modetabs{ display:flex; background:#33184f; }
+  .mode-btn{
+    flex:1; text-align:center; padding:10px; border:none; background:transparent;
+    color:var(--lav); font-family:'Roboto',sans-serif; font-size:12.5px; font-weight:700;
+    cursor:pointer; letter-spacing:.02em; transition:all .15s ease; border-bottom:3px solid transparent;
+  }
+  .mode-btn.active{ color:var(--white); border-bottom-color:var(--lime); background:rgba(255,255,255,0.05); }
+
+  .card-body{ background:var(--white); border-radius:0 0 16px 16px; box-shadow:0 24px 60px rgba(10,4,20,0.45); overflow:hidden; }
+  .mode-panel{ display:none; }
+  .mode-panel.active{ display:block; }
+
+  /* ---------------- fields ---------------- */
+  .fields{ padding:16px 16px 4px 16px; display:flex; flex-direction:column; gap:11px; }
+  .field{
+    border:1.5px solid var(--line); border-radius:10px; padding:9px 12px 10px 12px;
+    background:var(--field); transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .field:focus-within{ border-color:var(--violet); box-shadow:0 0 0 3px rgba(140,82,255,0.12); background:var(--white); }
+  .field.error{ border-color:var(--red); box-shadow:0 0 0 3px rgba(226,75,75,0.14); }
+  .field label{
+    display:flex; align-items:center; gap:4px;
+    font-family:'Anton', sans-serif; font-weight:400; color:var(--mid); font-size:10.5px;
+    letter-spacing:.07em; text-transform:uppercase; margin-bottom:4px;
+  }
+  .field label .req{ color:var(--red); }
+  .field label .opt{ font-family:'Roboto',sans-serif; font-weight:400; text-transform:none; color:#B7ADC9; font-size:10px; letter-spacing:0; margin-left:2px; }
+  .field input[type=text], .field textarea{
+    width:100%; border:none; outline:none; background:transparent;
+    font-family:'Roboto',sans-serif; font-size:14px; color:#2a2130; line-height:1.5; padding:0;
+    resize:vertical;
+  }
+  .field textarea{ min-height:22px; }
+  .field.roomy textarea{ min-height:70px; }
+  .field.tall textarea{ min-height:100px; }
+  .field input::placeholder, .field textarea::placeholder{ color:#B7ADC9; }
+
+  .chip-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:7px; }
+  .chip{
+    border:1px solid var(--line); background:#F5F0FC; color:var(--mid);
+    font-size:11px; font-weight:700; padding:5px 10px; border-radius:13px; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip:hover{ background:var(--violet); color:var(--white); border-color:var(--violet); }
+
+  .seg-toggle{ display:flex; gap:6px; flex-wrap:wrap; }
+  .seg-btn{
+    border:1.5px solid var(--line); background:var(--field); color:var(--mid);
+    font-size:12.5px; font-weight:700; padding:8px 13px; border-radius:16px; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .seg-btn:hover{ border-color:var(--violet); }
+  .seg-btn.active{ background:var(--violet); border-color:var(--violet); color:var(--white); }
+
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:9px; }
+  .subfield label{ font-size:10px; }
+
+  .checkline{ display:flex; align-items:flex-start; gap:8px; padding:5px 0; cursor:pointer; }
+  .checkline input[type=checkbox]{ margin-top:3px; width:15px; height:15px; accent-color:var(--violet); flex-shrink:0; }
+  .checkline span{ font-size:12.5px; line-height:1.4; }
+  .checkline .tag{ color:#9C93AC; font-size:10.5px; display:block; margin-top:1px; }
+
+  .initials-field{ display:flex; align-items:center; gap:10px; }
+  .initials-field input{ max-width:90px !important; text-transform:uppercase; font-weight:700; letter-spacing:.05em; }
+  .initials-note{ font-size:10.5px; color:var(--grey); }
+
+  /* ---------------- toolbar / actions ---------------- */
+  .actions{
+    padding:12px 16px 16px 16px; background:#F7F4FC; border-top:1px solid #ECE7F3;
+  }
+  .preview{
+    background:var(--deep); border-radius:12px; padding:13px 14px; margin-bottom:10px;
+    border:1px solid rgba(184,157,255,0.25);
+  }
+  .preview .plabel{
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--lav); margin-bottom:6px;
+  }
+  .preview .ptext{ font-size:13.5px; color:var(--white); line-height:1.55; word-break:break-word; min-height:20px; }
+  .preview .ptext .empty{ color:rgba(255,255,255,0.35); font-style:italic; }
+  .missing-note{ font-size:11px; color:#FFB4B4; margin-top:7px; display:none; align-items:center; gap:5px; }
+  .missing-note.show{ display:flex; }
+
+  .btn-row{ display:flex; gap:8px; }
+  .copy-btn{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+    background:var(--lime); color:var(--deep); border:none; cursor:pointer;
+    font-family:'Roboto',sans-serif; font-size:13px; font-weight:700;
+    padding:11px 14px; border-radius:22px; transition:all .15s ease;
+  }
+  .copy-btn:hover{ background:#5cff26; }
+  .copy-btn.disabled{ background:#DAD4E8; color:#9C93AC; cursor:not-allowed; }
+  .copy-btn svg{ width:14px; height:14px; }
+  .ghost-btn{
+    background:none; border:1.5px solid var(--line); color:var(--mid); cursor:pointer;
+    font-family:'Roboto',sans-serif; font-size:13px; font-weight:700;
+    padding:11px 16px; border-radius:22px; transition:all .15s ease;
+  }
+  .ghost-btn:hover{ background:#EFE9FC; }
+
+  /* ---------------- reference drawer ---------------- */
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(20,8,38,0.55); display:none;
+    align-items:flex-end; justify-content:center; z-index:20; backdrop-filter:blur(2px);
+  }
+  .drawer-overlay.show{ display:flex; }
+  .drawer{
+    background:var(--white); width:100%; max-width:480px; border-radius:18px 18px 0 0;
+    max-height:78vh; overflow-y:auto; padding:18px 18px 26px 18px;
+  }
+  .drawer h3{ font-family:'Anton',sans-serif; font-weight:400; color:var(--deep); font-size:17px; margin:0 0 12px 0; }
+  .drawer-close{ float:right; background:none; border:none; color:var(--grey); cursor:pointer; padding:4px; }
+  .ref-block{ margin-bottom:16px; }
+  .ref-block h4{ font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--mid); margin:0 0 8px 0; }
+  .abbr-row{ display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-bottom:1px solid var(--line); font-size:12.5px; }
+  .abbr-row b{ color:var(--mid); flex-shrink:0; }
+  .abbr-row span{ color:var(--grey); text-align:right; }
+  .principle-row{ font-size:12.5px; padding:7px 0; border-bottom:1px solid var(--line); line-height:1.5; }
+  .principle-row b{ color:var(--deep); }
+
+  /* ---------------- confirm modal ---------------- */
+  .confirm-overlay{
+    position:fixed; inset:0; background:rgba(20,8,38,0.55);
+    display:none; align-items:center; justify-content:center; z-index:30; backdrop-filter:blur(2px);
+  }
+  .confirm-overlay.show{ display:flex; }
+  .confirm-box{
+    background:var(--white); border-radius:14px; padding:22px 22px; width:300px; margin:0 16px;
+    box-shadow:0 20px 50px rgba(10,4,20,0.4); border-top:4px solid var(--violet);
+  }
+  .confirm-box h3{ margin:0 0 8px 0; font-size:15px; color:var(--deep); font-family:'Anton', sans-serif; font-weight:400; }
+  .confirm-box p{ margin:0 0 18px 0; font-size:13px; color:var(--grey); line-height:1.5; }
+  .confirm-actions{ display:flex; gap:9px; justify-content:flex-end; }
+  .confirm-actions button{ border:none; border-radius:18px; padding:9px 15px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:'Roboto',sans-serif; }
+  .cancel-btn{ background:#F1EBFA; color:var(--mid); }
+  .confirm-btn{ background:var(--lime); color:var(--deep); }
+
+  .toast{
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(10px);
+    background:var(--deep); color:var(--white); padding:10px 18px; border-radius:22px; font-size:12.5px;
+    opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
+    border:1px solid rgba(69,255,3,0.4); z-index:100;
+    display:flex; align-items:center; gap:7px; box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  }
+  .toast .dot{ width:6px; height:6px; border-radius:50%; background:var(--lime); box-shadow:0 0 6px rgba(69,255,3,0.9); }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .footnote{ text-align:center; font-size:10px; color:rgba(184,157,255,0.5); margin-top:12px; letter-spacing:.05em; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="titlebar">
+    <div class="brandmark">
+      <span class="gmark"></span>
+      <span class="wordmark">GSD<span class="bar"></span><span class="sub">Call Notepad</span></span>
+    </div>
+    <div class="head-actions">
+      <button class="icon-btn" id="refBtn" title="Quick reference">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </button>
+      <button class="icon-btn" id="resetIcon" title="Clear everything">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="modetabs">
+    <button class="mode-btn active" data-mode="entry">New Call</button>
+    <button class="mode-btn" data-mode="note">Add Note / Update</button>
+  </div>
+
+  <div class="card-body">
+
+    <!-- ===================== NEW CALL / ENTRY MODE ===================== -->
+    <div class="mode-panel active" id="panel-entry">
+      <div class="fields">
+
+        <div class="field" id="callerField">
+          <label>Who's Calling?</label>
+          <div class="seg-toggle" id="callerToggle">
+            <button class="seg-btn active" data-val="self">Patient</button>
+            <button class="seg-btn" data-val="other">Someone else</button>
+          </div>
+          <div class="two-col" id="callerSubfields" style="display:none;">
+            <div class="subfield">
+              <label>Caller Name</label>
+              <input type="text" id="callerName" placeholder="Judy">
+            </div>
+            <div class="subfield">
+              <label>Relation</label>
+              <input type="text" id="callerRelation" placeholder="wife">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Patient <span class="opt">(name / DOB — for your reference)</span></label>
+          <textarea id="patient" placeholder="Patient name / DOB..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Patient Status</label>
+          <div class="seg-toggle" id="statusToggle">
+            <button class="seg-btn active" data-val="NP">NP</button>
+            <button class="seg-btn" data-val="FU">FU</button>
+            <button class="seg-btn" data-val="TP">TP</button>
+          </div>
+          <div class="two-col" id="tpProviderWrap" style="display:none; grid-template-columns:1fr;">
+            <div class="subfield">
+              <label>Previous Provider <span class="opt">patient was established with</span></label>
+              <input type="text" id="tpProvider" placeholder="Dr. Ahmed, Northside Urology">
+            </div>
+          </div>
+        </div>
+
+        <div class="field roomy" id="reasonField">
+          <label>Visit Reason <span class="req">*</span></label>
+          <textarea id="reason" placeholder="Reason for the visit — the caller's own words..."></textarea>
+          <div class="chip-row">
+            <span class="chip" data-target="reason" data-txt="Stone11">Stone11</span>
+            <span class="chip" data-target="reason" data-txt="KS">KS</span>
+            <span class="chip" data-target="reason" data-txt="CCa">CCa</span>
+            <span class="chip" data-target="reason" data-txt="VasC">VasC</span>
+            <span class="chip" data-target="reason" data-txt="CCi">CCi</span>
+            <span class="chip" data-target="reason" data-txt="IC">IC</span>
+            <span class="chip" data-target="reason" data-txt="Low T">Low T</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Insurance</label>
+          <textarea id="insurance" placeholder="Insurance details..."></textarea>
+          <div class="chip-row">
+            <span class="chip" data-target="insurance" data-txt="Northside Charity, aware to bring assistance letter">Northside Charity</span>
+            <span class="chip" data-target="insurance" data-txt="will call back with insurance info">Call back w/ info</span>
+            <span class="chip" data-target="insurance" data-txt="needs referral for visit">Needs referral</span>
+            <span class="chip" data-target="insurance" data-txt="self-pay">Self-pay</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Referring MD / Facility <span class="opt">recently seen elsewhere</span></label>
+          <textarea id="facility" placeholder="e.g. last seen at Eagles Landing Family Practice"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Preferred MD <span class="opt">for your reference</span></label>
+          <textarea id="preferredMD" placeholder="Preferred provider..."></textarea>
+        </div>
+
+        <div class="field roomy tall">
+          <label>Supporting Details <span class="opt">frequency, meds, special needs — no limit</span></label>
+          <textarea id="additional" placeholder="Anything else the caller shared — write freely..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Records</label>
+          <div class="seg-toggle" id="recordsToggle">
+            <button class="seg-btn active" data-val="none">No records</button>
+            <button class="seg-btn" data-val="has">Has records</button>
+          </div>
+          <div class="two-col" id="recordsSubfield" style="display:none; grid-template-columns:1fr;">
+            <div class="subfield">
+              <label>Who's sending, and how</label>
+              <input type="text" id="recordsText" placeholder="Shauna, Eagles Landing front desk will fax records">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="checkline">
+            <input type="checkbox" id="officeProcedures" checked>
+            <span><strong>Aware of office procedures</strong><span class="tag">Phreesia paperwork · DASH Connect confirmation</span></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Your Initials <span class="req">*</span></label>
+          <div class="initials-field">
+            <input type="text" id="initials" placeholder="DB" maxlength="6">
+            <span class="initials-note">💾 remembered for next calls</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <div class="preview">
+          <div class="plabel">Appointment Details — ready to paste into NextGen/DASH</div>
+          <div class="ptext" id="entryPreview"><span class="empty">Fill in Visit Reason and Initials to build the entry...</span></div>
+          <div class="missing-note" id="missingNote">⚠ <span id="missingText"></span></div>
+        </div>
+        <div class="btn-row">
+          <button class="ghost-btn" id="clearBtnEntry">Clear</button>
+          <button class="copy-btn" id="copyEntry">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy &amp; Next Patient
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== ADD NOTE / UPDATE MODE ===================== -->
+    <div class="mode-panel" id="panel-note">
+      <div class="fields">
+        <div class="field roomy">
+          <label>Existing Details <span class="opt">paste — optional, just for preview</span></label>
+          <textarea id="existingDetails" placeholder="Paste the current appointment details here..."></textarea>
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="text" id="noteDate" placeholder="8.13.21">
+        </div>
+        <div class="field">
+          <label>What Happened?</label>
+          <div class="seg-toggle" id="actionToggle">
+            <button class="seg-btn active" data-val="rescheduled per patient">Rescheduled</button>
+            <button class="seg-btn" data-val="canceled per patient">Canceled</button>
+            <button class="seg-btn" data-val="custom">Other</button>
+          </div>
+          <div class="two-col" id="customActionWrap" style="display:none; grid-template-columns:1fr;">
+            <div class="subfield">
+              <label>Describe</label>
+              <input type="text" id="customAction" placeholder="confirmed insurance updated per caller">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Your Initials</label>
+          <input type="text" id="noteInitials" placeholder="CW" maxlength="6" style="max-width:90px; text-transform:uppercase; font-weight:700;">
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="preview">
+          <div class="plabel">New addition only</div>
+          <div class="ptext" id="addendumPreview"><span class="empty">Fill in the fields above...</span></div>
+        </div>
+        <div class="preview" style="border-color:rgba(69,255,3,0.3);">
+          <div class="plabel">Full entry (existing + new)</div>
+          <div class="ptext" id="fullPreview"><span class="empty">Paste existing details above...</span></div>
+        </div>
+        <div class="btn-row">
+          <button class="ghost-btn" id="copyAddendumOnly">Copy Addition Only</button>
+          <button class="copy-btn" id="copyFullEntry">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Full Entry
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footnote">GSD MEDICAL OUTSOURCE · INTERNAL TOOL</div>
+</div>
+
+<!-- ===================== REFERENCE DRAWER ===================== -->
+<div class="drawer-overlay" id="drawerOverlay">
+  <div class="drawer">
+    <button class="drawer-close" id="drawerClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3>Quick Reference</h3>
+
+    <div class="ref-block">
+      <h4>Patient Status</h4>
+      <div class="abbr-row"><b>NP</b><span>New Patient</span></div>
+      <div class="abbr-row"><b>FU</b><span>Follow Up</span></div>
+      <div class="abbr-row"><b>TP</b><span>Transfer Patient — include previous provider</span></div>
+    </div>
+
+    <div class="ref-block">
+      <h4>Diagnosis Shorthand</h4>
+      <div class="abbr-row"><b>Stone11</b><span>Kidney stones, Stone11 protocol</span></div>
+      <div class="abbr-row"><b>KS</b><span>Kidney stones</span></div>
+      <div class="abbr-row"><b>CCa</b><span>Cancer consultation</span></div>
+      <div class="abbr-row"><b>VasC</b><span>Vasectomy consultation</span></div>
+      <div class="abbr-row"><b>CCi</b><span>Circumcision consultation</span></div>
+      <div class="abbr-row"><b>IC</b><span>Interstitial cystitis</span></div>
+      <div class="abbr-row"><b>Low T</b><span>Low testosterone</span></div>
+    </div>
+
+    <div class="ref-block">
+      <h4>The 4 Principles</h4>
+      <div class="principle-row"><b>Professional & concise.</b> Avoid slang; dept. abbreviations are fine.</div>
+      <div class="principle-row"><b>Reflect the caller's words.</b> Never assume a diagnosis.</div>
+      <div class="principle-row"><b>Clear & readable.</b> Separate components with //</div>
+      <div class="principle-row"><b>The full picture.</b> Include anything that helps clinic staff prepare.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CONFIRM RESET MODAL ===================== -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <h3>CLEAR EVERYTHING?</h3>
+    <p>This erases all fields on this call and starts fresh. This can't be undone.</p>
+    <div class="confirm-actions">
+      <button class="cancel-btn" id="cancelReset">Cancel</button>
+      <button class="confirm-btn" id="confirmReset">Yes, clear it</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="dot"></span>Copied</div>
+
+<script>
+/* ---------------- MODE TABS ---------------- */
+document.querySelectorAll('.mode-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active', b===btn));
+    document.querySelectorAll('.mode-panel').forEach(p=>p.classList.toggle('active', p.id==='panel-'+btn.dataset.mode));
+  });
+});
+
+/* ---------------- SEGMENT TOGGLES ---------------- */
+function setupToggle(id, onChange){
+  const wrap = document.getElementById(id);
+  const btns = wrap.querySelectorAll('.seg-btn');
+  btns.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      btns.forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      onChange(b.dataset.val);
+    });
+  });
+  return {
+    get: ()=> wrap.querySelector('.seg-btn.active').dataset.val,
+    set: (val)=>{ btns.forEach(x=>x.classList.toggle('active', x.dataset.val===val)); onChange(val); }
+  };
+}
+
+const callerCtl = setupToggle('callerToggle', (val)=>{
+  document.getElementById('callerSubfields').style.display = (val==='other') ? 'grid' : 'none';
+  buildEntry();
+});
+const statusCtl = setupToggle('statusToggle', (val)=>{
+  document.getElementById('tpProviderWrap').style.display = (val==='TP') ? 'grid' : 'none';
+  buildEntry();
+});
+const recordsCtl = setupToggle('recordsToggle', (val)=>{
+  document.getElementById('recordsSubfield').style.display = (val==='has') ? 'grid' : 'none';
+  buildEntry();
+});
+
+/* ---------------- CHIPS ---------------- */
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    const el = document.getElementById(chip.dataset.target);
+    el.value = el.value ? el.value + ', ' + chip.dataset.txt : chip.dataset.txt;
+    buildEntry();
+  });
+});
+
+/* ---------------- LIVE INPUTS ---------------- */
+['callerName','callerRelation','patient','tpProvider','reason','insurance','facility','preferredMD','additional','recordsText','initials']
+  .forEach(id=>{ document.getElementById(id).addEventListener('input', buildEntry); });
+document.getElementById('officeProcedures').addEventListener('change', buildEntry);
+
+/* ---------------- STORAGE (initials + autosave draft) ---------------- */
+let memoryStore = {};
+function storageGet(key){ try{ return window.localStorage.getItem(key) || memoryStore[key] || null; } catch(e){ return memoryStore[key] || null; } }
+function storageSet(key, value){ try{ window.localStorage.setItem(key, value); } catch(e){ memoryStore[key] = value; } }
+
+(function(){
+  const saved = storageGet('gsd_agent_initials');
+  if(saved){
+    document.getElementById('initials').value = saved;
+    document.getElementById('noteInitials').value = saved;
+  }
+})();
+document.getElementById('initials').addEventListener('input', (e)=> storageSet('gsd_agent_initials', e.target.value.trim()));
+document.getElementById('noteInitials').addEventListener('input', (e)=> storageSet('gsd_agent_initials', e.target.value.trim()));
+
+/* ---------------- BUILD ENTRY STRING ---------------- */
+function escapeHtml(str){ const div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
+
+function buildEntry(){
+  const segments = [];
+
+  const status = statusCtl.get();
+  const tpProvider = document.getElementById('tpProvider').value.trim();
+  segments.push(status === 'TP' && tpProvider ? `TP - est. with ${tpProvider}` : status);
+
+  const reason = document.getElementById('reason').value.trim();
+  if(reason) segments.push(reason);
+
+  const callerMode = callerCtl.get();
+  if(callerMode === 'other'){
+    const name = document.getElementById('callerName').value.trim();
+    const relation = document.getElementById('callerRelation').value.trim();
+    if(relation && name) segments.push(`scheduled with ${relation} (${name})`);
+    else if(name) segments.push(`scheduled with ${name}`);
+    else if(relation) segments.push(`scheduled with ${relation}`);
+  }
+
+  const additional = document.getElementById('additional').value.trim();
+  if(additional) segments.push(additional);
+
+  const facility = document.getElementById('facility').value.trim();
+  if(facility) segments.push(facility);
+
+  const recordsMode = recordsCtl.get();
+  const recordsText = document.getElementById('recordsText').value.trim();
+  segments.push(recordsMode === 'has' && recordsText ? recordsText : 'no records');
+
+  const insurance = document.getElementById('insurance').value.trim();
+  if(insurance) segments.push(insurance);
+
+  if(document.getElementById('officeProcedures').checked) segments.push('aware of office procedures');
+
+  let result = segments.filter(s=>s && s.length).join('//');
+  const initials = document.getElementById('initials').value.trim();
+  if(initials) result += ' ' + initials;
+
+  const preview = document.getElementById('entryPreview');
+  preview.innerHTML = result ? escapeHtml(result) : '<span class="empty">Fill in Visit Reason and Initials to build the entry...</span>';
+  window._entryResult = result;
+
+  const missing = [];
+  if(!reason) missing.push('Visit Reason');
+  if(!initials) missing.push('Initials');
+  const btn = document.getElementById('copyEntry');
+  const note = document.getElementById('missingNote');
+  document.getElementById('reasonField').classList.toggle('error', missing.includes('Visit Reason'));
+  if(missing.length){
+    btn.classList.add('disabled');
+    note.classList.add('show');
+    document.getElementById('missingText').textContent = 'Missing: ' + missing.join(', ');
+  } else {
+    btn.classList.remove('disabled');
+    note.classList.remove('show');
+  }
+}
+buildEntry();
+
+/* ---------------- CLEAR / RESET (entry mode) ---------------- */
+function clearEntryForm(keepInitials){
+  statusCtl.set('NP');
+  recordsCtl.set('none');
+  callerCtl.set('self');
+  ['callerName','callerRelation','patient','tpProvider','reason','insurance','facility','preferredMD','additional','recordsText']
+    .forEach(id=> document.getElementById(id).value = '');
+  document.getElementById('officeProcedures').checked = true;
+  if(!keepInitials) document.getElementById('initials').value = '';
+  buildEntry();
+}
+document.getElementById('clearBtnEntry').addEventListener('click', ()=> clearEntryForm(true));
+
+/* header reset icon -> full confirm-guarded clear (also clears Add Note tab) */
+const confirmOverlay = document.getElementById('confirmOverlay');
+document.getElementById('resetIcon').addEventListener('click', ()=> confirmOverlay.classList.add('show'));
+document.getElementById('cancelReset').addEventListener('click', ()=> confirmOverlay.classList.remove('show'));
+confirmOverlay.addEventListener('click', (e)=>{ if(e.target === confirmOverlay) confirmOverlay.classList.remove('show'); });
+document.getElementById('confirmReset').addEventListener('click', ()=>{
+  clearEntryForm(true);
+  document.getElementById('existingDetails').value = '';
+  document.getElementById('customAction').value = '';
+  buildAddendum();
+  confirmOverlay.classList.remove('show');
+  showToast('Cleared');
+});
+
+/* ---------------- REFERENCE DRAWER ---------------- */
+const drawerOverlay = document.getElementById('drawerOverlay');
+document.getElementById('refBtn').addEventListener('click', ()=> drawerOverlay.classList.add('show'));
+document.getElementById('drawerClose').addEventListener('click', ()=> drawerOverlay.classList.remove('show'));
+drawerOverlay.addEventListener('click', (e)=>{ if(e.target === drawerOverlay) drawerOverlay.classList.remove('show'); });
+
+/* ---------------- ADD NOTE MODE ---------------- */
+const actionCtl = setupToggle('actionToggle', (val)=>{
+  document.getElementById('customActionWrap').style.display = (val==='custom') ? 'grid' : 'none';
+  buildAddendum();
+});
+['existingDetails','noteDate','customAction','noteInitials'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', buildAddendum);
+});
+
+(function(){
+  const d = new Date();
+  const m = d.getMonth()+1, day = d.getDate(), yy = String(d.getFullYear()).slice(-2);
+  document.getElementById('noteDate').value = `${m}.${day}.${yy}`;
+})();
+
+function buildAddendum(){
+  const date = document.getElementById('noteDate').value.trim();
+  const actionVal = actionCtl.get();
+  const action = actionVal === 'custom' ? document.getElementById('customAction').value.trim() : actionVal;
+  const initials = document.getElementById('noteInitials').value.trim();
+
+  let addendum = '';
+  if(date || action || initials) addendum = [date, action, initials].filter(Boolean).join(' ');
+
+  document.getElementById('addendumPreview').innerHTML = addendum ? escapeHtml(addendum) : '<span class="empty">Fill in the fields above...</span>';
+
+  const existing = document.getElementById('existingDetails').value.trim();
+  const fullEl = document.getElementById('fullPreview');
+  if(existing && addendum) fullEl.innerHTML = escapeHtml(existing + '//' + addendum);
+  else if(existing) fullEl.innerHTML = escapeHtml(existing);
+  else fullEl.innerHTML = '<span class="empty">Paste existing details above...</span>';
+
+  window._addendumResult = addendum;
+  window._fullResult = (existing && addendum) ? (existing + '//' + addendum) : existing;
+}
+buildAddendum();
+
+/* ---------------- COPY ---------------- */
+async function copyText(text){
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  }
+}
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.innerHTML = `<span class="dot"></span>${msg}`;
+  toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 1900);
+}
+
+document.getElementById('copyEntry').addEventListener('click', async ()=>{
+  const btn = document.getElementById('copyEntry');
+  if(btn.classList.contains('disabled')){
+    document.getElementById('missingNote').classList.add('show');
+    return;
+  }
+  await copyText(window._entryResult);
+  showToast('Copied — ready for the next call');
+  clearEntryForm(true);
+});
+
+document.getElementById('copyAddendumOnly').addEventListener('click', async ()=>{
+  if(!window._addendumResult) return;
+  await copyText(window._addendumResult);
+  showToast('Addition copied');
+});
+document.getElementById('copyFullEntry').addEventListener('click', async ()=>{
+  if(!window._fullResult) return;
+  await copyText(window._fullResult);
+  showToast('Full entry copied');
+});
+</script>
+</body>
+</html>

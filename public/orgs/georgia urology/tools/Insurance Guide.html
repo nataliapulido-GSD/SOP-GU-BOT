@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insurance Guide · Georgia Urology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Palette inspired by gaurology.com: deep navy header/nav, clean white body,
+     warm gold call-to-action (their "Schedule Appointment" buttons), soft sky-blue accent */
+  --navy:#0F3D2A;
+  --navy-2:#155C3D;
+  --sky:#2E9A5C;
+  --sky-light:#E7F5EC;
+  --gold:#3FA66D;
+  --gold-dark:#2C7A4E;
+  --paper:#F7F8F9;
+  --paper-2:#FFFFFF;
+  --ink:#132430;
+  --ink-soft:#5B6B75;
+  --line:#E1E6E9;
+  --green:#2E7D4F;
+  --green-bg:#E7F4EC;
+  --red:#B4432E;
+  --red-bg:#FBE9E5;
+  --gray-bg:#EEEDE7;
+  --radius:12px;
+  --shadow: 0 2px 10px rgba(14,42,67,0.06), 0 1px 2px rgba(14,42,67,0.08);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter', system-ui, -apple-system, sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Poppins', system-ui, sans-serif;
+  font-weight:600;
+  color:var(--navy);
+  margin:0 0 .4em 0;
+  letter-spacing:-0.01em;
+}
+p{margin:0 0 1em 0;}
+a{color:var(--sky);}
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--gold-dark);
+  font-weight:600;
+  display:block;
+  margin-bottom:.5em;
+}
+
+/* ===== Header ===== */
+header.top{
+  position:sticky;top:0;z-index:50;
+  background:var(--navy);
+  color:#fff;
+  padding:0;
+  box-shadow:var(--shadow);
+  border-bottom:3px solid var(--gold);
+}
+.top-inner{
+  max-width:1180px;margin:0 auto;padding:14px 20px 0 20px;
+}
+.brand-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Poppins',sans-serif;font-weight:700;color:var(--navy);font-size:1.1rem;
+  flex-shrink:0;
+}
+.brand-text .t1{font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:600;color:#fff;line-height:1.15;}
+.brand-text .t2{font-size:.76rem;color:#BFE0CC;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;}
+.cbo-pill{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.16);
+  padding:7px 12px;border-radius:100px;font-size:.82rem;color:#DCEFE2;
+  white-space:nowrap;
+}
+.cbo-pill b{color:#fff;}
+.cbo-pill .dot{width:7px;height:7px;border-radius:50%;background:#5FD68A;flex-shrink:0;}
+
+nav.tabs{
+  max-width:1180px;margin:14px auto 0 auto;
+  padding:0 20px 8px 20px;
+  display:flex;gap:6px;flex-wrap:wrap;overflow-x:visible;
+  scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none;}
+nav.tabs button{
+  flex-shrink:0;
+  background:transparent;border:none;
+  color:rgba(255,255,255,0.82);
+  font-family:'Inter',sans-serif;
+  font-size:.87rem;font-weight:500;
+  padding:10px 14px 12px 14px;
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:.15s;
+  white-space:nowrap;
+}
+nav.tabs button:hover{color:#fff;}
+nav.tabs button.active{
+  color:#fff;font-weight:600;
+  border-bottom:3px solid var(--gold);
+}
+
+/* ===== Layout ===== */
+main{max-width:1180px;margin:0 auto;padding:34px 20px 90px 20px;}
+section.panel{display:none;animation:fade .25s ease;}
+section.panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+.hero{
+  background:linear-gradient(120deg, var(--navy) 0%, var(--navy-2) 60%, var(--sky) 150%);
+  border-radius:16px;
+  padding:38px 34px;
+  color:#fff;
+  margin-bottom:30px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;
+  background:radial-gradient(circle, rgba(199,154,61,0.28), transparent 70%);
+}
+.hero h1{color:#fff;font-size:2rem;max-width:640px;position:relative;}
+.hero p.lead{color:#C9E9D6;max-width:620px;font-size:1.02rem;position:relative;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 18px;border-radius:8px;
+  font-weight:600;font-size:.92rem;
+  cursor:pointer;border:none;text-decoration:none;
+  transition:transform .12s, box-shadow .12s;
+  font-family:'Inter',sans-serif;
+}
+.btn:active{transform:translateY(1px);}
+.btn-gold{background:var(--gold);color:#fff;}
+.btn-gold:hover{box-shadow:0 4px 14px rgba(199,154,61,0.4);}
+.btn-ghost{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.3);}
+.btn-ghost:hover{background:rgba(255,255,255,0.18);}
+
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:26px 0;}
+.qcard{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;cursor:pointer;transition:.15s;box-shadow:var(--shadow);
+  border-top:3px solid transparent;
+}
+.qcard:hover{transform:translateY(-2px);border-top-color:var(--gold);}
+.qcard .icon{
+  width:38px;height:38px;border-radius:8px;background:var(--sky-light);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:1.15rem;
+}
+.qcard h3{font-size:1.0rem;margin-bottom:4px;}
+.qcard p{font-size:.87rem;color:var(--ink-soft);margin:0;}
+
+.section-head{margin-bottom:22px;}
+.section-head h2{font-size:1.5rem;}
+.section-head .sub{color:var(--ink-soft);font-size:.97rem;max-width:680px;}
+
+.card{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;margin-bottom:18px;box-shadow:var(--shadow);
+}
+.card h3{font-size:1.06rem;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:760px){.two-col{grid-template-columns:1fr;}}
+.tag{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+  padding:3px 9px;border-radius:100px;margin-bottom:10px;
+}
+.tag-comm{background:var(--sky-light);color:var(--sky);}
+.tag-gov{background:#DCEFE2;color:var(--gold-dark);}
+ul.clean{margin:0 0 0 0;padding-left:1.15em;}
+ul.clean li{margin-bottom:6px;}
+.callout{
+  border-left:4px solid var(--gold);
+  background:#FBF6EA;
+  border-radius:0 8px 8px 0;
+  padding:16px 18px;font-size:.94rem;color:var(--navy-2);
+  margin:16px 0;
+}
+.callout.critical{border-left-color:var(--red);background:#FCEEEA;}
+.callout b{color:var(--navy);}
+
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+.plan-type-card{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);
+}
+.plan-type-card .letter{
+  font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:700;color:var(--sky);
+  display:block;margin-bottom:6px;
+}
+.plan-type-card h3{font-size:1rem;margin-bottom:8px;}
+.plan-type-card p{font-size:.87rem;color:var(--ink-soft);margin:0;}
+
+.steps{counter-reset:step;list-style:none;margin:0;padding:0;}
+.steps li{
+  counter-increment:step;position:relative;padding:6px 0 6px 40px;font-size:.93rem;
+}
+.steps li::before{
+  content:counter(step);
+  position:absolute;left:0;top:4px;width:26px;height:26px;border-radius:50%;
+  background:var(--navy);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+.email-box{
+  font-family:'IBM Plex Mono',monospace;font-size:.85rem;background:var(--gray-bg);
+  padding:10px 14px;border-radius:8px;display:inline-block;margin-top:8px;
+}
+
+.contact-box{
+  background:linear-gradient(120deg,var(--navy),var(--navy-2));color:#fff;
+  border-radius:var(--radius);padding:26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;
+}
+.contact-box .big{font-family:'Poppins',sans-serif;font-size:1.4rem;}
+.contact-box .hours{color:#BFE0CC;font-size:.9rem;}
+
+/* ===== Grid tool ===== */
+.tool-shell{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.tool-step{padding:22px 24px;border-bottom:1px solid var(--line);}
+.tool-step:last-child{border-bottom:none;}
+.tool-step .step-label{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.step-label .num{
+  width:20px;height:20px;border-radius:50%;background:var(--sky);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.68rem;
+}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{
+  padding:8px 14px;border-radius:100px;border:1.5px solid var(--line);background:var(--paper-2);
+  font-size:.86rem;font-weight:500;cursor:pointer;transition:.12s;color:var(--ink);
+  font-family:'Inter',sans-serif;
+}
+.pill:hover{border-color:var(--sky);}
+.pill.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.pill.doc.active{background:var(--sky);border-color:var(--sky);}
+
+.search-wrap{position:relative;}
+.search-wrap input{
+  width:100%;padding:13px 16px 13px 42px;border-radius:8px;border:1.5px solid var(--line);
+  font-size:1rem;font-family:'Inter',sans-serif;outline:none;background:var(--paper);
+}
+.search-wrap input:focus{border-color:var(--sky);background:#fff;}
+.search-wrap .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-soft);}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:.78rem;color:var(--ink-soft);}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block;}
+
+.results-area{padding:20px 24px 26px 24px;max-height:640px;overflow-y:auto;}
+.result-hint{color:var(--ink-soft);font-size:.9rem;padding:6px 2px 14px 2px;}
+.cat-block{margin-bottom:8px;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.cat-header{
+  padding:12px 16px;background:var(--paper);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:.93rem;color:var(--navy);
+}
+.cat-header:hover{background:var(--sky-light);}
+.cat-header .chev{transition:.15s;color:var(--ink-soft);font-size:.8rem;}
+.cat-block.open .cat-header .chev{transform:rotate(90deg);}
+.cat-plans{display:none;}
+.cat-block.open .cat-plans{display:block;}
+.plan-row{
+  padding:11px 16px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.plan-row .pname{font-size:.9rem;flex:1;min-width:180px;}
+.plan-row mark{background:#DCEFE2;color:var(--navy);padding:0 2px;border-radius:3px;}
+.status-row{display:flex;gap:6px;flex-wrap:wrap;}
+.badge{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;
+  padding:4px 9px;border-radius:100px;white-space:nowrap;
+}
+.badge .doc-name{opacity:.65;font-weight:500;margin-right:4px;}
+.b-y{background:var(--green-bg);color:var(--green);}
+.b-n{background:var(--red-bg);color:var(--red);}
+.b-y1{background:#DCEFE2;color:var(--gold-dark);}
+.b-p{background:var(--gray-bg);color:#6b6b62;}
+.b-blank{background:var(--gray-bg);color:#8a8a80;}
+
+.empty-state{text-align:center;padding:50px 20px;color:var(--ink-soft);}
+.empty-state .big-ic{font-size:2rem;margin-bottom:10px;}
+
+footer{
+  text-align:center;padding:30px 20px 50px 20px;color:var(--ink-soft);font-size:.82rem;
+}
+
+@media(max-width:640px){
+  .hero{padding:26px 20px;}
+  .hero h1{font-size:1.5rem;}
+  .contact-box{flex-direction:column;align-items:flex-start;}
+  .results-area{max-height:480px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="brand-mark">GU</div>
+        <div class="brand-text">
+          <div class="t1">Insurance Guide</div>
+          <div class="t2">GEORGIA UROLOGY · PATIENT SUPPORT CENTER</div>
+        </div>
+      </div>
+      <div class="cbo-pill"><span class="dot"></span> CBO: <b>678-284-4040</b> ext. 1119 · Mon–Fri 9am–4pm</div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button data-target="inicio" class="active">Home</button>
+      <button data-target="buscador">🔎 Insurance Lookup</button>
+      <button data-target="tipos-seguro">Commercial vs. Government</button>
+      <button data-target="tipos-plan">Plan Types</button>
+      <button data-target="multiplan">Multiplan &amp; Medi-Share</button>
+      <button data-target="especiales">Special Cases</button>
+      <button data-target="financiero">Care Credit &amp; Assistance</button>
+      <button data-target="practicantes">Advanced Practitioners</button>
+      <button data-target="cbo">Central Business Office (CBO)</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HOME ================= -->
+<section class="panel active" id="inicio">
+  <div class="hero">
+    <span class="eyebrow" style="color:#BFEBD1">Chapter 9 · Understanding Insurance</span>
+    <h1>Confirm the insurance before scheduling — it's that simple.</h1>
+    <p class="lead">This interactive guide brings together the full Chapter 9 manual and the July 2026 Insurance Grid in one place, built to resolve a call in seconds — not minutes.</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" onclick="goTo('buscador')">🔎 Open the Insurance Lookup</button>
+      <button class="btn btn-ghost" onclick="goTo('especiales')">View Special Cases</button>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>What do you need to resolve right now?</h2>
+    <p class="sub">Everything is one click away. Pick the card that best matches the call you have on the line.</p>
+  </div>
+
+  <div class="grid-cards">
+    <div class="qcard" onclick="goTo('buscador')">
+      <div class="icon">🔎</div>
+      <h3>Does the physician accept this insurance?</h3>
+      <p>Search by physician, location (POD), or plan name in the full Insurance Grid.</p>
+    </div>
+    <div class="qcard" onclick="goTo('tipos-seguro')">
+      <div class="icon">🏛️</div>
+      <h3>Not sure if it's Commercial or Government</h3>
+      <p>Learn to recognize the insurance type the caller is describing.</p>
+    </div>
+    <div class="qcard" onclick="goTo('especiales')">
+      <div class="icon">💵</div>
+      <h3>Patient has no insurance / wants self-pay</h3>
+      <p>Self-Pay policy ($250 minimum) and referral rules.</p>
+    </div>
+    <div class="qcard" onclick="goTo('financiero')">
+      <div class="icon">🤝</div>
+      <h3>Caller mentions Care Credit or financial assistance</h3>
+      <p>Exact steps, and who to email.</p>
+    </div>
+    <div class="qcard" onclick="goTo('multiplan')">
+      <div class="icon">🌐</div>
+      <h3>Patient has Multiplan, PHCS, or Medi-Share</h3>
+      <p>These aren't traditional insurers — here's how they're handled.</p>
+    </div>
+    <div class="qcard" onclick="goTo('cbo')">
+      <div class="icon">📞</div>
+      <h3>Need to transfer to the CBO</h3>
+      <p>Cold vs. warm transfer, and contact hours.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Golden rule:</b> confirming the patient's insurance is your responsibility when scheduling. Not doing so can result in a patient being turned away the day of their consultation. That's why this process has a two-level safeguard: the Patient Support Center first, backed by the Central Business Office (CBO).
+  </div>
+</section>
+
+<!-- ================= INSURANCE LOOKUP ================= -->
+<section class="panel" id="buscador">
+  <div class="section-head">
+    <h2>🔎 Insurance Lookup</h2>
+    <p class="sub">Select the location (POD), the physician, and type the plan name. This is a quick-reference tool — when in doubt, confirm with the CBO.</p>
+  </div>
+
+  <div class="tool-shell">
+    <div class="tool-step">
+      <div class="step-label"><span class="num">1</span> Choose the location / POD</div>
+      <div class="pill-row" id="podRow"></div>
+    </div>
+    <div class="tool-step">
+      <div class="step-label"><span class="num">2</span> Choose the physician <span style="font-weight:400;opacity:.7">(optional — all are shown by default)</span></div>
+      <div class="pill-row" id="docRow"></div>
+    </div>
+    <div class="tool-step">
+      <div class="step-label"><span class="num">3</span> Search the insurance plan</div>
+      <div class="search-wrap">
+        <span class="ic">🔍</span>
+        <input type="text" id="planSearch" placeholder="e.g. Aetna, Cigna PPO, Medicaid, Tricare...">
+      </div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--green)"></i> Accepted</span>
+        <span><i class="dot" style="background:var(--red)"></i> Not accepted</span>
+        <span><i class="dot" style="background:var(--gold-dark)"></i> Accepted with condition / tiered network — verify with CBO</span>
+        <span><i class="dot" style="background:#6b6b62"></i> Pending / not accepting new patients</span>
+      </div>
+    </div>
+    <div class="results-area" id="resultsArea"></div>
+  </div>
+</section>
+
+<!-- ================= COMMERCIAL VS GOVERNMENT ================= -->
+<section class="panel" id="tipos-seguro">
+  <div class="section-head">
+    <span class="eyebrow">9.1</span>
+    <h2>Commercial v. Government Plans</h2>
+    <p class="sub">When discussing insurance with a caller it is important to recognize these two insurance types.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <span class="tag tag-comm">Commercial — privately funded</span>
+      <h3>Primarily provided through employer-sponsored plans</h3>
+      <ul class="clean">
+        <li>HMO</li>
+        <li>PPO</li>
+        <li>POS</li>
+        <li>High-Deductible Health Plan (HDHP)</li>
+        <li>Exclusive Provider Organization (EPO)</li>
+        <li>Private Fee-For-Service (PFFS)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag tag-gov">Government — taxpayer funded</span>
+      <h3>Financed by federal and state taxes</h3>
+      <ul class="clean">
+        <li>Medicare</li>
+        <li>Medicaid</li>
+        <li>Peachstate</li>
+        <li>Ambetter</li>
+        <li>Children's Health Insurance Program (CHIP)</li>
+        <li>Wellcare</li>
+        <li>Federal/state employee health plans</li>
+        <li>Veterans Health Administration (VHA)</li>
+        <li>Tricare</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Next step:</b> once you have identified the insurance type, use the <a href="#" onclick="goTo('buscador');return false;">Insurance Lookup</a> to confirm the physician's preference. If a plan is not accepted by the desired provider, patients may either proceed with scheduling as a self-pay patient or schedule with a different provider that does accept their health plan.
+  </div>
+</section>
+
+<!-- ================= PLAN TYPES ================= -->
+<section class="panel" id="tipos-plan">
+  <div class="section-head">
+    <span class="eyebrow">9.2</span>
+    <h2>Insurance Types</h2>
+    <p class="sub">If a caller is having a difficult time identifying their insurance type, direct them to look at the bottom corners of their card.</p>
+  </div>
+
+  <div class="callout">
+    If the caller still struggles, <b>default to PPO</b> — the Central Business Office (CBO) will verify patient insurance information once it is in the system.
+  </div>
+
+  <div class="plan-grid" style="margin-top:20px;">
+    <div class="plan-type-card">
+      <span class="letter">HMO</span>
+      <h3>Health Maintenance Organization</h3>
+      <p>Have one in-network PCP that provides routine care and refers you to in-network specialists. Referrals are required, and out-of-network care will not be covered.</p>
+    </div>
+    <div class="plan-type-card">
+      <span class="letter">EPO</span>
+      <h3>Exclusive Provider Organization</h3>
+      <p>Similar to HMO, only in-network care is covered. Generally have larger networks than HMO. Similar to PPO, no referrals required for specialist care.</p>
+    </div>
+    <div class="plan-type-card">
+      <span class="letter">POS</span>
+      <h3>Point of Service</h3>
+      <p>Have one in-network PCP that provides routine care and manages your access to other doctors. Referrals to specialists are required. You can also visit out-of-network physicians at a higher cost.</p>
+    </div>
+    <div class="plan-type-card">
+      <span class="letter">PPO</span>
+      <h3>Preferred Provider Organization</h3>
+      <p>Not required to have a PCP and do not need referrals to see specialists. You can choose which doctors you see. Out-of-network physicians will cost more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MULTIPLAN ================= -->
+<section class="panel" id="multiplan">
+  <div class="section-head">
+    <span class="eyebrow">9.3</span>
+    <h2>Multiplan and Medi-Share</h2>
+    <p class="sub">These are not traditional insurance carriers, so they're handled a bit differently from the rest of the Insurance Grid.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>🌐 Multiplan and PHCS</h3>
+      <p>Nationwide PPO provider network that allows you to choose which doctors you see. Multiplan and PHCS <b>are not insurance plans</b>, but broad networks of providers. Insurance companies can contract with these networks to access discounted services for their members.</p>
+      <div class="callout" style="margin:0;">✅ <b>All our providers accept Multiplan.</b></div>
+    </div>
+    <div class="card">
+      <h3>🤝 Medi-Share</h3>
+      <p>Healthcare sharing program that consists of a community sharing financial resources and paying each other's medical expenses. <b>This is not an insurance plan</b>, but a service a patient may have.</p>
+      <div class="callout critical" style="margin:0 0 10px 0;">Only our <b>Piedmont Providers</b> and our <b>Pediatric Providers</b> accept MediShare.</div>
+      <p style="margin:0;font-size:.88rem;"><b>Piedmont Providers who accept Medi-Share:</b><br>
+      Dr. Abbott · Dr. Shapiro · Dr. Yang · Dr. Barrett-Harlow · Donica Davis, P.A. · Dr. Kemper · Dr. Chen · Dr. Futral · Neil Trossevin, P.A. · Dr. Nicholson</p>
+    </div>
+  </div>
+
+  <div class="callout critical">
+    <b>Special case:</b> if a patient has both <b>Medi-Share and Multiplan/PHCS</b>, all our providers are obligated to accept this per our contract with Multiplan. This is a rare occurrence.
+  </div>
+</section>
+
+<!-- ================= SPECIAL CASES ================= -->
+<section class="panel" id="especiales">
+  <div class="section-head">
+    <span class="eyebrow">9.4</span>
+    <h2>Special Cases</h2>
+    <p class="sub">In addition to the numerous plans our physicians accept in their office, there are also insurance cases that require you to receive and/or communicate extra information when scheduling.</p>
+  </div>
+
+  <div class="card">
+    <h3>💵 Self-Pay</h3>
+    <div class="callout critical">
+      The minimum out of pocket cost for an in-office Self Pay visit is <b>$250</b>.
+    </div>
+    <p>That amount is just to cover the office visit with the provider. This means that if the doctor orders labs or tests the cost may increase (labs and tests are at the doctor's discretion at the time of the visit).</p>
+    <p style="margin:0;"><b>Remember:</b> document in the appointment details that you have communicated this policy to the caller. It is important to share this information upfront to ensure there are no surprises at the time of the visit.</p>
+  </div>
+
+  <div class="card">
+    <h3>📋 Insurance with Referral Requirements</h3>
+    <p>Depending upon the insurance policy, a referral may or may not be necessary for an appointment. Please <b>confirm with the caller</b> whether it is required by their insurance.</p>
+    <p style="margin-bottom:8px;"><b>There are three exceptions to this procedure</b> — in these cases the referral is mandatory:</p>
+    <div class="two-col" style="grid-template-columns:repeat(3,1fr);">
+      <div class="callout" style="margin:0;"><b>Kaiser</b><br>Patient must bring/fax the referral and provide the referral number.</div>
+      <div class="callout" style="margin:0;"><b>Tricare</b><br>Patient must bring/fax the referral.</div>
+      <div class="callout" style="margin:0;"><b>Triwest (now Optum)</b><br>Patient must bring/fax the referral.</div>
+    </div>
+    <p style="margin-top:14px;margin-bottom:0;">Patients can still schedule with us even if they do not have their referral on hand. Please <b>encourage the patient to obtain the referral</b> as you are scheduling the appointment.</p>
+  </div>
+</section>
+
+<!-- ================= FINANCIAL ================= -->
+<section class="panel" id="financiero">
+  <div class="section-head">
+    <span class="eyebrow">9.4 (cont.)</span>
+    <h2>Care Credit and Financial Assistance</h2>
+  </div>
+
+  <div class="card">
+    <h3>💳 Care Credit</h3>
+    <p>Care Credit is a <b>form of payment</b> for medical bills, not an insurance plan. Patients may or may not have an insurance policy in addition to having Care Credit.</p>
+    <div class="callout critical">
+      Callers using Care Credit must be informed that their out-of-pocket expense must be <b>at least $300</b> before our office can accept it as a form of payment.
+    </div>
+    <p style="margin:0;"><b>Remember:</b> add to the appointment detail that the patient has Care Credit and is aware of the $300 minimum.</p>
+  </div>
+
+  <div class="card">
+    <h3>🤝 Financial Assistance</h3>
+    <p>Most medical facilities offer assistance programs to ease the financial burden of medical expenses for patients in need. Some of our offices do not accept these programs — you can clarify this information with the CBO or the office's front desk.</p>
+
+    <div class="two-col">
+      <div style="border:1px solid var(--line);border-radius:10px;padding:18px;">
+        <h4 style="margin-bottom:10px;">Wellstar Cobb Assistance</h4>
+        <p style="font-size:.85rem;color:var(--ink-soft);margin-bottom:10px;">Applies to: Dr. Kaplan and Dr. Oberle</p>
+        <ul class="steps">
+          <li>Add <b>"Patient has WA"</b> to appointment details.</li>
+          <li>Inform patient to bring assistance letter and add <b>"aware to bring assistance letter"</b> to appointment details.</li>
+          <li>Email patient name, date of birth, appointment, physician, and insurance information to Danielle Ledford.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--line);border-radius:10px;padding:18px;">
+        <h4 style="margin-bottom:10px;">Northside Assistance</h4>
+        <p style="font-size:.85rem;color:var(--ink-soft);margin-bottom:10px;">Accepted in our Northern POD, for physicians affiliated with Northside</p>
+        <ul class="steps">
+          <li>Add <b>"Patient has NA"</b> to appointment details.</li>
+          <li>Inform patient to bring assistance letter and add <b>"aware to bring assistance letter"</b> to appointment details.</li>
+          <li>Email patient name, date of birth, appointment, physician, and insurance information to Danielle Ledford.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="email-box">✉️ dledford@gaurology.com</div>
+  </div>
+</section>
+
+<!-- ================= ADVANCED PRACTITIONERS ================= -->
+<section class="panel" id="practicantes">
+  <div class="section-head">
+    <span class="eyebrow">9.5</span>
+    <h2>Insurance and Advanced Practitioners</h2>
+  </div>
+  <div class="card">
+    <p>As with physicians, our <b>Physician Assistants (PA)</b> and <b>Nurse Practitioners (NP)</b> have insurance guidelines we must adhere to so confusion can be avoided for our patients. Most advanced practitioners are paired with a specific physician in our practice.</p>
+    <div class="two-col">
+      <div class="callout" style="margin:0;">
+        <b>Commercial insurance:</b> determine whether an advanced practitioner will accept a patient's plan by referring to the corresponding physician's Insurance Grid in the <a href="#" onclick="goTo('buscador');return false;">Insurance Lookup</a>.
+      </div>
+      <div class="callout" style="margin:0;">
+        <b>Government-funded insurance:</b> consult the practitioner's preference guideline for any stipulations.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CBO ================= -->
+<section class="panel" id="cbo">
+  <div class="section-head">
+    <span class="eyebrow">9.6</span>
+    <h2>Involving the Central Business Office</h2>
+  </div>
+
+  <div class="card">
+    <p>Callers can reach the Central Business Office (CBO) by the direct number, or by calling the Patient Support Center and then being transferred. You will need to reach out to that department whenever you receive a question about:</p>
+    <ul class="clean">
+      <li>Balances and copays</li>
+      <li>Payment plans</li>
+      <li>Procedure costs</li>
+      <li>Insurance authorizations</li>
+      <li>Insurance codes</li>
+      <li>Collections</li>
+    </ul>
+    <div class="callout critical" style="margin-bottom:0;">Giving financial advice, excluding self-pay consultation fees, is <b>outside of the Patient Support Center's scope</b>.</div>
+  </div>
+
+  <div class="card">
+    <h3>Cold transfer vs. warm transfer</h3>
+    <p>Generally, you can <b>cold transfer</b> a patient to the CBO. However, pay attention to the nuances in each situation! If a caller has already expressed their unsuccessful attempts at speaking with a CBO representative, that is a great time to perform a <b>warm transfer</b>.</p>
+  </div>
+
+  <div class="card">
+    <h3>Just need to confirm an insurance?</h3>
+    <p style="margin:0;">If you need to confirm whether a physician will accept a caller's insurance, <b>use the CBO as your resource — you do not need to transfer the patient</b> in this case. Just have the name of the insurance plan and member ID ready to share with a CBO representative yourself. Someone will be able to give a definitive answer, and you would have cut out additional holding time for the caller!</p>
+  </div>
+
+  <div class="contact-box">
+    <div>
+      <div class="eyebrow" style="color:#BFEBD1">Central Business Office</div>
+      <div class="big">678-284-4040 <span style="opacity:.6;font-size:1rem;">/ ext. 1119</span></div>
+      <div class="hours">Monday through Friday · 9:00 am – 4:00 pm</div>
+    </div>
+    <button class="btn btn-gold" onclick="goTo('buscador')">🔎 Go to Insurance Lookup</button>
+  </div>
+</section>
+
+</main>
+
+<footer>Internal Patient Support Center guide · Georgia Urology · Insurance Grid data — July 2026 · When in doubt, confirm with the CBO.</footer>
+
+<script>
+const DATA = {"Southern":{"doctors":["Abbott","Barrett Harlow","Carmen","Mithal","Shapiro","Sotimehin","Yang"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Aetna AEXCEL","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["N","N","Y","N","N","N","N"]},{"n":"Aetna Value Performance","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Whole Health","s":["N","N","Y","N","N","N","N"]},{"n":"Aetna Medicare HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna GA Community Network","s":["N","N","Y","N","N","N","N"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Alliant Solo Care","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Alliant Health Plan with PHCS Network","s":["N","N","Y1","N","N","N","N"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["N","N","Y","N","N","N","N"]},{"n":"Amerigroup Medicaid","s":["N","N","Y","N","N","N","N"]},{"n":"Anthem Blue Value","s":["N","N","N","N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["N","N","Y","N","N","N","N"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Connection HPN","s":["N","N","Y","N","N","N","N"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X","s":["N","N","Y","N","N","N","N"]},{"n":"BCBS Pathway","s":["N","N","Y","N","N","N","N"]},{"n":"BCBS Pathway X Enhanced","s":["N","N","Y","N","N","N","N"]},{"n":"BCBS Pathway Enhanced","s":["N","N","Y","N","N","N","N"]},{"n":"BCBS Pathway X Guided Access HMO","s":["N","N","Y","N","N","N","N"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Empire MediBlue Freedom PPO","s":["N","N","Y","N","N","N","N"]},{"n":"Medicare Preferred Premier PPO","s":["N","N","Y","N","N","N","N"]},{"n":"MediBlue Prime Select HMO","s":["N","N","Y","N","N","N","N"]},{"n":"BlueHPN (High Performance Network)","s":["N","N","Y","N","N","N","N"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Medicare (Dual Complete)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Marketplace","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Tricare Prime Demo by CareSource","s":["N","N","Y","N","N","N","N"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"LocalPlus/LocalPlusIN","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Piedmont Exclusive","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Piedmont Choice","s":["Y","Y","Y1","Y","Y","Y","Y"]},{"n":"Cigna Connect Network  IFP/Simple Choice","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Cigna Healthspring","s":["N","N","Y","N","N","N","N"]},{"n":"Cigna Medicare Total Care HMO DSP","s":["N","N","N","N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["N","N","Y","N","N","N","N"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["Y","Y","N","Y","Y","Y","Y"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["N","N","Y","N","N","N","N"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Human National POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["N","N","Y","N","N","N","N"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Select","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["N","N","Y2","N","N","N","N"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["Y","Y","N","Y","Y","Y","Y"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","N","N","N","N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["N","N","Y","N","N","N","N"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y","Y"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["N","N","Y","N","N","N","N"]},{"n":"Oscar HMO","s":["N","N","Y","N","N","N","N"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["N","N","Y","Y","N","N","N"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["Y","Y","N","Y","Y","Y","Y"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N","N","N","N"]},{"n":"Wellcare by Allwell","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC AARP HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete HMO","s":["N","N","Y","N","N","N","N"]},{"n":"AARP Medicare Complete Choice PPO","s":["N","N","Y","N","N","N","N"]},{"n":"AARP Medicare Select","s":["N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["N","N","Y","N","N","N","N"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Yes**   Must have valid referral","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]},{"name":"**8/8/19-Per CK put Yes** on Kaiser for all doctors because Dr. Oberle said that all of our doctors need to see these patients and either they can refer them to another doctor if they need surgery and the hospital doesn't accept Kaiser or they can perfrom the surgery at Northside","plans":[]}]},"Northwest":{"doctors":["Bhanji","Capelouto","Desai","DiCarlo","Gonzalez","Kaplan","Ludwig","Oberle","Proctor","Rosenfeld","Taghechian","Wajswol"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Aetna AEXCEL","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Value Performance","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Whole Health","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare Hmo","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna GA Community Network","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Alliant Solo Care","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Alliant Health Plan with PHCS Network","s":["Y1","Y1","N","N","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Amerigroup Medicaid","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Anthem Blue Value","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Connections HPN","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X Enhanced","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway Enhanced","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X Guided Access HMO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Empire MediBlue Freedom PPO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Medicare Preferred Premier PPO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"MediBlue Prime Select HMO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BlueHPN (High Performance Network)","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Medicare (Dual Complete)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Marketplace","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Tricare Prime Demo by CareSource","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"LocalPlus/LocalPlusIN","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Piedmont Exclusive","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Piedmont Choice","s":["Y1","Y1","Y","Y","Y1","Y1","Y","Y1","Y1","Y1","Y1","Y1"]},{"n":"Cigna Connect Network  IFP/Simple Choice","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Cigna Healthspring","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana National POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Extra","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Select","s":["Y","Y","","","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["Y2","Y2","N","N","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y","Y1","Y1","Y1","Y1","Y1"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Oscar HMO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["N","N","Y","Y","N","N","N","N","N","N","N","N"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Wellcare by Allwell","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC AARP HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete HMO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Select","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete Choice PPO","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["Y","Y","N","N","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Yes**   Must have valid referral","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]},{"name":"**8/8/19-Per CK put Yes** on Kaiser for all doctors because Dr. Oberle said that all of our doctors need to see these patients and either they can refer them to another doctor if they need surgery and the hospital doesn't accept Kaiser or they can perfrom the surgery at Northside","plans":[]}]},"Northern":{"doctors":["Belew","Canter","Couvaras","Hebert","Hiffa","Kapadia","Kriteman","Lu","Mellis","Mohapatra","Rutland","Wyatt"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna AEXCEL","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Value Performance","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Whole Health","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Aetna GA Community Network","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Alliant Solo Care","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Alliant Health Plan with PHCS Network","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Amerigroup Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Anthem Blue Value","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Connection HPN","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X Enhanced","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway Enhanced","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X Guided Access HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Empire MediBlue Freedom PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Medicare Preferred Premier PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"MediBlue Prime Select HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BlueHPN (High Performance Network)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","P","Y","Y"]},{"n":"Care Source Medicare (Dual Complete)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","P","Y","Y"]},{"n":"Care Source Marketplace","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","P","Y","Y"]},{"n":"Tricare Prime Demo by CareSource","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","P","Y","Y"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"LocalPlus/LocalPlusIN","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Piedmont Exclusive","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Piedmont Choice","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Cigna Connect Network  IFP/Simple Choice","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Cigna Healthspring","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana National POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Select","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Oscar HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Wellcare by Allwell","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC AARP HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Select","s":["N","Y","N","N","N","N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete Choice PPO","s":["Y","N","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N","N","N","N","N","N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N","N","N","N","N","N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Yes**   Must have valid referral","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]},{"name":"**8/8/19-Per CK put Yes** on Kaiser for all doctors because Dr. Oberle said that all of our doctors need to see these patients and either they can refer them to another doctor if they need surgery and the hospital doesn't accept Kaiser or they can perfrom the surgery at Northside","plans":[]}]},"Gwinnett":{"doctors":["Allen","Anglade","Cicic","Dovirak","Kim","Searvance","Song","Yeoh"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["N","N","N","N","N","N","N","N"]},{"n":"Aetna AEXCEL","s":["N","N","N","N","N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Value Performance","s":["N","N","N","N","N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N","N","N","N","N"]},{"n":"Aetna Whole Health","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N","N","N","N","N"]},{"n":"Aetna GA Community Network","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["N","N","N","N","N","N","N","N"]},{"n":"Alliant Solo Care","s":["N","N","N","N","N","N","N","N"]},{"n":"Alliant Health Plan with PHCS Network","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Amerigroup Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Anthem Blue Value","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Connection HPN","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X Enhanced","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway Enhanced","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X Guided Access HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Empire MediBlue Freedom PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Medicare Preferred Premier PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"MediBlue Prime Select HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"BlueHPN (High Performance Network)","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N","N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Medicare (Dual Complete)","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Marketplace","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Tricare Prime Demo by CareSource","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["N","N","N","N","N","N","N","N"]},{"n":"LocalPlus/LocalPlusIN","s":["N","N","N","N","N","N","N","N"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["N","N","N","N","N","N","N","N"]},{"n":"Piedmont Exclusive","s":["N","N","N","N","N","N","N","N"]},{"n":"Piedmont Choice","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Cigna Connect Network  IFP/Simple Choice","s":["N","N","N","N","N","N","N","N"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["N","N","N","N","N","N","N","N"]},{"n":"Healthspring","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N","N","N","N","N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana National POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Select","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2","Y2"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Oscar HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["N","N","N","N","N","N","N","N"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N","N","N","N","N"]},{"n":"Wellcare by Allwell","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N","N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N","N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N","N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N","N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N","N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N","N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC AARP HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete HMO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Select","s":["N","N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N","N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N","N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N","N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y","Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Yes**   Must have valid referral","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]},{"name":"**8/8/19-Per CK put Yes** on Kaiser for all doctors because Dr. Oberle said that all of our doctors need to see these patients and either they can refer them to another doctor if they need surgery and the hospital doesn't accept Kaiser or they can perfrom the surgery at Northside","plans":[]}]},"Braselton":{"doctors":["Katkoori","Patel","Sharpe","Stanley"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["N","N","N","N"]},{"n":"Aetna AEXCEL","s":["N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["Y","Y","Y","Y"]},{"n":"Aetna Value Performance","s":["N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N"]},{"n":"Aetna Whole Health","s":["Y","Y","Y","Y"]},{"n":"Aetna Medicare HMO","s":["Y","Y","Y","Y"]},{"n":"Aetna Medicare PPO","s":["Y","Y","Y","Y"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N"]},{"n":"Aetna GA Community Network","s":["Y","Y","Y","Y"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y","Y","Y","Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["N","N","N","N"]},{"n":"Alliant Solo Care","s":["N","N","N","N"]},{"n":"Alliant Health Plan with PHCS Network","s":["Y1","Y1","Y1","Y1"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["Y","Y","Y","Y"]},{"n":"Amerigroup Medicaid","s":["Y","Y","Y","Y"]},{"n":"Anthem Blue Value","s":["N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["Y","Y","Y","Y"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y"]},{"n":"Blue Connection HPN","s":["Y","Y","Y","Y"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["Y","Y","Y","Y"]},{"n":"BCBS Pathway X","s":["Y","Y","Y","Y"]},{"n":"BCBS Pathway","s":["Y","Y","Y","Y"]},{"n":"BCBS Pathway X Enhanced","s":["Y","Y","Y","Y"]},{"n":"BCBS Pathway Enhanced","s":["Y","Y","Y","Y"]},{"n":"BCBS Pathway X Guided Access HMO","s":["Y","Y","Y","Y"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y","Y","Y","Y"]},{"n":"Empire MediBlue Freedom PPO","s":["Y","Y","Y","Y"]},{"n":"Medicare Preferred Premier PPO","s":["Y","Y","Y","Y"]},{"n":"MediBlue Prime Select HMO","s":["Y","Y","Y","Y"]},{"n":"BlueHPN (High Performance Network)","s":["Y","Y","Y","Y"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["Y","Y","Y","Y"]},{"n":"Care Source Medicare (Dual Complete)","s":["Y","Y","Y","Y"]},{"n":"Care Source Marketplace","s":["Y","Y","Y","Y"]},{"n":"Tricare Prime Demo by CareSource","s":["Y","Y","Y","Y"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["N","N","N","N"]},{"n":"LocalPlus/LocalPlusIN","s":["N","N","N","N"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["N","N","N","N"]},{"n":"Piedmont Exclusive","s":["N","N","N","N"]},{"n":"Piedmont Choice","s":["Y1","Y1","Y1","Y1"]},{"n":"Cigna Connect Network  IFP/Simple Choice","s":["N","N","N","N"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["N","N","N","N"]},{"n":"Healthspring","s":["Y","Y","Y","Y"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["Y","Y","Y","Y"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["Y","Y","Y","Y"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["N","N","N","N"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["Y","Y","Y","Y"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["N","N","N","N"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N","N","N","N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y"]},{"n":"Humana National POS","s":["Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["Y","Y","Y","Y"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["Y","Y","Y","Y"]},{"n":"Humana Gold Plus HMO","s":["Y","Y","Y","Y"]},{"n":"Humana Gold Choice HMO","s":["Y","Y","Y","Y"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y"]},{"n":"Humana Tricare Select","s":["Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2","Y2","Y2","Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2","Y2","Y2","Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2","Y2","Y2","Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["Y2","Y2","Y2","Y2"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["N","N","N","N"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y","Y","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["Y","Y","Y","Y"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1","Y1","Y1","Y1"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["Y","Y","Y","Y"]},{"n":"Oscar HMO","s":["Y","Y","Y","Y"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["Y","Y","Y","Y"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["N","N","N","N"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N"]},{"n":"Wellcare by Allwell","s":["Y","Y","Y","Y"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["Y","Y","Y","Y"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["Y","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y","Y","Y","Y"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["Y","Y","Y","Y"]},{"n":"UHC AARP HMO","s":["Y","Y","Y","Y"]},{"n":"AARP Medicare Complete HMO","s":["Y","Y","Y","Y"]},{"n":"AARP Medicare Select","s":["N","N","N","N"]},{"n":"AARP Medicare Complete Choice PPO","s":["Y","Y","Y","Y"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["Y","Y","Y","Y"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y","Y","Y","Y"]}]},{"name":"Yes**   Must have valid referral","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]},{"name":"**8/8/19-Per CK put Yes** on Kaiser for all doctors because Dr. Oberle said that all of our doctors need to see these patients and either they can refer them to another doctor if they need surgery and the hospital doesn't accept Kaiser or they can perfrom the surgery at Northside","plans":[]}]},"Decatur":{"doctors":["Callaway","Chen","Falconer","Futral","Kemper","Msezane","Stites"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["Y","Y","N","Y","N","N","N"]},{"n":"Aetna AEXCEL","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Aetna Value Performance","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Whole Health","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Aetna Medicare HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna GA Community Network","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["Y","Y","N","Y","N","N","N"]},{"n":"Alliant Solo Care","s":["Y","Y","N","Y","N","N","N"]},{"n":"Alliant Health Plan with PHCS Network","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Amerigroup Medicaid","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Anthem Blue Value","s":["N","N","N","N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Connection HPN","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Pathway X","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BCBS Pathway","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BCBS Pathway X Enhanced","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BCBS Pathway Enhanced","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BCBS Pathway X Guided Access HMO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Empire MediBlue Freedom PPO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Medicare Preferred Premier PPO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"MediBlue Prime Select HMO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"BlueHPN (High Performance Network)","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Medicare (Dual Complete)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Marketplace","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Tricare Prime Demo by CareSource","s":["N","N","Y","N","Y","Y","Y"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["Y","Y","N","Y","N","N","N"]},{"n":"LocalPlus/LocalPlusIN","s":["Y","Y","N","Y","N","N","N"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["Y","Y","N","Y","N","N","N"]},{"n":"Piedmont Exclusive","s":["Y","Y","N","Y","N","N","N"]},{"n":"Piedmont Choice","s":["Y","Y","Y1","Y","Y1","Y1","Y1"]},{"n":"Cigna Connect Network  IFP/Simple Choice","s":["Y","Y","N","Y","N","N","N"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["Y","Y","N","Y","N","N","N"]},{"n":"Healthspring","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N","N","N","N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["Y","Y","N","Y","N","N","N"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["N","N","Y","N","Y","Y","Y"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana National POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Tricare Select","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2","Y2","Y2","Y2","Y2","Y2","Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["N","N","Y2","N","Y2","Y2","Y2"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["Y","Y","N","Y","N","N","N"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","N","N","N","N"]},{"n":"Medicare","s":["","","","","Y","",""]},{"n":"Medicare","s":["Y","Y","Y","Y","","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["N","N","Y","N","Y","Y","Y"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Oscar HMO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["Y","Y","N","Y","N","N","N"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N","N","N","N"]},{"n":"Wellcare by Allwell","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC AARP HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"AARP Medicare Complete Choice PPO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"AARP Medicare Select","s":["N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete HMO","s":["N","N","Y","N","Y","Y","Y"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["N","N","Y","N","Y","Y","Y"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Yes**   Must have valid referral","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]},{"name":"**8/8/19-Per CK put Yes** on Kaiser for all doctors because Dr. Oberle said that all of our doctors need to see these patients and either they can refer them to another doctor if they need surgery and the hospital doesn't accept Kaiser or they can perfrom the surgery at Northside","plans":[]}]},"Pediatric":{"doctors":["Blum","Cerwinka","De","Garcia-Roig","Kirsch","Scherz","Smith"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Managed Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Open Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna QPOS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna US Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna CVS Health ACA Plan","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna AEXCEL","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Premier Care (APCN)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Value Performance","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Specialty Network","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Whole Health","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Medicare HMO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Medicare PPO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime HMO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna Medicare Prime PPO","s":["N","N","N","N","N","N","N"]},{"n":"Aetna GA Community Network","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Aetna Wellstar EPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["N","N","N","N","N","N","N"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["N","N","N","N","N","N","N"]},{"n":"Alliant Solo Care","s":["N","N","N","N","N","N","N"]},{"n":"Alliant Health Plan with PHCS Network","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["N","N","N","N","N","N","N"]},{"n":"Amerigroup Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Anthem Blue Value","s":["N","N","N","N","N","N","N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Choice PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Cross POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Connection HPN","s":["N","N","N","N","N","N","N"]},{"n":"BCBS POS SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS HMO SHBP","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"BCBS Medicare SHBP","s":["N","N","N","N","N","N","N"]},{"n":"BCBS Pathway X","s":["N","N","N","N","N","N","N"]},{"n":"BCBS Pathway","s":["N","N","N","N","N","N","N"]},{"n":"BCBS Pathway X Enhanced","s":["N","N","N","N","N","N","N"]},{"n":"BCBS Pathway Enhanced","s":["N","N","N","N","N","N","N"]},{"n":"BCBS Pathway X Guided Access HMO","s":["N","N","N","N","N","N","N"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["N","N","N","N","N","N","N"]},{"n":"Empire MediBlue Freedom PPO","s":["N","N","N","N","N","N","N"]},{"n":"Medicare Preferred Premier PPO","s":["N","N","N","N","N","N","N"]},{"n":"MediBlue Prime Select HMO","s":["N","N","N","N","N","N","N"]},{"n":"BlueHPN (High Performance Network)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Blue Value Individual Network HMO","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar EPO","s":["N","N","N","N","N","N","N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicare (Dual Complete)","s":["N","N","N","N","N","N","N"]},{"n":"Care Source Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Care Source Marketplace","s":["N","N","N","N","N","N","N"]},{"n":"Tricare Prime Demo by CareSource","s":["N","N","N","N","N","N","N"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthcare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Open Access POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"MyHealth360 LocalPlus IN","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"LocalPlus/LocalPlus IN","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlus IN","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Piedmont Exclusive","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Piedmont Choice","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"Cigna Connect Network IFP/Simple Choice","s":["N","N","N","N","N","N","N"]},{"n":"Cigna Cisel","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna + Oscar Local Plus","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Great West Open Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Cigna Healthspring","s":["N","N","N","N","N","N","N"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N","N","N","N","N","N","N"]},{"n":"Cigna OAP Clearity","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["N","N","N","N","N","N","N"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N","N","N","N","N","N","N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"CoventryOne HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Coventry Value Product","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Southcare PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"First Health PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"CCN PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["N","N","N","N","N","N","N"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["N","N","N","N","N","N","N"]}]},{"name":"Eon Health","plans":[{"n":"Eon Health (Clear Spring Health)","s":["N","N","N","N","N","N","N"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N","N","N","N","N","N","N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana National POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Northside Health Network","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Gold Choice PFFS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Humana Choice Medicare PPO","s":["N","N","N","N","N","N","N"]},{"n":"Humana Gold Plus HMO","s":["N","N","N","N","N","N","N"]},{"n":"Humana Gold Choice HMO","s":["N","N","N","N","N","N","N"]},{"n":"Humana Tricare Prime","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Kaiser Multichoice PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Kaiser Senior Advantage","s":["N","N","N","N","N","N","N"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["N","N","N","N","N","N","N"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N","N","N","N","N","N","N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N","N","N","N","N","N","N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N","N","N","Y","N","N","N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Mutually Preferred PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Multiplan PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Medi-Share","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N","N","N","N","N","N","N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Proamerica","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y","Y","Y","Y","Y","Y","Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["N","N","N","N","N","N","N"]},{"n":"Oscar HMO","s":["N","N","N","N","N","N","N"]},{"n":"Oscar Guided HMO (Emory Network)","s":["N","N","N","N","N","N","N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["N","N","N","N","N","N","N"]},{"n":"Peachstate Medicaid","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Core Network","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Ambetter Select Plus Piedmont","s":["N","N","N","N","N","N","N"]},{"n":"Ambetter Wellstar Select","s":["N","N","N","N","N","N","N"]},{"n":"Wellcare by Allwell","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar Plan (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N","N","N","N","N","N","N"]},{"n":"Gwinnett Select (Ambetter)","s":["N","N","N","N","N","N","N"]}]},{"name":"Pruitt Health Premier","plans":[{"n":"Pruitt Health Premier","s":["N","N","N","N","N","N","N"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Choice Plus Open Access","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Options PPO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Select Plus POS","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Navigate","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UMR (Tier 2)","s":["Y1","Y1","Y1","Y1","Y1","Y1","Y1"]},{"n":"UHC SHBP Choice HMO","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["N","N","N","N","N","N","N"]},{"n":"UHC Exchange","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"Evercare","s":["N","N","N","N","N","N","N"]},{"n":"Surest","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC EPO","s":["N","N","N","N","N","N","N"]},{"n":"UHC PPO Medicare Advantage","s":["N","N","N","N","N","N","N"]},{"n":"UHC AARP HMO","s":["N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete Choice PPO","s":["N","N","N","N","N","N","N"]},{"n":"AARP Medicare Select","s":["N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete HMO","s":["N","N","N","N","N","N","N"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["N","N","N","N","N","N","N"]},{"n":"Bind (Surest) on demand health insurance","s":["Y","Y","Y","Y","Y","Y","Y"]},{"n":"UHC Core","s":["N","N","N","N","N","N","N"]},{"n":"UHC Charter","s":["N","N","N","N","N","N","N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N","N","N","N","N","N","N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["N","N","N","N","N","N","N"]}]},{"name":"Yes*!- Must have a Referral from Kaiser before patient is seen","plans":[]},{"name":"**OON**- Out of Network- Possible increase in copays, coinsurance, and/or deductible- may require authorizations and precerts","plans":[]},{"name":"Yes!!!- Office Procedures Only- Cannot be seen in the ASC","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]}]},"Di Meglio":{"doctors":["Di Meglio"],"categories":[{"name":"Aetna","plans":[{"n":"Aetna Elect Choice","s":["Y"]},{"n":"Aetna Managed Choice","s":["Y"]},{"n":"Aetna Open Choice","s":["Y"]},{"n":"Aetna QPOS","s":["Y"]},{"n":"Aetna Traditional/National Advantage","s":["Y"]},{"n":"Aetna US Access","s":["Y"]},{"n":"Aetna CVS Health ACA Plan","s":["Y"]},{"n":"Aetna AEXCEL","s":["N"]},{"n":"Aetna Premier Care (APCN)","s":["N"]},{"n":"Aetna Value Performance","s":["N"]},{"n":"Aetna Specialty Network","s":["N"]},{"n":"Aetna Whole Health","s":["N"]},{"n":"Aetna Medicare HMO","s":["Y"]},{"n":"Aetna Medicare PPO","s":["Y"]},{"n":"Aetna Medicare Prime HMO","s":["N"]},{"n":"Aetna Medicare Prime PPO","s":["N"]},{"n":"Aetna GA Community Network","s":["N"]},{"n":"Aetna Wellstar EPO","s":["N"]}]},{"name":"Advantra Freedom Medicare","plans":[{"n":"Advantra Freedom Medicare Advantage","s":["Y"]}]},{"name":"Alliant Health Plan","plans":[{"n":"Alliant Health Plan","s":["Y"]},{"n":"Alliant Solo Care","s":["Y"]},{"n":"Alliant Health Plan with PHCS Network","s":["N"]},{"n":"Allied PHCS Practitioner and Ancillary Only","s":["N"]}]},{"name":"Amerigroup","plans":[{"n":"Amerigroup Medicare","s":["N"]},{"n":"Amerigroup Medicaid","s":["N"]},{"n":"Anthem Blue Value","s":["N"]}]},{"name":"Blue Cross/Blue Shield","plans":[{"n":"Blue Choice HMO","s":["Y"]},{"n":"Blue Choice PPO","s":["Y"]},{"n":"Blue Cross FEP Basic/ FEP Standard","s":["Y"]},{"n":"Blue Cross Indemnity/PAR/Traditional","s":["N"]},{"n":"Blue Cross POS","s":["Y"]},{"n":"Blue Open Access POS","s":["Y"]},{"n":"Blue Connection HPN","s":["N"]},{"n":"BCBS POS SHBP","s":["Y"]},{"n":"BCBS HMO SHBP","s":["Y"]},{"n":"BCBS Medicare SHBP","s":["Y"]},{"n":"BCBS Pathway X","s":["N"]},{"n":"BCBS Pathway","s":["N"]},{"n":"BCBS Pathway X Enhanced","s":["N"]},{"n":"BCBS Pathway Enhanced","s":["N"]},{"n":"BCBS Pathway X Guided Access HMO","s":["N"]},{"n":"BCBS Medicare Advantage HMO/PPO","s":["Y"]},{"n":"Empire MediBlue Freedom PPO","s":["N"]},{"n":"Medicare Preferred Premier PPO","s":["N"]},{"n":"MediBlue Prime Select HMO","s":["N"]},{"n":"BlueHPN (High Performance Network)","s":["N"]},{"n":"Blue Value Individual Network HMO","s":["N"]},{"n":"Wellstar EPO","s":["N"]}]},{"name":"Care Source","plans":[{"n":"Care Source Medicaid","s":["N"]},{"n":"Care Source Medicare (Dual Complete)","s":["N"]},{"n":"Care Source Marketplace","s":["N"]},{"n":"Tricare Prime Demo by CareSource","s":["N"]}]},{"name":"Cigna /Great West","plans":[{"n":"Cigna Healthcare HMO","s":["Y"]},{"n":"Cigna Healthcare POS","s":["Y"]},{"n":"Cigna Healthcare PPO","s":["Y"]},{"n":"Cigna Open Access HMO","s":["Y"]},{"n":"Cigna Open Access POS","s":["Y"]},{"n":"MyHealth360 LocalPlus IN","s":["Y"]},{"n":"LocalPlus/LocalPlusIN","s":["Y"]},{"n":"Choice Fund LocalPlus/Choice Fund LocalPlusIN","s":["Y"]},{"n":"Piedmont Exclusive","s":["Y"]},{"n":"Piedmont Choice","s":["Y"]},{"n":"Cigna Connect Network IFP/Simple Choice","s":["Y"]},{"n":"Cigna Cisel","s":["Y"]},{"n":"Great West PPO","s":["Y"]},{"n":"Great West POS","s":["Y"]},{"n":"Great West HMO","s":["Y"]},{"n":"Great West Open Access","s":["Y"]},{"n":"Cigna + Oscar Open Access Plus","s":["Y"]},{"n":"Cigna + Oscar Local Plus","s":["Y"]},{"n":"Cigna Healthspring","s":["N"]},{"n":"Cigna Medicare Totoal Care HMO DSP","s":["N"]},{"n":"Cigna OAP Clearity","s":["Y"]}]},{"name":"Clover Healthcare","plans":[{"n":"Clover Health Medicare Advantage","s":["N"]}]},{"name":"Corvel/Corcare","plans":[{"n":"Corvel Workers Comp","s":["N"]}]},{"name":"Coventry/First Health/CCN","plans":[{"n":"Coventry HMO","s":["Y"]},{"n":"Coventry POS","s":["Y"]},{"n":"CoventryOne HMO HIX","s":["N"]},{"n":"Coventry Value Product","s":["Y"]},{"n":"Southcare PPO","s":["Y"]},{"n":"First Health PPO","s":["Y"]},{"n":"CCN PPO","s":["Y"]}]},{"name":"Curative Health Plan","plans":[{"n":"Curative Health Plan First Health","s":["Y"]}]},{"name":"Devoted Health Plan","plans":[{"n":"Devoted Health Plan","s":["N"]}]},{"name":"Evolutions","plans":[{"n":"Evolutions HC PPO","s":["Y"]}]},{"name":"Galaxy Health Network","plans":[{"n":"Galaxy Health Network PPO","s":["N"]}]},{"name":"Georgia Health Advantage","plans":[{"n":"Georgia Health Advantage","s":["N"]}]},{"name":"Humana/Tricare","plans":[{"n":"Humana Employers Health PPO","s":["Y"]},{"n":"Humana Employers Health PPO Medicare PFFS","s":["Y"]},{"n":"Humana National POS","s":["Y"]},{"n":"Humana Northside Health Network","s":["N"]},{"n":"Humana Gold Choice PFFS","s":["Y"]},{"n":"Humana Choice Medicare PPO","s":["Y"]},{"n":"Humana Gold Plus HMO","s":["Y"]},{"n":"Humana Tricare Prime","s":["Y"]},{"n":"Humana Tricare Select","s":["Y"]}]},{"name":"Kaiser Permanente","plans":[{"n":"Kaiser HMO/POS","s":["Y2"]},{"n":"Kaiser Multichoice PPO","s":["Y2"]},{"n":"Kaiser Senior Advantage","s":["Y2"]},{"n":"Kaiser Permanente, a Tricare Prime Option","s":["Y2"]}]},{"name":"Lasso Healthcare","plans":[{"n":"Lasso Healthcare MSA","s":["N"]}]},{"name":"Lifewell","plans":[{"n":"Healthscope Benefits","s":["Y"]}]},{"name":"Lucent Health","plans":[{"n":"Lucent Health","s":["N"]}]},{"name":"Med College of GA Correctional","plans":[{"n":"Medical College of GA Correctional Healthcare","s":["N"]}]},{"name":"Medicare","plans":[{"n":"Medicare","s":["Y"]}]},{"name":"Medicaid","plans":[{"n":"Medicaid","s":["NP"]}]},{"name":"Multiplan Network/PHCS/Mutual of Omaha","plans":[{"n":"Beech Street/ Capp Care PPO","s":["Y"]},{"n":"Beech Street/ Capp Care WC","s":["Y"]},{"n":"Kaiser Mutichoice POS (PHCS)","s":["Y"]},{"n":"Mutually Preferred PPO","s":["Y"]},{"n":"Preferred Plan of Georgia PPO","s":["Y"]},{"n":"Preferred Plan of Georgia POS","s":["Y"]},{"n":"Multiplan PPO","s":["Y"]},{"n":"PHCS","s":["Y"]},{"n":"PHCS Medi-Share","s":["N"]},{"n":"PHCS Practitioner and Ancillary Only","s":["N"]},{"n":"Kaiser Multichoice POS (PHCS Tier 2)","s":["Y1"]},{"n":"Kaiser Dual Choice PPO (PHCS)","s":["Y"]},{"n":"Proamerica","s":["Y"]}]},{"name":"Nova Net","plans":[{"n":"NovaNet PPO","s":["Y"]}]},{"name":"Oscar","plans":[{"n":"Oscar Exchange Plan","s":["N"]},{"n":"Oscar HMO","s":["N"]},{"n":"Oscar Guided HMO (Emory Network","s":["N"]}]},{"name":"Peachstate","plans":[{"n":"Peachstate Medicare (Allwell)","s":["N"]},{"n":"Peachstate Medicaid","s":["N"]},{"n":"Ambetter Core Network","s":["Y"]},{"n":"Ambetter Select Plus Piedmont","s":["Y"]},{"n":"Ambetter Wellstar Select","s":["N"]},{"n":"Wellcare by AllWell","s":["N"]},{"n":"Wellstar Plan (Ambetter)","s":["N"]},{"n":"Wellstar Select Balance C31 Plan (Ambetter)","s":["N"]},{"n":"Saint Josephs Candler Select (Ambetter)","s":["N"]},{"n":"Gwinnett Select (Ambetter)","s":["N"]}]},{"name":"United Healthcare","plans":[{"n":"UHC Choice","s":["Y"]},{"n":"UHC Choice Plus Open Access","s":["Y"]},{"n":"UHC Options PPO","s":["Y"]},{"n":"UHC Select HMO","s":["Y"]},{"n":"UHC Select Plus HMO","s":["Y"]},{"n":"UHC Select Plus POS","s":["Y"]},{"n":"UHC SHBP Choice HMO","s":["Y"]},{"n":"UHC Navigate","s":["Y"]},{"n":"UHC Exchange","s":["Y"]},{"n":"Evercare","s":["N"]},{"n":"Surest","s":["Y"]},{"n":"UHC EPO","s":["N"]},{"n":"UHC PPO Medicare Advantage","s":["Y"]},{"n":"UHC AARP HMO","s":["Y"]},{"n":"UHC SHBP Medicare Advantage PPO","s":["Y"]},{"n":"Secure Horizons Medicare Complete","s":["N"]},{"n":"Secure Horizons Medicare Direct","s":["N"]},{"n":"AARP Medicare Complete HMO","s":["N"]},{"n":"AARP Medicare Complete Plus HMO-POS","s":["N"]},{"n":"Bind (Surest) on demand health insurance","s":["Y"]},{"n":"UHC Core","s":["N"]},{"n":"UHC Charter","s":["N"]}]},{"name":"USA Managed Care PPO","plans":[{"n":"USA Managed Care PPO","s":["N"]}]},{"name":"UHC VA CCN","plans":[{"n":"Optum VA","s":["Y"]}]},{"name":"**OON**- Out of Network- Possible increase in copays, coinsurance, and/or deductible- may require authorizations and precerts","plans":[]},{"name":"Yes!!!- Office Procedures Only- Cannot be seen in the ASC","plans":[]},{"name":"Yes*!*!- Patient may have higher copay, coinsurance,and/or deductible due to Tier 2 Status or being OON","plans":[]}]}};
+
+const POD_LABELS = {
+  "Southern": "Southern",
+  "Northwest": "Northwest",
+  "Northern": "Northern",
+  "Gwinnett": "Gwinnett",
+  "Braselton": "Braselton",
+  "Decatur": "Decatur",
+  "Pediatric": "Pediatric",
+  "Di Meglio": "Di Meglio"
+};
+
+let currentPod = Object.keys(DATA)[0];
+let currentDocIdx = -1; // -1 = all doctors
+
+function goTo(id){
+  document.querySelectorAll('section.panel').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>{
+  b.addEventListener('click', ()=>goTo(b.dataset.target));
+});
+
+function renderPodRow(){
+  const row = document.getElementById('podRow');
+  row.innerHTML = '';
+  Object.keys(DATA).forEach(pod=>{
+    const b = document.createElement('button');
+    b.className = 'pill' + (pod===currentPod ? ' active':'');
+    b.textContent = POD_LABELS[pod] || pod;
+    b.onclick = ()=>{ currentPod = pod; currentDocIdx = -1; renderPodRow(); renderDocRow(); renderResults(); };
+    row.appendChild(b);
+  });
+}
+
+function renderDocRow(){
+  const row = document.getElementById('docRow');
+  row.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'pill doc' + (currentDocIdx===-1 ? ' active':'');
+  allBtn.textContent = 'All physicians';
+  allBtn.onclick = ()=>{ currentDocIdx=-1; renderDocRow(); renderResults(); };
+  row.appendChild(allBtn);
+  DATA[currentPod].doctors.forEach((doc, idx)=>{
+    const b = document.createElement('button');
+    b.className = 'pill doc' + (currentDocIdx===idx ? ' active':'');
+    b.textContent = 'Dr. ' + doc;
+    b.onclick = ()=>{ currentDocIdx=idx; renderDocRow(); renderResults(); };
+    row.appendChild(b);
+  });
+}
+
+function badgeFor(code, docName){
+  let cls='b-blank', label='Verify';
+  if(code==='Y'){cls='b-y'; label='Yes';}
+  else if(code==='N'){cls='b-n'; label='No';}
+  else if(code==='Y1'){cls='b-y1'; label='Yes*';}
+  else if(code==='Y2'){cls='b-y1'; label='Yes**';}
+  else if(code==='P'){cls='b-p'; label='Pending';}
+  else if(code==='NP'){cls='b-p'; label='No new patients';}
+  else {cls='b-blank'; label='—';}
+  const docPart = docName ? '<span class="doc-name">'+docName+'</span>' : '';
+  return '<span class="badge '+cls+'">'+docPart+label+'</span>';
+}
+
+function highlight(text, term){
+  if(!term) return text;
+  const idx = text.toLowerCase().indexOf(term.toLowerCase());
+  if(idx===-1) return text;
+  return text.slice(0,idx) + '<mark>' + text.slice(idx, idx+term.length) + '</mark>' + text.slice(idx+term.length);
+}
+
+function renderResults(){
+  const term = document.getElementById('planSearch').value.trim();
+  const area = document.getElementById('resultsArea');
+  const podData = DATA[currentPod];
+  const doctors = podData.doctors;
+
+  if(term.length < 2){
+    let html = '<div class="result-hint">Type at least 2 letters to search, or browse the categories below.</div>';
+    podData.categories.forEach((cat, ci)=>{
+      html += '<div class="cat-block" data-ci="'+ci+'">';
+      html += '<div class="cat-header" onclick="toggleCat(this)"><span>'+cat.name+' <span style="font-weight:400;color:var(--ink-soft)">('+cat.plans.length+')</span></span><span class="chev">▶</span></div>';
+      html += '<div class="cat-plans">';
+      cat.plans.forEach(p=>{
+        html += renderPlanRow(p, doctors, '');
+      });
+      html += '</div></div>';
+    });
+    area.innerHTML = html;
+    return;
+  }
+
+  let matches = [];
+  podData.categories.forEach(cat=>{
+    cat.plans.forEach(p=>{
+      if(p.n.toLowerCase().includes(term.toLowerCase()) || cat.name.toLowerCase().includes(term.toLowerCase())){
+        matches.push({p, catName: cat.name});
+      }
+    });
+  });
+
+  if(matches.length===0){
+    area.innerHTML = '<div class="empty-state"><div class="big-ic">🕵️</div>No plans matched "'+term+'" in '+POD_LABELS[currentPod]+'.<br>Try another location or confirm with the CBO.</div>';
+    return;
+  }
+
+  let html = '<div class="result-hint">'+matches.length+' result(s) in '+POD_LABELS[currentPod]+'</div>';
+  matches.forEach(m=>{
+    html += '<div style="border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden;">';
+    html += '<div style="font-size:.72rem;color:var(--ink-soft);padding:6px 14px 0 14px;font-family:\'IBM Plex Mono\',monospace;text-transform:uppercase;letter-spacing:.05em;">'+m.catName+'</div>';
+    html += renderPlanRow(m.p, doctors, term);
+    html += '</div>';
+  });
+  area.innerHTML = html;
+}
+
+function renderPlanRow(p, doctors, term){
+  let html = '<div class="plan-row"><div class="pname">'+highlight(p.n, term)+'</div><div class="status-row">';
+  if(currentDocIdx===-1){
+    doctors.forEach((doc,i)=>{
+      html += badgeFor(p.s[i], doc);
+    });
+  } else {
+    html += badgeFor(p.s[currentDocIdx], null);
+  }
+  html += '</div></div>';
+  return html;
+}
+
+function toggleCat(el){
+  el.parentElement.classList.toggle('open');
+}
+
+document.getElementById('planSearch').addEventListener('input', renderResults);
+
+renderPodRow();
+renderDocRow();
+renderResults();
+</script>
+
+</body>
+</html>
